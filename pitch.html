@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Jim Script · Fred's Records</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@0,400;0,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --surface: #161616;
+            --border: #2a2a2a;
+            --text: #e0e0e0;
+            --muted: #888;
+            --gold: #D4AF37;
+            --green: #22c55e;
+            --red: #ef4444;
+            --orange: #f97316;
+            --blue: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 6rem;
+        }
+
+        /* --- HEADER --- */
+        .script-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .script-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .script-header h1 {
+            font-family: 'Playfair Display';
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: white;
+            line-height: 1.2;
+        }
+        .script-header h1 em { color: var(--gold); font-style: italic; }
+        .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .meta-item strong { color: var(--text); }
+
+        /* --- INSTRUCTION BOX --- */
+        .instruction-box {
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.25);
+            border-left: 3px solid var(--gold);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .instruction-box strong { color: var(--gold); }
+
+        /* --- BEAT / SECTION --- */
+        .beat {
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3.5rem;
+        }
+        .beat:last-of-type { border-bottom: none; }
+
+        .beat-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .beat-num {
+            font-family: 'Playfair Display';
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.2);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .beat-meta { flex: 1; }
+        .beat-tag {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        .beat-title {
+            font-family: 'Playfair Display';
+            font-size: 1.35rem;
+            color: white;
+        }
+        .beat-duration {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        /* --- SCRIPT TEXT --- */
+        .script-text {
+            font-family: 'Playfair Display';
+            font-size: 1.15rem;
+            font-style: italic;
+            color: white;
+            line-height: 1.75;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.75rem 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--gold);
+        }
+        .script-text mark {
+            background: rgba(212,175,55,0.2);
+            color: var(--gold);
+            font-style: normal;
+            padding: 0 3px;
+            border-radius: 2px;
+        }
+        .pause {
+            display: block;
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted);
+            margin: 1.25rem 0;
+            text-align: center;
+        }
+        .pause::before, .pause::after {
+            content: '—— ';
+            color: var(--border);
+        }
+
+        /* --- DIRECTOR NOTE --- */
+        .note {
+            font-family: 'Inter';
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            padding: 0.75rem 1rem;
+            border-left: 2px solid var(--border);
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+        .note strong { color: var(--text); font-style: normal; }
+
+        /* --- OBJECTION HANDLER --- */
+        .objection-block {
+            background: rgba(239,68,68,0.04);
+            border: 1px solid rgba(239,68,68,0.2);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .objection-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 0.75rem;
+        }
+        .objection-q {
+            font-family: 'Inter';
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        .objection-a {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 1rem;
+            color: white;
+            line-height: 1.7;
+            border-left: 2px solid var(--green);
+            padding-left: 1rem;
+        }
+
+        /* --- STAT CALLOUT --- */
+        .stat-row {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .stat-chip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+        }
+        .stat-chip .num {
+            font-family: 'Playfair Display';
+            font-size: 1.6rem;
+            color: var(--gold);
+            display: block;
+        }
+        .stat-chip .lbl {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-top: 0.3rem;
+        }
+
+        /* --- THE ASK --- */
+        .ask-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(212,175,55,0.03));
+            border: 2px solid var(--gold);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .ask-box .ask-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .ask-box h3 {
+            font-family: 'Playfair Display';
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .ask-box .ask-script {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold);
+            line-height: 1.7;
+        }
+
+        /* --- LEAVE-BEHIND --- */
+        .leave-behind {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .leave-behind .lb-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--blue);
+            margin-bottom: 0.75rem;
+        }
+        .leave-behind ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .leave-behind li {
+            font-size: 0.9rem;
+            color: var(--text);
+            padding-left: 1.25rem;
+            position: relative;
+        }
+        .leave-behind li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* --- PROGRESS METER --- */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13,13,13,0.95);
+            border-top: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .pb-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        .pb-track {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            position: relative;
+        }
+        .pb-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .pb-time {
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 500px) {
+            body { padding: 1.5rem 1rem 6rem; }
+            .script-text { padding: 1.25rem; font-size: 1.05rem; }
+            .beat-num { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="script-header">
+        <span class="script-label">Speaking Notes · Internal · Confidential</span>
+        <h1>The Jim Script<br><em>Seven Minutes That Matter</em></h1>
+        <div class="meta-row">
+            <div class="meta-item">Format <strong>In-Person</strong></div>
+            <div class="meta-item">Duration <strong>~7 Minutes</strong></div>
+            <div class="meta-item">Ask <strong>One Decision</strong></div>
+            <div class="meta-item">Leave-behind <strong>admin.html</strong></div>
+        </div>
+    </header>
+
+    <div class="instruction-box">
+        <strong>How to use this:</strong> Read the <em>italicized script text</em> as your spoken words — adapt naturally, don't recite. Director notes are in grey. Objection handlers are ready if he pushes back. The only goal of this conversation is a single yes: <strong>"Let's try it for 90 days."</strong><br><br>
+        Murray presents. Jack and Brandon are in the room for credibility but let Murray lead. Siblings should be aligned before this meeting — that's the buffer.
+    </div>
+
+    <!-- ===================== BEAT 1 ===================== -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">1</div>
+            <div class="beat-meta">
+                <div class="beat-tag">Opening · ~60 seconds</div>
+                <div class="beat-title">Honour the Legacy First</div>
+                <div class="beat-duration">Before anything else, establish he's not being sold to</div>
+            </div>
+        </div>
+
+        <div class="note"><strong>Note:</strong> Do not open with numbers, a deck, or technology. Open with him. The first 60 seconds determine whether he's listening or defending.</div>
+
+        <div class="script-text">
+            "Jim, I want to start by saying — we're not here to change anything. What you built at 198 Duckworth is something I'm genuinely proud to be part of. Fifty-four years. That doesn't happen by accident. It happens because someone made the right calls, every single year, when nobody else would. That's you.
+
+            <span class="pause">pause — let it land</span>
+
+            The only question we want to talk about today is: <mark>how do we make sure Fred's is still here in fifty more years?</mark> Because we think there's a way to do that. And it doesn't cost the store anything. Not a single record off the shelf. Not a change to how Tony and Matthew run the floor. Nothing."
+        </div>
+
+        <div class="note"><strong>Read the room:</strong> If Jim nods or says "okay" — continue. If he crosses his arms, say: <em>"I know you've heard pitches before. This one is different because we only get paid if it works. If it doesn't work, you walk away and it costs you nothing extra."</em> Then continue Beat 2.</div>
+    </div>
+
+    <!-- ===================== BEAT 2 ===================== -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">2</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Gap · ~75 seconds</div>
+                <div class="beat-title">The One Thing That Doesn't Make Sense</div>
+                <div class="beat-duration">Name the opportunity without making him feel bad about it</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "Here's the thing that keeps Murray up at night. Fred's does over a million dollars a year in that store. That's an incredible number. One of the best independent record stores in the country — by revenue.
+
+            <span class="pause">pause</span>
+
+            And yet, right now, if someone in Alberta — a Newfoundlander who grew up buying records from you — goes online to find Fred's, to buy something, to send something home as a gift — <mark>there's nothing there.</mark> They can't buy from you. They move on.
+
+            That's not a technology problem. That's a revenue problem. Those sales are happening — just not at Fred's. Somebody else is getting that money."
+        </div>
+
+        <div class="stat-row">
+            <div class="stat-chip">
+                <span class="num">$1M+</span>
+                <span class="lbl">In-Store Annually</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">$0</span>
+                <span class="lbl">Online Revenue</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">54 yrs</span>
+                <span class="lbl">of Brand Trust</span>
+            </div>
+        </div>
+
+        <div class="note"><strong>Note:</strong> Don't say "website is embarrassing" or reference any institution that used it as an example. The framing is purely about revenue left on the table — not about anything being wrong.</div>
+    </div>
+
+    <!-- ===================== BEAT 3 ===================== -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">3</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Solution · ~90 seconds</div>
+                <div class="beat-title">What We're Actually Proposing</div>
+                <div class="beat-duration">Plain English. No tech. No jargon.</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "We want to build Fred's an online store. A proper one — not a generic website, but one that looks and feels like Fred's. Your photos, your history, your identity.
+
+            <span class="pause">pause</span>
+
+            The way it works is simple: Tony and Matthew keep running the floor the same way they always have. When a record comes in that's worth selling online — a rare one, a collectible — someone takes two photos on their iPhone. That's the new task. Two photos. Our team handles everything else from Ontario. We write the listing, price it against the market, and manage the whole digital side.
+
+            <span class="pause">pause</span>
+
+            Every Friday, those records go live to collectors across Canada and the US at the same time. It becomes a weekly event for buyers. They show up for it. Collectors <em>love</em> that kind of thing — it's the same reason people line up for Record Store Day.
+
+            <mark>We call it the Friday Drop.</mark> And it requires almost nothing new from your team."
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he asks: "So who ships the boxes?"</div>
+            <div class="objection-q">"Who's doing the packing and shipping? Tony doesn't have time for that."</div>
+            <div class="objection-a">"Great question — and a fair one. In the early days, when volume is low, we handle that with whoever's available. As the online side grows, the revenue it generates pays for a part-time person whose only job is packing and shipping. The digital side funds its own operations. Tony never touches a box."</div>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he asks: "What if a customer buys it in-store and it's already sold online?"</div>
+            <div class="objection-q">"What happens if you sell a record in the store that someone already bought online?"</div>
+            <div class="objection-a">"We've solved this specifically. High-value records going online are held in a dedicated spot behind the counter — not in the regular bins — for the first 48 hours. The moment it sells in-store, it's gone from the website instantly. The system is designed so that can't happen."</div>
+        </div>
+    </div>
+
+    <!-- ===================== BEAT 4 ===================== -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">4</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Deal · ~75 seconds</div>
+                <div class="beat-title">The Numbers — and the Risk</div>
+                <div class="beat-duration">This should feel like a no-brainer, not a negotiation</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "Here's what we're asking for. There's a setup cost — to build the store, get everything connected properly. That number is in the document we're leaving with you today, and it's a fraction of what a normal web agency would charge.
+
+            <span class="pause">pause</span>
+
+            After that, we take ten percent of whatever we sell online. Nothing from the store. Nothing from your in-store revenue. Not a dollar. Only from the new money we generate online together.
+
+            <span class="pause">pause</span>
+
+            <mark>If we sell nothing, you pay us nothing.</mark> We lose our time. You lose nothing.
+
+            You can walk away after 90 days — no penalty, no contract. You keep everything we build. Every line of code, every customer list. It's yours.
+
+            We've structured it this way because we believe in what we're doing. We're not here to take a fee and disappear. We only eat if Fred's eats first."
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he pushes back on cost</div>
+            <div class="objection-q">"That's still a lot of money for something unproven."</div>
+            <div class="objection-a">"I understand. And if you want to see the math: if we sell 50 records a month online — which is conservative given how many people follow this store — the software costs pay for themselves in the first week. We're not asking you to gamble on speculation. We're asking you to try something for 90 days with a clearly defined exit."</div>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he asks: "Who are you, exactly?"</div>
+            <div class="objection-q">"Why should I trust you with something like this?"</div>
+            <div class="objection-a">"Fair. We're a digital agency based in Ontario. We built the website for Meadus Contracting — a four-generation family builder — using the same heritage-first approach we're bringing here. We've also run sell-out streetwear drops and taken a fitness studio from zero to $42,000 in revenue in six weeks. We know how to do this. And we'd rather stake our income on it than charge you a retainer to prove it."</div>
+        </div>
+    </div>
+
+    <!-- ===================== BEAT 5 ===================== -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">5</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Close · ~60 seconds</div>
+                <div class="beat-title">The Only Question Left</div>
+                <div class="beat-duration">One ask. One answer. Don't over-speak.</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "Jim, you've kept this store alive through the death of CDs, through Napster, through streaming, through a pandemic. You've outlasted every chain that ever tried to compete with independents.
+
+            <span class="pause">pause</span>
+
+            The vinyl market is bigger right now than it's been since 1983. A billion dollars a year in the US alone. The people who grew up in this store — who moved away — they still love Fred's. They just can't buy from Fred's yet.
+
+            <mark>That's the only thing we're here to fix.</mark>
+
+            We'd love to try this for 90 days, see what the numbers say, and go from there. That's all we're asking."
+        </div>
+
+        <div class="note"><strong>STOP TALKING.</strong> After the ask, be quiet. Silence is fine. Let him think. The worst thing you can do is fill the silence with more selling.</div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he says: "Let me think about it"</div>
+            <div class="objection-q">"I need some time to think this over."</div>
+            <div class="objection-a">"Of course. Completely fair. We're leaving you this document — it has the full breakdown, the numbers, and every detail. No pressure. Take your time. The only thing I'd say is that every week without online sales is a week that money's going somewhere else. But we're here whenever you're ready."</div>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If he says: "No"</div>
+            <div class="objection-q">"I'm not interested in doing this."</div>
+            <div class="objection-a">"I fully respect that. It's your business and your call. If anything changes or you have questions after you've had time to sit with it, Murray knows where to find us. Genuinely — thank you for your time today, Jim."</div>
+        </div>
+    </div>
+
+    <!-- ===================== THE ASK ===================== -->
+    <div class="ask-box">
+        <div class="ask-label">The Single Ask</div>
+        <h3>One Decision.<br>One Sentence.</h3>
+        <p class="ask-script">"Let's try it for 90 days. If the numbers aren't there, we shake hands and part ways. No hard feelings."</p>
+    </div>
+
+    <!-- ===================== LEAVE-BEHIND ===================== -->
+    <div class="leave-behind" style="margin-top: 2rem;">
+        <div class="lb-label">After the Meeting — Leave Behind</div>
+        <ul>
+            <li>Print or show <strong>admin.html</strong> — the full proposal document with all five points in plain English</li>
+            <li>The financial projections table is in there — let him read on his own time</li>
+            <li>Do not show <strong>admin2.html</strong> (Murray's long-term vision) in this meeting — that's for Year 2 conversations</li>
+            <li>Leave a business card and/or the <strong>jack@scalingwithsummit.io</strong> contact</li>
+        </ul>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <div style="margin-top: 3rem; text-align: center; font-family: 'Space Mono'; font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; padding-top: 2rem; border-top: 1px solid var(--border);">
+        Summit · For Internal Use Only · March 30, 2026 · Confidential
+    </div>
+
+    <!-- Progress meter (reads scroll position as approx time) -->
+    <div class="progress-bar">
+        <span class="pb-label">Reading</span>
+        <div class="pb-track"><div class="pb-fill" id="pbFill"></div></div>
+        <span class="pb-time" id="pbTime">~7 min</span>
+    </div>
+
+    <script>
+        // Scroll-based reading progress
+        const fill = document.getElementById('pbFill');
+        const time = document.getElementById('pbTime');
+        const totalMinutes = 7;
+
+        window.addEventListener('scroll', () => {
+            const scrollEl = document.documentElement;
+            const scrolled = scrollEl.scrollTop / (scrollEl.scrollHeight - scrollEl.clientHeight);
+            const pct = Math.min(scrolled * 100, 100);
+            fill.style.width = pct + '%';
+            const remaining = Math.max(0, Math.round(totalMinutes * (1 - scrolled)));
+            time.textContent = remaining === 0 ? 'Ready' : '~' + remaining + ' min left';
+        });
+    </script>
+
+</body>
+</html>

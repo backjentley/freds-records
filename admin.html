@@ -303,6 +303,97 @@
             letter-spacing: 1px;
         }
 
+        /* EXEC SUMMARY */
+        .exec-summary {
+            background: linear-gradient(135deg, #0d0d0d 0%, #161616 100%);
+            border-bottom: 3px solid var(--prop-gold);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .exec-summary-label {
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--prop-gold);
+            margin-bottom: 2rem;
+        }
+        .exec-summary h2 {
+            font-family: 'Playfair Display';
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            color: white;
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .exec-summary h2 em { color: var(--prop-gold); font-style: italic; }
+        .exec-bullet-list {
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .exec-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            background: rgba(212,175,55,0.06);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 1.2rem 1.5rem;
+        }
+        .exec-bullet-num {
+            font-family: 'Playfair Display';
+            font-size: 1.8rem;
+            color: var(--prop-gold);
+            line-height: 1;
+            min-width: 2rem;
+            flex-shrink: 0;
+        }
+        .exec-bullet-text {
+            font-family: 'Inter';
+            font-size: 1.05rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .exec-bullet-text strong { color: white; }
+        .exec-bottom-line {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--prop-gold);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* RETIREMENT SECTION */
+        .retirement-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.03) 100%);
+            border: 2px solid var(--prop-gold);
+            padding: 3rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .retirement-box h3 {
+            font-family: 'Playfair Display';
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .retirement-box h3 em { color: var(--prop-gold); }
+        .retirement-box p {
+            font-family: 'Inter';
+            font-size: 1rem;
+            color: var(--prop-text);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         @media (max-width: 768px) {
             .stat-grid, .deal-grid, .engine-grid, .case-grid { grid-template-columns: 1fr; }
             .prop-nav { padding: 1rem; }
@@ -320,17 +411,62 @@
         <a href="index.html" class="prop-nav-back">&larr; Back to Site</a>
     </nav>
 
+    <!-- EXECUTIVE SUMMARY — For Jim & the Siblings -->
+    <section class="exec-summary" id="summary">
+        <div class="exec-summary-label">Executive Summary &middot; Plain English</div>
+        <h2>Five Things You Need to Know<br>About <em>This Proposal</em></h2>
+        <div class="exec-bullet-list">
+            <div class="exec-bullet">
+                <span class="exec-bullet-num">1</span>
+                <span class="exec-bullet-text"><strong>Fred's already makes $1,000,000+ a year in the store.</strong> This proposal doesn't touch that. It adds a second revenue stream on top of it — online sales — from zero to potentially $500,000/year.</span>
+            </div>
+            <div class="exec-bullet">
+                <span class="exec-bullet-num">2</span>
+                <span class="exec-bullet-text"><strong>The setup investment starts at $5,000.</strong> There are no monthly retainers, no long-term contracts. After that, we only get paid 10% of what we generate online. If we don't sell anything, we don't get paid anything.</span>
+            </div>
+            <div class="exec-bullet">
+                <span class="exec-bullet-num">3</span>
+                <span class="exec-bullet-text"><strong>Tony and the team keep running the store exactly as they do today.</strong> The only change to the daily rhythm is a structured task when rare records arrive: photograph it, confirm the grade. Our team handles listing, pricing, and all digital operations remotely — nights and weekends.</span>
+            </div>
+            <div class="exec-bullet">
+                <span class="exec-bullet-num">4</span>
+                <span class="exec-bullet-text"><strong>You can walk away after 90 days.</strong> No penalty. No lock-in. You keep every line of code we write. Full NDA available on request. Your information stays private.</span>
+            </div>
+            <div class="exec-bullet">
+                <span class="exec-bullet-num">5</span>
+                <span class="exec-bullet-text"><strong>The goal is to keep Fred's in the family forever.</strong> Online revenue is how this business grows into the next generation — without needing to sell, take on a partner, or change what makes Fred's, Fred's.</span>
+            </div>
+        </div>
+        <p class="exec-bottom-line">"We only win when Fred's wins. That's the whole deal."</p>
+    </section>
+
     <header class="prop-hero">
         <div class="prop-hero-overline">Prepared for The Brokenshire Family &middot; March 2026</div>
         <h1>From Duckworth Street<br>to the World.</h1>
         <p class="prop-hero-sub">A strategic partnership to take Canada's oldest record store online. Zero upfront risk. Full alignment. We only win when Fred's wins.</p>
     </header>
 
+    <!-- SECTION 0: The Legacy — Why This Matters -->
+    <section class="prop-section">
+        <div class="prop-section-number">00</div>
+        <h2>Keeping Fred's in the Family</h2>
+
+        <div class="retirement-box">
+            <h3>The Question Worth Asking:<br><em>"Is there a way to retire without selling?"</em></h3>
+            <p>Fred's Records has been in this family since 1972. The building is paid off. The brand is respected across Canada. The only question left is: how does the next chapter look? Online revenue is the answer — not to change the store, but to fund the store's future without anyone having to sell their stake, bring in outside investors, or walk away from 54 years of work.</p>
+        </div>
+
+        <p style="padding: 0.5rem 0;">This proposal doesn't ask Fred's to change. It asks Fred's to show up in one more place — online — so that every Newfoundlander living in Alberta, every tourist who walked through 198 Duckworth and left forever, and every collector searching Google at midnight can find what they're looking for. And buy it.</p>
+
+        <h3><span class="material-icons">people</span> What This Means for the Staff</h3>
+        <p>A shared priority across the family: growing the business so the people who built it get compensated properly. Online revenue is new money — every dollar above break-even is available to reinvest. That means raises. That means longevity. That means Fred's is still Fred's in 30 years.</p>
+    </section>
+
     <!-- SECTION 1: The Opportunity -->
     <section class="prop-section">
         <div class="prop-section-number">01</div>
         <h2>The Untapped Goldmine</h2>
-        <p>Founded in 1972 by Fred Brokenshire at just 19 years old, Fred's Records isn't just a store. Fred built Newfoundland's modern music industry: Duckworth Distribution, Atlantica Records, the East Coast Music Awards. He managed The Irish Descendants. He turned 198 Duckworth Street into a cultural institution recognized by Discogs as <strong>Canada's oldest independent record store</strong>. Today, it does over <strong>$1,000,000+</strong> in annual brick-and-mortar sales with zero online presence. The current website is literally used at the College of the North Atlantic as an example of what <em>not</em> to do. The opportunity isn't theoretical. It's sitting on the shelf.</p>
+        <p>Founded in 1972 by Fred Brokenshire at just 19 years old, Fred's Records isn't just a store. Fred built Newfoundland's modern music industry: Duckworth Distribution, Atlantica Records, the East Coast Music Awards. He managed The Irish Descendants. He turned 198 Duckworth Street into a cultural institution recognized by Discogs as <strong>Canada's oldest independent record store</strong>. Today, it does over <strong>$1,000,000+</strong> in annual brick-and-mortar sales with zero online presence. The current website no longer reflects the brand Fred built. The opportunity isn't theoretical. It's sitting on the shelf.</p>
 
         <div class="stat-grid">
             <div class="stat-box">
@@ -349,7 +485,7 @@
 
         <div class="quote-block">
             <p>"We sell over a million dollars in records a year. That's insane, boys. And we don't sell anything online."</p>
-            <cite>Murray Brokenshire, Discovery Call, March 16 2026</cite>
+            <cite>Murray Brokenshire, Fred's Records</cite>
         </div>
 
         <p>The vinyl market has done what gold is doing now. U.S. vinyl sales topped <strong>$1.04 billion</strong> in 2025 for the first time since 1983. That's 19 consecutive years of growth, 48.5 million units sold, and a global market projected to hit $4.18 billion in 2026. Taylor Swift alone moved 1.6 million vinyl units of a single album. Fred's has outlasted Sam the Record Man, every mall chain, and the MP3 era. The next evolution is digital. Not replacing the store. Amplifying it.</p>
@@ -491,7 +627,7 @@
 
         <div class="quote-block">
             <p>"We'd rather have skin in the game. Cover our expenses with a setup, then make our profit on the profit share. That way it's a no-brainer."</p>
-            <cite>Jack Bentley, Discovery Call</cite>
+            <cite>Jack Bentley, Summit Digital</cite>
         </div>
 
         <h3><span class="material-icons">check_circle</span> What's Included in the $5,000 Setup</h3>
@@ -522,7 +658,7 @@
             <li>The 10% management fee only applies to <em>online</em> sales. In-store revenue is completely untouched</li>
             <li>No long-term contract. <strong>90-day initial term</strong> with month-to-month after. If the numbers don't hit, walk away clean. No penalties.  You keep every line of code we write</li>
             <li>Full NDA available upon request for sensitive financial information</li>
-            <li><strong>Tony, Matthew, and the full team keep doing exactly what they do.</strong> The only new task is snapping 2 photos per premium record on an iPhone. We handle 100% of the digital infrastructure remotely from Toronto</li>
+            <li><strong>Tony, Matthew, and the full team keep doing exactly what they always have.</strong> When a premium used record comes in, there's one new structured step: photograph, confirm grade, done. We handle 100% of the listing, pricing, and digital infrastructure remotely from Toronto. As online volume grows, the revenue it generates pays for a dedicated part-time packer — Tony never ships a box.</li>
         </ul>
     </section>
 
@@ -572,8 +708,8 @@
         <p>Sonic Boom, Rough Trade, and hundreds of independent stores already operate high-performing Shopify e-commerce operations. Swee Lee, a music retailer that migrated to Shopify, saw a 50% increase in online revenue year-over-year. Fred's has the strongest brand name in the country. The only thing missing is the digital storefront.</p>
 
         <div class="quote-block">
-            <p>"The most important thing is: how do we increase sales without buying more shit? Website. It'll pay for itself in 3 weeks."</p>
-            <cite>Discovery Call, March 16 2026</cite>
+            <p>"The most important thing is: how do we increase sales without buying more stock? Website. It'll pay for itself in 3 weeks."</p>
+            <cite>Murray Brokenshire, Fred's Records</cite>
         </div>
     </section>
 
