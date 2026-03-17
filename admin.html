@@ -402,6 +402,121 @@
             .projection-table { font-size: 0.7rem; }
             .projection-table th, .projection-table td { padding: 0.5rem; }
         }
+
+        /* ── SUMMIT OPS NAV (upgraded) ── */
+        .summit-ops-nav {
+            background: #0c0c0c;
+            border-bottom: 1px solid #1f1f1f;
+            padding: 0.55rem 3rem;
+            display: flex;
+            gap: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 72px;
+            z-index: 90;
+            backdrop-filter: blur(8px);
+        }
+        .summit-ops-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #3a3a3a;
+            margin-right: 1.5rem;
+            white-space: nowrap;
+        }
+        .summit-ops-nav a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #555;
+            text-decoration: none;
+            padding: 0.4rem 0.9rem;
+            position: relative;
+            transition: color 0.25s;
+            white-space: nowrap;
+        }
+        .summit-ops-nav a:hover { color: #D4AF37; }
+        .summit-ops-nav a.active {
+            color: #D4AF37;
+        }
+        .summit-ops-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.55rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 3px;
+            background: #D4AF37;
+            border-radius: 50%;
+        }
+
+        /* ── ENTRANCE ANIMATIONS ── */
+        .anim-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .anim-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .anim-in:nth-child(2) { transition-delay: 0.08s; }
+        .anim-in:nth-child(3) { transition-delay: 0.16s; }
+        .anim-in:nth-child(4) { transition-delay: 0.24s; }
+        .anim-in:nth-child(5) { transition-delay: 0.32s; }
+        .anim-in:nth-child(6) { transition-delay: 0.40s; }
+
+        /* ── CARD GLOW HOVER ── */
+        .stat-box, .engine-card, .deal-box, .case-card, .exec-bullet, .quote-block {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .stat-box:hover, .engine-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212,175,55,0.08);
+            border-color: rgba(212,175,55,0.3);
+        }
+        .deal-box:hover {
+            box-shadow: 0 8px 30px rgba(212,175,55,0.07);
+        }
+        .exec-bullet:hover {
+            background: rgba(212,175,55,0.09);
+            border-color: rgba(212,175,55,0.35);
+        }
+
+        /* ── HERO GLOW ── */
+        .prop-hero {
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.06) 0%, rgba(100,50,200,0.04) 50%, transparent 80%);
+            position: relative;
+        }
+        .prop-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff' fill-opacity='0.012'/%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* ── SECTION DIVIDER ANIMATION ── */
+        .prop-section {
+            border-bottom: none;
+            position: relative;
+        }
+        .prop-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 2rem;
+            right: 2rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--prop-border) 20%, var(--prop-border) 80%, transparent);
+        }
+
+        /* ── STAT COUNT-UP ── */
+        .stat-num[data-count] { transition: color 0.3s; }
     </style>
 </head>
 <body>
@@ -410,17 +525,17 @@
         <span class="prop-nav-label">Confidential Growth Proposal</span>
         <a href="index.html" class="prop-nav-back">&larr; Back to Site</a>
     </nav>
-    <!-- Summit Ops Cross-Page Nav -->
-    <div style="background:#111;border-bottom:1px solid #1e1e1e;padding:0.5rem 3rem;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
-        <span style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:3px;color:#555;white-space:nowrap;">Summit Ops ↗</span>
-        <a href="internal.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Intelligence</a>
-        <a href="admin.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#D4AF37;text-decoration:none;white-space:nowrap;">Strategy Pt.1 ←</a>
-        <a href="admin2.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Strategy Pt.2</a>
-        <a href="master.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Master Ref</a>
-        <a href="pitch.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Jim Script</a>
-        <a href="pitch_siblings.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Siblings Script</a>
-        <a href="agreement.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Agreement</a>
-    </div>
+    <!-- Summit Ops Cross-Page Nav (upgraded) -->
+    <nav class="summit-ops-nav">
+        <span class="summit-ops-label">Summit Ops</span>
+        <a href="internal.html">Intelligence</a>
+        <a href="admin.html" class="active">Strategy Pt.1</a>
+        <a href="admin2.html">Strategy Pt.2</a>
+        <a href="master.html">Master Ref</a>
+        <a href="pitch.html">Jim Script</a>
+        <a href="pitch_siblings.html">Siblings Script</a>
+        <a href="agreement.html">Agreement</a>
+    </nav>
 
     <!-- EXECUTIVE SUMMARY — For Jim & the Siblings -->
     <section class="exec-summary" id="summary">
@@ -780,5 +895,44 @@
     <footer class="prop-footer">
         &copy; 2026 Summit. Prepared exclusively for Fred's Records Ltd. All projections are estimates based on comparable market data.
     </footer>
+<script>
+(function(){
+  // ── IntersectionObserver entrance animation ──
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.anim-in').forEach(el => obs.observe(el));
+
+  // ── Count-up animation ──
+  function countUp(el) {
+    const raw = el.dataset.count;
+    const isFloat = raw.includes('.');
+    const target = parseFloat(raw.replace(/[^0-9.]/g,''));
+    const prefix = raw.match(/^[^0-9]*/)[0];
+    const suffix = raw.match(/[^0-9.]*$/)[0];
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val = target * ease;
+      el.textContent = prefix + (isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString()) + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ countUp(e.target); countObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+  // ── Animate stat boxes automatically ──
+  document.querySelectorAll('.stat-box, .prop-section, .exec-bullet, .engine-card, .case-card').forEach((el, i) => {
+    el.classList.add('anim-in');
+    el.style.transitionDelay = (i * 0.07) + 's';
+    obs.observe(el);
+  });
+})();
+</script>
 </body>
 </html>

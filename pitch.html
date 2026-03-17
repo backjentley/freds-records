@@ -351,20 +351,123 @@
             .script-text { padding: 1.25rem; font-size: 1.05rem; }
             .beat-num { font-size: 2rem; }
         }
+
+        /* ── SUMMIT OPS NAV ── */
+        .summit-ops-nav {
+            background: #0a0a0a;
+            border-bottom: 1px solid #1e1e1e;
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            gap: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            backdrop-filter: blur(8px);
+        }
+        .summit-ops-label {
+            font-family: 'Space Mono';
+            font-size: 0.42rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #2e2e2e;
+            margin-right: 1.25rem;
+            white-space: nowrap;
+        }
+        .summit-ops-nav a {
+            font-family: 'Space Mono';
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #555;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            position: relative;
+            transition: color 0.25s;
+            white-space: nowrap;
+        }
+        .summit-ops-nav a:hover { color: #D4AF37; }
+        .summit-ops-nav a.active { color: #D4AF37; }
+        .summit-ops-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px; height: 3px;
+            background: #D4AF37;
+            border-radius: 50%;
+        }
+
+        /* ── BEAT ENTRANCE ANIMATIONS ── */
+        .beat {
+            position: relative;
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .beat.anim-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .beat.anim-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── LEFT TIMELINE CONNECTOR ── */
+        .beats-container {
+            position: relative;
+        }
+        .beats-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,0.3), transparent);
+        }
+
+        /* ── GRADIENT PROGRESS BAR ── */
+        .pb-fill {
+            background: linear-gradient(90deg, #D4AF37 0%, #f0d060 50%, #D4AF37 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        /* ── BEAT NUM GRADIENT ── */
+        .beat-num {
+            background: linear-gradient(135deg, #D4AF37, #f5d878, #b8922a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── SCRIPT TEXT HOVER GLOW ── */
+        .script-text {
+            transition: box-shadow 0.3s ease;
+        }
+        .script-text:hover {
+            box-shadow: 0 0 40px rgba(212,175,55,0.06), inset 0 0 0 1px rgba(212,175,55,0.12);
+        }
     </style>
 </head>
 <body>
-<!-- Summit Ops Cross-Page Nav -->
-<div style="background:#0d0d0d;border-bottom:1px solid #2a2a2a;padding:0.5rem 1.5rem;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
-    <span style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:3px;color:#555;white-space:nowrap;">Summit Ops ↗</span>
-    <a href="internal.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Intelligence</a>
-    <a href="admin.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Strategy Pt.1</a>
-    <a href="admin2.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Strategy Pt.2</a>
-    <a href="master.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Master Ref</a>
-    <a href="pitch.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#D4AF37;text-decoration:none;white-space:nowrap;">Jim Script ←</a>
-    <a href="pitch_siblings.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Siblings Script</a>
-    <a href="agreement.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#D4AF37'" onmouseout="this.style.color='#888'">Agreement</a>
-</div>
+<!-- Summit Ops Cross-Page Nav (upgraded) -->
+<nav class="summit-ops-nav">
+    <span class="summit-ops-label">Summit Ops</span>
+    <a href="internal.html">Intelligence</a>
+    <a href="admin.html">Strategy Pt.1</a>
+    <a href="admin2.html">Strategy Pt.2</a>
+    <a href="master.html">Master Ref</a>
+    <a href="pitch.html" class="active">Jim Script</a>
+    <a href="pitch_siblings.html">Siblings Script</a>
+    <a href="agreement.html">Agreement</a>
+</nav>
 
     <header class="script-header">
         <span class="script-label">Speaking Notes · Internal · Confidential</span>
@@ -606,6 +709,20 @@
             time.textContent = remaining === 0 ? 'Ready' : '~' + remaining + ' min left';
         });
     </script>
+
+<script>
+(function(){
+  // Beat entrance animations
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.beat').forEach((el, i) => {
+    el.classList.add('anim-in');
+    el.style.transitionDelay = (i * 0.04) + 's';
+    obs.observe(el);
+  });
+})();
+</script>
 
 </body>
 </html>

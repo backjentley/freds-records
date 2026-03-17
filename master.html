@@ -40,21 +40,97 @@ h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
 @media(max-width:600px){.grid{grid-template-columns:1fr;}}
 @media print{.top-bar{display:none;}.shell{padding:1rem;}}
+
+/* ── SUMMIT OPS NAV (light theme) ── */
+.summit-ops-nav {
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(184,149,42,0.2);
+  padding: 0.55rem 2rem;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 32px;
+  z-index: 90;
+  backdrop-filter: blur(8px);
+}
+.summit-ops-label {
+  font-family: 'Space Mono';
+  font-size: 0.42rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #333;
+  margin-right: 1.25rem;
+  white-space: nowrap;
+}
+.summit-ops-nav a {
+  font-family: 'Space Mono';
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #777;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  position: relative;
+  transition: color 0.25s;
+  white-space: nowrap;
+}
+.summit-ops-nav a:hover { color: #b8952a; }
+.summit-ops-nav a.active { color: #b8952a; font-weight: 700; }
+.summit-ops-nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px; height: 3px;
+  background: #b8952a;
+  border-radius: 50%;
+}
+
+/* ── ENTRANCE ANIMATIONS ── */
+.anim-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.anim-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── CARD HOVER ── */
+.section {
+  transition: box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.section:hover {
+  box-shadow: 0 4px 20px rgba(184,149,42,0.07);
+  border-color: rgba(184,149,42,0.3);
+}
+.unknowns:hover {
+  box-shadow: 0 4px 20px rgba(184,149,42,0.12);
+}
+
+/* ── ITEM DOT PULSE ── */
+.item-dot {
+  transition: transform 0.2s ease;
+}
+.item:hover .item-dot { transform: scale(1.5); }
+.item { transition: background 0.2s; }
+.item:hover { background: rgba(184,149,42,0.03); }
 </style>
 </head>
 <body>
 <div class="top-bar"><span>Fred's Records × Summit · Master Considerations · March 2026</span><span>Internal Use Only</span></div>
-<!-- Summit Ops Cross-Page Nav -->
-<div style="background:#1a1a1a;border-bottom:1px solid #ccc3;padding:0.5rem 2rem;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
-    <span style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:3px;color:#aaa9;white-space:nowrap;">Summit Ops ↗</span>
-    <a href="internal.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Intelligence</a>
-    <a href="admin.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Strategy Pt.1</a>
-    <a href="admin2.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Strategy Pt.2</a>
-    <a href="master.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#b8952a;text-decoration:none;white-space:nowrap;">Master Ref ←</a>
-    <a href="pitch.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Jim Script</a>
-    <a href="pitch_siblings.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Siblings Script</a>
-    <a href="agreement.html" style="font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:#888;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#b8952a'" onmouseout="this.style.color='#888'">Agreement</a>
-</div>
+<!-- Summit Ops Cross-Page Nav (upgraded) -->
+<nav class="summit-ops-nav">
+  <span class="summit-ops-label">Summit Ops</span>
+  <a href="internal.html">Intelligence</a>
+  <a href="admin.html">Strategy Pt.1</a>
+  <a href="admin2.html">Strategy Pt.2</a>
+  <a href="master.html" class="active">Master Ref</a>
+  <a href="pitch.html">Jim Script</a>
+  <a href="pitch_siblings.html">Siblings Script</a>
+  <a href="agreement.html">Agreement</a>
+</nav>
 <div class="shell">
 
 <div class="doc-header">
@@ -245,5 +321,18 @@ h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
   <span>Do Not Share</span>
 </div>
 </div>
+
+<script>
+(function(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.section, .grid, .grid-2').forEach((el, i) => {
+    el.classList.add('anim-in');
+    el.style.transitionDelay = (i * 0.05) + 's';
+    obs.observe(el);
+  });
+})();
+</script>
 </body>
 </html>
