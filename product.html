@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumours - Fleetwood Mac (1st Press) | Fred's Records</title>
+    <meta name="description" content="Original 1977 pressing of Fleetwood Mac's Rumours. RL master stamp in deadwax. VG+ condition. Graded to Goldmine standards.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rumours (1st Press) | Fred's Records">
+    <meta property="og:description" content="Fleetwood Mac - Rumours. Original 1977 Warner Bros pressing with RL stamp. Hand-graded VG+ by our team. Ships worldwide in custom mailers.">
+    <meta property="og:image" content="images/rumours.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rumours (1st Press) | Fred's Records">
+    <meta name="twitter:description" content="Fleetwood Mac - Rumours. Original 1977 Warner Bros pressing with RL stamp. Hand-graded VG+ by our team. Ships worldwide in custom mailers.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Schema.org Product Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Rumours - Fleetwood Mac (1st Press)",
+      "image": "images/rumours.webp",
+      "description": "Original 1977 pressing of Fleetwood Mac's Rumours. RL master stamp in deadwax. VG+ condition. Graded to Goldmine standards.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Warner Bros."
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://fredsrecords.com/product.html",
+        "priceCurrency": "CAD",
+        "price": "125.00",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/UsedCondition"
+      }
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pdp { max-width: var(--max-w); margin: 0 auto; padding: 2rem; }
+        .breadcrumbs { display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--slate); padding: 1rem 0 2rem; }
+        .breadcrumbs a { color: var(--slate); transition: color var(--transition); }
+        .breadcrumbs a:hover { color: var(--purple); }
+        .pdp-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 3rem; }
+        .pdp-gallery { display: flex; flex-direction: column; gap: 1rem; }
+        .pdp-main-img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--border); background: #f8f8f8; transition: transform 0.4s; cursor: zoom-in; }
+        .pdp-main-img:hover { transform: scale(1.02); }
+        .pdp-thumbs { display: flex; gap: 0.75rem; }
+        .pdp-thumb { width: 80px; height: 80px; border: 2px solid var(--border); object-fit: cover; cursor: pointer; transition: border-color var(--transition); }
+        .pdp-thumb.active, .pdp-thumb:hover { border-color: var(--purple); }
+        .pdp-details {}
+        .pdp-artist { font-size: 1.1rem; color: var(--slate); font-weight: 500; margin-bottom: 4px; }
+        .pdp-title { font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; margin-bottom: 1rem; }
+        .pdp-price-row { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; }
+        .pdp-price { font-family: var(--font-ui); font-size: 2rem; font-weight: 700; color: var(--red); }
+        .pdp-ship { font-size: 0.8rem; color: var(--slate); }
+        .pdp-cta { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .pdp-cta .btn-primary { flex: 1; justify-content: center; padding: 16px; font-size: 0.85rem; }
+        .pdp-cta .btn-fav { padding: 16px; border: 1px solid var(--border); background: none; color: var(--charcoal); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+        .pdp-cta .btn-fav:hover { border-color: var(--red); color: var(--red); }
+
+        .pdp-section { padding: 1.5rem 0; border-top: 1px solid var(--border); }
+        .pdp-section-title { font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+        .pdp-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem; }
+        .pdp-spec-label { color: var(--slate); }
+        .pdp-spec-value { font-weight: 600; }
+        .pdp-condition { display: flex; gap: 1.5rem; margin-top: 0.75rem; }
+        .pdp-cond-box { flex: 1; text-align: center; padding: 1rem; border: 1px solid var(--border); background: #f9f9f9; }
+        .pdp-cond-label { font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: var(--slate); margin-bottom: 4px; }
+        .pdp-cond-grade { font-size: 1.4rem; font-weight: 700; }
+        .pdp-cond-text { font-size: 0.7rem; color: var(--slate); }
+
+        .pdp-tracklist { border: none; padding: 0; }
+        .pdp-track { display: flex; align-items: center; gap: 1rem; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+        .pdp-track:hover { background: #fafafa; margin: 0 -8px; padding: 10px 8px; }
+        .pdp-track-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--slate); width: 24px; text-align: right; }
+        .pdp-track-play { width: 28px; height: 28px; border-radius: 50%; background: rgba(74,35,90,0.08); color: var(--purple); display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+        .pdp-track:hover .pdp-track-play { background: var(--purple); color: white; }
+        .pdp-track-name { flex: 1; font-weight: 500; font-size: 0.9rem; }
+        .pdp-track-dur { font-family: var(--font-mono); font-size: 0.8rem; color: var(--slate); }
+
+        .tony-note { background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white; padding: 2rem; margin-top: 2rem; }
+        .tony-note-text { font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.6; border-left: 3px solid var(--gold); padding-left: 1.25rem; margin-bottom: 1rem; }
+        .tony-note-author { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+
+        @media (max-width: 768px) { .pdp-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972</span></a>
+        <div class="nav-links">
+            <a href="shop.html" class="active">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search..." aria-label="Search catalog"></div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items"><span class="material-icons">shopping_cart</span><span class="nav-cart-badge">3</span></div>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html" class="active">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<main id="main">
+
+<div class="pdp">
+    <nav class="breadcrumbs">
+        <a href="index.html">Home</a><span class="material-icons" style="font-size:0.9rem;">chevron_right</span>
+        <a href="shop.html">Vinyl</a><span class="material-icons" style="font-size:0.9rem;">chevron_right</span>
+        <a href="shop.html">Classic Rock</a><span class="material-icons" style="font-size:0.9rem;">chevron_right</span>
+        <span style="color:var(--charcoal); font-weight: 500;">Rumours</span>
+    </nav>
+
+    <div class="pdp-grid">
+        <div class="pdp-gallery">
+            <img src="images/rumours.webp" alt="Rumours - Front Cover" class="pdp-main-img" id="mainImg">
+            <div class="pdp-thumbs">
+                <img src="images/rumours.webp" alt="Front" class="pdp-thumb active" onclick="document.getElementById('mainImg').src=this.src">
+                <img src="images/interior_1.webp" alt="Back" class="pdp-thumb" onclick="document.getElementById('mainImg').src=this.src">
+                <img src="images/grading_1.webp" alt="Vinyl Surface" class="pdp-thumb" onclick="document.getElementById('mainImg').src=this.src">
+                <img src="images/grading_2.webp" alt="Deadwax" class="pdp-thumb" onclick="document.getElementById('mainImg').src=this.src">
+            </div>
+        </div>
+
+        <div class="pdp-details">
+            <div class="pdp-artist">Fleetwood Mac</div>
+            <h1 class="pdp-title">Rumours</h1>
+            <div class="pdp-price-row">
+                <span class="pdp-price">$125.00</span>
+                <span class="pdp-ship">Ships in 24 hours · Free over $150</span>
+            </div>
+            <div class="pdp-cta">
+                <button class="btn-primary"><span class="material-icons" style="font-size:1.1rem;">add_shopping_cart</span> Add to Cart</button>
+                <button class="btn-fav"><span class="material-icons">favorite_border</span></button>
+            </div>
+
+            <div class="pdp-section">
+                <h3 class="pdp-section-title">Release Details</h3>
+                <div class="pdp-spec-grid">
+                    <div class="pdp-spec-label">Label</div><div class="pdp-spec-value">Warner Bros.</div>
+                    <div class="pdp-spec-label">Catalog #</div><div class="pdp-spec-value">BSK 3010</div>
+                    <div class="pdp-spec-label">Format</div><div class="pdp-spec-value">Vinyl, LP, Album, 1st Press</div>
+                    <div class="pdp-spec-label">Pressing</div><div class="pdp-spec-value">RL (Robert Ludwig) Master</div>
+                    <div class="pdp-spec-label">Country</div><div class="pdp-spec-value">US</div>
+                    <div class="pdp-spec-label">Released</div><div class="pdp-spec-value">1977</div>
+                </div>
+            </div>
+
+            <div class="pdp-section">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="pdp-section-title" style="margin-bottom:0;">Condition</h3>
+                    <a href="about.html" style="font-size: 0.8rem; color: var(--purple); display: flex; align-items: center; gap: 4px;">Grading Scale <span class="material-icons" style="font-size:0.8rem;">open_in_new</span></a>
+                </div>
+                <div class="pdp-condition">
+                    <div class="pdp-cond-box"><div class="pdp-cond-label">Media</div><div class="pdp-cond-grade">NM</div><div class="pdp-cond-text">Near Mint</div></div>
+                    <div class="pdp-cond-box"><div class="pdp-cond-label">Sleeve</div><div class="pdp-cond-grade">VG+</div><div class="pdp-cond-text">Very Good Plus</div></div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1rem; line-height: 1.6;">Minor ring wear on front of gatefold. Vinyl is pristine with RL mastering stamp clearly visible in deadwax. Includes original inner sleeve. One of the finest examples we've had come through the shop.</p>
+            </div>
+
+            <div class="pdp-section">
+                <h3 class="pdp-section-title">Tracklist</h3>
+                <div>
+                    <div class="pdp-track"><span class="pdp-track-num">A1</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Second Hand News</span><span class="pdp-track-dur">2:56</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">A2</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Dreams</span><span class="pdp-track-dur">4:14</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">A3</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Never Going Back Again</span><span class="pdp-track-dur">2:14</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">A4</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Don't Stop</span><span class="pdp-track-dur">3:13</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">A5</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Go Your Own Way</span><span class="pdp-track-dur">3:38</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">B1</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Songbird</span><span class="pdp-track-dur">3:20</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">B2</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">The Chain</span><span class="pdp-track-dur">4:28</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">B3</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">You Make Loving Fun</span><span class="pdp-track-dur">3:31</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">B4</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Oh Daddy</span><span class="pdp-track-dur">3:56</span></div>
+                    <div class="pdp-track"><span class="pdp-track-num">B5</span><button class="pdp-track-play"><span class="material-icons" style="font-size:0.85rem;">play_arrow</span></button><span class="pdp-track-name">Gold Dust Woman</span><span class="pdp-track-dur">4:51</span></div>
+                </div>
+            </div>
+
+            <div class="tony-note">
+                <p class="tony-note-text">"Original '77 pressing with the coveted RL stamp. Robert Ludwig's mastering gave these early copies a dynamic range you just don't get on later pressings. Spins like butter. Minor ring wear on the gatefold but the music is absolutely immaculate. This one doesn't come around often - and when it does, it doesn't last."</p>
+                <span class="tony-note-author">- Tony Plowman · Head Buyer · 32 Years at Fred's</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related Items -->
+    <div style="margin-top: 5rem; border-top: 1px solid #e5e5e5; padding-top: 5rem;">
+        <h2 style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; margin-bottom: 2.5rem; color: var(--charcoal);">More from the Bins</h2>
+        <div class="product-grid" style="grid-template-columns: repeat(4, 1fr) !important; gap: 1.5rem;">
+            <!-- More Fleetwood Mac -->
+            <div class="product-card" onclick="window.location.href='product.html'">
+                <div class="product-img"><img src="images/rumours.webp" alt="Fleetwood Mac - Fleetwood Mac" style="filter: grayscale(100%) opacity(0.5);"><span class="badge badge-black">VG+</span></div>
+                <div class="product-info"><div class="product-name">Fleetwood Mac (1975)</div><div class="product-artist">Fleetwood Mac</div><div class="product-footer"><div class="product-price">$45</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+            </div>
+            <!-- More 70s Rock -->
+            <div class="product-card" onclick="window.location.href='product.html'">
+                <div class="product-img"><img src="images/rumours.webp" alt="Led Zeppelin IV" style="filter: sepia(100%) hue-rotate(180deg) opacity(0.5);"><span class="badge badge-red">NM</span></div>
+                <div class="product-info"><div class="product-name">Led Zeppelin IV</div><div class="product-artist">Led Zeppelin</div><div class="product-footer"><div class="product-price">$65</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+            </div>
+            <div class="product-card" onclick="window.location.href='product.html'">
+                <div class="product-img"><img src="images/rumours.webp" alt="The Dark Side of the Moon" style="filter: invert(1) opacity(0.5);"><span class="badge badge-black">VG</span></div>
+                <div class="product-info"><div class="product-name">Dark Side of the Moon</div><div class="product-artist">Pink Floyd</div><div class="product-footer"><div class="product-price">$80</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+            </div>
+            <div class="product-card" onclick="window.location.href='product.html'">
+                <div class="product-img"><img src="images/rumours.webp" alt="Hotel California" style="filter: hue-rotate(90deg) opacity(0.5);"><span class="badge badge-gold">MINT</span></div>
+                <div class="product-info"><div class="product-name">Hotel California</div><div class="product-artist">Eagles</div><div class="product-footer"><div class="product-price">$90</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021).</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li><li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger - Built from St. John's</span></div>
+</footer>
+
+<script src="js/interactions.js"></script>
+</body>
+</html>

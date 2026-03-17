@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merch & Apparel | Fred's Records - Est. 1972</title>
+    <meta name="description" content="Fred's Records official merch. Heritage tees, band tees, vinyl accessories, and limited edition collector's items. Designed on Duckworth Street.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Merch | Fred's Records - Heritage Collection">
+    <meta property="og:description" content="Official Fred's Records merchandise. Heritage tees, hoodies, cork slipmats, wooden crates, and collector items celebrating 54 years on Duckworth Street.">
+    <meta property="og:image" content="images/merch_heritage_tee.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Merch | Fred's Records - Heritage Collection">
+    <meta name="twitter:description" content="Official Fred's Records merchandise. Heritage tees, hoodies, cork slipmats, wooden crates, and collector items celebrating 54 years on Duckworth Street.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Merch Hero */
+        .merch-hero { position: relative; min-height: 70vh; display: flex; align-items: center; overflow: hidden; }
+        .merch-hero-bg { position: absolute; inset: 0; }
+        .merch-hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
+        .merch-hero-content { position: relative; z-index: 2; max-width: var(--max-w); margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .merch-hero-text {}
+        .merch-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: white; line-height: 1.05; margin-bottom: 1rem; }
+        .merch-hero-title em { color: var(--gold); }
+        .merch-hero-desc { color: rgba(255,255,255,0.6); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; }
+        .merch-hero-features { display: flex; gap: 2rem; }
+        .merch-feature { text-align: center; }
+        .merch-feature-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .merch-feature-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+
+        /* Category Nav */
+        .cat-nav { position: sticky; top: 68px; z-index: 50; background: white; border-bottom: 1px solid var(--border); padding: 0 2rem; }
+        .cat-nav-inner { max-width: var(--max-w); margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
+        .cat-nav-inner::-webkit-scrollbar { display: none; }
+        .cat-link { padding: 16px 24px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: var(--slate); border-bottom: 2px solid transparent; transition: all var(--transition); white-space: nowrap; }
+        .cat-link:hover, .cat-link.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+        /* Collection Block */
+        .collection-block { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+        .collection-block:last-child { border-bottom: none; }
+        .collection-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+        .collection-name { font-family: var(--font-ui); font-size: 1.5rem; font-weight: 700; }
+        .collection-desc { color: var(--slate); font-size: 0.85rem; margin-top: 4px; max-width: 500px; }
+        .collection-count { font-family: var(--font-mono); font-size: 0.7rem; color: var(--slate); letter-spacing: 1px; }
+
+        /* Merch Card */
+        .merch-card { background: white; border: 1px solid var(--border); overflow: hidden; transition: all 0.4s; }
+        .merch-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .merch-card-img { aspect-ratio: 1; overflow: hidden; background: #f8f8f8; }
+        .merch-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .merch-card:hover .merch-card-img img { transform: scale(1.05); }
+        .merch-card-info { padding: 1.25rem; border-top: 3px solid var(--gold); }
+        .merch-card:hover .merch-card-info { border-top-color: var(--purple); }
+        .merch-card-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+        .merch-card-desc { color: var(--slate); font-size: 0.8rem; line-height: 1.5; margin-bottom: 1rem; }
+        .merch-card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .merch-card-price { font-family: var(--font-ui); font-size: 1.3rem; font-weight: 700; color: var(--purple); }
+        .merch-sizes { display: flex; gap: 4px; }
+        .merch-size { width: 28px; height: 28px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 700; color: var(--slate); cursor: pointer; transition: all var(--transition); }
+        .merch-size:hover { border-color: var(--purple); color: var(--purple); background: rgba(74,35,90,0.05); }
+
+        /* Limited Badge */
+        .limited-banner { background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white; padding: 3rem 2rem; margin: 2rem 0; text-align: center; }
+        .limited-banner-title { font-family: var(--font-display); font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .limited-banner-text { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .merch-hero-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Announcement -->
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD · Record Store Day 2026 pre-orders now open</div>
+
+<!-- Nav -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972 · St. John's</span></a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html" class="active">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search catalog..." aria-label="Search catalog"></div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items"><span class="material-icons">shopping_cart</span><span class="nav-cart-badge">3</span></div>
+            <button class="nav-cta">Join the List</button>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html" class="active">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<!-- Merch Hero -->
+<section class="merch-hero">
+    <div class="merch-hero-bg"><img src="images/store_front.webp" alt="Fred's Records Interior"></div>
+    <div class="merch-hero-content">
+        <div class="merch-hero-text">
+            <p class="heritage-eyebrow" style="margin-bottom: 1rem;">Official Merch · Designed on Duckworth St.</p>
+            <h1 class="merch-hero-title">Wear the <em>Heritage</em></h1>
+            <p class="merch-hero-desc">
+                54 years of curation distilled into wearable heritage. Every piece designed in-house at 198 Duckworth Street. Heritage fits, vintage aesthetics, modern quality. This isn't merch - it's a membership card.
+            </p>
+            <div class="merch-hero-features">
+                <div class="merch-feature"><div class="merch-feature-icon"></div><div class="merch-feature-label">Premium Cotton</div></div>
+                <div class="merch-feature"><div class="merch-feature-icon"></div><div class="merch-feature-label">Designed in NL</div></div>
+                <div class="merch-feature"><div class="merch-feature-icon"></div><div class="merch-feature-label">Ships Worldwide</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Category Nav -->
+<div class="cat-nav">
+    <div class="cat-nav-inner">
+        <a href="#heritage-col" class="cat-link active">Heritage Collection</a>
+        <a href="#band-tees" class="cat-link">Band Tees & Apparel</a>
+        <a href="#accessories" class="cat-link">Vinyl Accessories</a>
+        <a href="#lifestyle" class="cat-link">Lifestyle & Home</a>
+        <a href="#limited" class="cat-link">Collector's Edition</a>
+    </div>
+</div>
+
+<div class="section">
+
+<!-- Heritage Logo Collection -->
+<div class="collection-block" id="heritage-col" style="margin-top: 2rem;">
+    <div class="collection-header">
+        <div>
+            <h2 class="collection-name">The "Heritage" Logo Collection</h2>
+            <p class="collection-desc">Clean, classic designs that focus on the shop's iconic branding.</p>
+        </div>
+        <span class="collection-count">5 Items</span>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <!-- 1 -->
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_heritage_tee.webp" alt="Original 1972 Tee"><span class="badge badge-gold">Top Seller</span></div>
+            <div class="product-info"><div class="product-name">The "Original 1972" Tee</div><div class="product-artist">Vintage Yellow</div><div class="product-footer"><div class="product-price">$35</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <!-- 2 -->
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_hoodie.webp" alt="Hoodie"></div>
+            <div class="product-info"><div class="product-name">"Duckworth Street" Hoodie</div><div class="product-artist">Charcoal Gray</div><div class="product-footer"><div class="product-price">$65</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <!-- 3 -->
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_tote.webp" alt="Tote"></div>
+            <div class="product-info"><div class="product-name">"Record Tote" Heavy Canvas Bag</div><div class="product-artist">Fits 15 LPs</div><div class="product-footer"><div class="product-price">$25</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <!-- 4 -->
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_heritage_tee.webp" alt="Crewneck" style="filter: hue-rotate(270deg);"></div>
+            <div class="product-info"><div class="product-name">"Fred's Character" Crewneck</div><div class="product-artist">Cracked Vintage Print</div><div class="product-footer"><div class="product-price">$55</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <!-- 5 -->
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_hat.webp" alt="Dad Hat"></div>
+            <div class="product-info"><div class="product-name">The Classic Dad Hat</div><div class="product-artist">Purple Cotton Twill</div><div class="product-footer"><div class="product-price">$30</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Furthest East Band Tees -->
+<div class="collection-block" id="band-tees" style="margin-top: 5rem;">
+    <div class="collection-header">
+        <div>
+            <h2 class="collection-name">Band Tees & Apparel</h2>
+            <p class="collection-desc">Tour-style merch for the legendary record shop.</p>
+        </div>
+        <span class="collection-count">6 Items</span>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_band_tee.webp" alt="East Band Tee"></div>
+            <div class="product-info"><div class="product-name">The "East" Band Tee</div><div class="product-artist">Faded Black</div><div class="product-footer"><div class="product-price">$40</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_raglan_jersey.webp" alt="Local Jersey"></div>
+            <div class="product-info"><div class="product-name">"Trad-Rock" Local Jersey</div><div class="product-artist">3/4 Sleeve Vintage</div><div class="product-footer"><div class="product-price">$45</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_band_tee.webp" alt="Jamaica Farewell" style="filter: sepia(0.5);"></div>
+            <div class="product-info"><div class="product-name">"Jamaica Farewell" Lyric Tee</div><div class="product-artist">Premium Cream</div><div class="product-footer"><div class="product-price">$40</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_raglan_jersey.webp" alt="Sonic Boom" style="filter: hue-rotate(200deg);"></div>
+            <div class="product-info"><div class="product-name">The "Sonic Boom" Rival Jersey</div><div class="product-artist">Purple/White</div><div class="product-footer"><div class="product-price">$45</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_band_tee.webp" alt="Fiddler Tee" style="filter: invert(0.1);"></div>
+            <div class="product-info"><div class="product-name">"Fiddler & Fender" Tee</div><div class="product-artist">Graphic Print</div><div class="product-footer"><div class="product-price">$35</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_hoodie.webp" alt="Storefront Hoodie" style="filter: contrast(1.2);"></div>
+            <div class="product-info"><div class="product-name">"198 Duckworth" Hoodie</div><div class="product-artist">High-Contrast Print</div><div class="product-footer"><div class="product-price">$75</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Vinyl Accessories -->
+<div class="collection-block" id="accessories" style="margin-top: 5rem;">
+    <div class="collection-header">
+        <div>
+            <h2 class="collection-name">Vinyl Accessories</h2>
+            <p class="collection-desc">Premium tools for the analog listener.</p>
+        </div>
+        <span class="collection-count">5 Items</span>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_slipmat.webp" alt="Slipmat"><span class="badge badge-gold">Essential</span></div>
+            <div class="product-info"><div class="product-name">"Golden Ratio" Cork Slipmat</div><div class="product-artist">Anti-Static Control</div><div class="product-footer"><div class="product-price">$22</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_wooden_crate.webp" alt="Crate"></div>
+            <div class="product-info"><div class="product-name">"Original Wood" Record Crate</div><div class="product-artist">Holds 50-70 LPs</div><div class="product-footer"><div class="product-price">$85</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_slipmat.webp" alt="Sleeves" style="filter: grayscale(1);"></div>
+            <div class="product-info"><div class="product-name">"First Press" Inner Sleeves</div><div class="product-artist">Pack of 50 Poly-Lined</div><div class="product-footer"><div class="product-price">$30</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_pins.webp" alt="Adapter" style="filter: sepia(1);"></div>
+            <div class="product-info"><div class="product-name">"Heavy Weight" 45 Adapter</div><div class="product-artist">Solid Brass Engraved</div><div class="product-footer"><div class="product-price">$45</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_tote.webp" alt="Cloth" style="filter: invert(0.8);"></div>
+            <div class="product-info"><div class="product-name">"Atlantic Breeze" Cleaning Cloth</div><div class="product-artist">Microfiber Yellow</div><div class="product-footer"><div class="product-price">$12</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Lifestyle & Home -->
+<div class="collection-block" id="lifestyle" style="margin-top: 5rem;">
+    <div class="collection-header">
+        <div>
+            <h2 class="collection-name">Lifestyle & Local Gear</h2>
+            <p class="collection-desc">Representing Duckworth St. in any weather.</p>
+        </div>
+        <span class="collection-count">5 Items</span>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_windbreaker.webp" alt="Windbreaker"></div>
+            <div class="product-info"><div class="product-name">"Sea Dog" Windbreaker</div><div class="product-artist">St. John's Weather Ready</div><div class="product-footer"><div class="product-price">$85</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_hat.webp" alt="Beanie" style="filter: brightness(0.5);"></div>
+            <div class="product-info"><div class="product-name">"Uncle Jim" Fisherman's Beanie</div><div class="product-artist">Heavy-Knit Toque</div><div class="product-footer"><div class="product-price">$35</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_coffee_mug.webp" alt="Mug"></div>
+            <div class="product-info"><div class="product-name">"St. John's Standard" Mug</div><div class="product-artist">Heavy Ceramic</div><div class="product-footer"><div class="product-price">$18</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_candle.webp" alt="Candle"></div>
+            <div class="product-info"><div class="product-name">"Sounds of the Rock" Candle</div><div class="product-artist">Scented Local Wood</div><div class="product-footer"><div class="product-price">$28</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_pint_glass.webp" alt="Pint Glass"></div>
+            <div class="product-info"><div class="product-name">198 Duckworth St. Pint Glass</div><div class="product-artist">Classic Bar Glass</div><div class="product-footer"><div class="product-price">$15</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Collector's Series -->
+<div class="collection-block" id="limited" style="margin-top: 5rem; margin-bottom: 5rem;">
+    <div class="collection-header">
+        <div>
+            <h2 class="collection-name">Limited Edition "Collector's" Series</h2>
+            <p class="collection-desc">Small batch runs for the true Fred's loyalists.</p>
+        </div>
+        <span class="collection-count">4 Items</span>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_tribute_poster.webp" alt="Poster"><span class="badge badge-black">Limited</span></div>
+            <div class="product-info"><div class="product-name">Heritage Tribute Poster</div><div class="product-artist">Silk Screen 18x24</div><div class="product-footer"><div class="product-price">$45</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_challenge_coin.webp" alt="Coin"></div>
+            <div class="product-info"><div class="product-name">Fred's Challenge Coin</div><div class="product-artist">Numbered Edition</div><div class="product-footer"><div class="product-price">$20</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_pins.webp" alt="Pins"></div>
+            <div class="product-info"><div class="product-name">50th Anniversary Pin Set</div><div class="product-artist">3 Enamel Pins</div><div class="product-footer"><div class="product-price">$25</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+        <div class="product-card" onclick="window.location.href='product.html'">
+            <div class="product-img"><img src="images/merch_sticker_pack.webp" alt="Stickers"></div>
+            <div class="product-info"><div class="product-name">DJ "Bunker" Sticker Pack</div><div class="product-artist">Die-Cut Vinyl</div><div class="product-footer"><div class="product-price">$12</div><button class="btn-dig" aria-label="Add to cart"><span class="material-icons" style="font-size:12px">add</span></button></div></div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021). The music never stops.</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li><li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger - Built from St. John's</span></div>
+</footer>
+
+<script src="js/interactions.js"></script>
+</body>
+</html>

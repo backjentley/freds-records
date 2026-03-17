@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Drop - Browse Vinyl | Fred's Records</title>
+    <meta name="description" content="Browse new arrivals, pre-orders, and rare finds. 50,000+ titles curated since 1972. Goldmine-graded used vinyl shipped worldwide.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shop Vinyl | Fred's Records - New Arrivals & Rare Finds">
+    <meta property="og:description" content="Browse thousands of records graded by hand and curated by experts. From first pressings to sealed new releases, shipped worldwide from St. John's.">
+    <meta property="og:image" content="images/crates_1.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shop Vinyl | Fred's Records - New Arrivals & Rare Finds">
+    <meta name="twitter:description" content="Browse thousands of records graded by hand and curated by experts. From first pressings to sealed new releases, shipped worldwide from St. John's.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preload" as="image" href="images/rumours.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .shop-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 60vh; }
+        .shop-hero-left { background: var(--warm-white); padding: 4rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); }
+        .shop-hero-right { position: relative; overflow: hidden; background: var(--purple); }
+        .shop-hero-right img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .shop-hero-right-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2; }
+        .shop-vinyl-wrap { position: relative; width: 300px; height: 300px; }
+        .shop-vinyl { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; animation: spin 20s linear infinite; box-shadow: 0 0 80px rgba(0,0,0,0.5); }
+        .shop-vinyl-hole { position: absolute; top: 50%; left: 50%; width: 20px; height: 20px; background: var(--purple); border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid rgba(255,255,255,0.2); z-index: 5; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .shop-stats { display: flex; gap: 3rem; margin-top: 2rem; }
+        .shop-stat { text-align: center; }
+        .shop-stat-val { font-family: var(--font-ui); font-size: 2rem; font-weight: 700; color: var(--gold); }
+        .shop-stat-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .results-bar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; margin-bottom: 1rem; }
+        .results-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--slate); }
+        .view-toggle { display: flex; gap: 4px; }
+        .view-toggle button { background: none; border: 1px solid var(--border); padding: 6px 10px; color: var(--slate); cursor: pointer; }
+        .view-toggle button.active { border-color: var(--purple); color: var(--purple); background: rgba(74,35,90,0.05); }
+
+        /* Genre Scroll - uses shared style.css */
+
+        @media (max-width: 768px) { .shop-hero { grid-template-columns: 1fr; } .shop-hero-right { min-height: 50vh; } }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD · Record Store Day 2026 pre-orders now open</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972 · St. John's</span></a>
+        <div class="nav-links">
+            <a href="shop.html" class="active">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search catalog..." aria-label="Search catalog"></div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items"><span class="material-icons">shopping_cart</span><span class="nav-cart-badge">3</span></div>
+            <button class="nav-cta">Join the List</button>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html" class="active">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<main id="main">
+<!-- Shop Hero -->
+<section class="shop-hero">
+    <div class="shop-hero-left">
+        <div style="display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--red); color: var(--red); padding: 6px 14px; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem; width: fit-content;">
+            <span class="pulse-dot" style="background: var(--red);"></span> This Week's Drop
+        </div>
+        <h1 style="font-family: var(--font-display); font-size: 3.5rem; font-weight: 900; line-height: 1.05; margin-bottom: 1rem;">Fresh in the <em style="color: var(--purple-mid);">Bins</em></h1>
+        <p style="color: var(--slate); font-size: 1.05rem; line-height: 1.7; max-width: 480px; margin-bottom: 2rem;">Hand-picked weekly drops, graded to Goldmine standards. Real condition photos, Tony's blurb on every used record. When they're gone, they're gone.</p>
+        <div style="display: flex; gap: 1rem;">
+            <a href="#products" class="btn-primary"><span class="material-icons" style="font-size:1rem;">album</span> Enter the Stacks</a>
+            <a href="merch.html" class="btn-ghost">Shop Merch</a>
+        </div>
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 2rem; font-family: var(--font-mono); font-size: 0.7rem;">
+            <div><span style="color: var(--slate); display: block; font-size: 0.55rem; letter-spacing: 1px;">NEXT DROP</span><strong id="timer" style="color: var(--red);"></strong></div>
+            <div><span style="color: var(--slate); display: block; font-size: 0.55rem; letter-spacing: 1px;">TITLES</span><strong>50,000+</strong></div>
+            <div><span style="color: var(--slate); display: block; font-size: 0.55rem; letter-spacing: 1px;">SHIPS TO</span><strong>Worldwide</strong></div>
+        </div>
+    </div>
+    <div class="shop-hero-right">
+        <img src="images/interior_1.webp" alt="Fred's Records Interior" loading="lazy">
+        <div class="shop-hero-right-overlay">
+            <div class="shop-vinyl-wrap">
+                <img src="images/rumours.webp" alt="Vinyl Record" class="shop-vinyl">
+                <div class="shop-vinyl-hole"></div>
+            </div>
+            <div class="shop-stats">
+                <div class="shop-stat"><div class="shop-stat-val">54</div><div class="shop-stat-label">Years</div></div>
+                <div class="shop-stat"><div class="shop-stat-val">50K+</div><div class="shop-stat-label">Titles</div></div>
+                <div class="shop-stat"><div class="shop-stat-val">AAA</div><div class="shop-stat-label">Mastering</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Genres -->
+<section style="padding: 4rem 2rem; background: var(--bg-muted); border-bottom: 1px solid var(--border);">
+    <div style="max-width: var(--max-w); margin: 0 auto;">
+        <div class="section-header" style="border-bottom-color: #d1d5db;">
+            <div><h2 class="section-title">Dig Deeper</h2><p class="section-subtitle">Browse by genre. Every section curated by hand since 1972.</p></div>
+        </div>
+        <div class="genre-scroll">
+            <div class="genre-card"><img src="images/interior_2.webp" alt="NL & Celtic"><div class="genre-card-overlay"></div><div class="genre-card-content"><div class="genre-card-bar" style="background:var(--gold)"></div><h4>Newfoundland & Celtic</h4><p>Irish Descendants, Alan Doyle, GBS</p></div></div>
+            <div class="genre-card"><img src="images/crates_2.webp" alt="Classic Rock"><div class="genre-card-overlay"></div><div class="genre-card-content"><div class="genre-card-bar" style="background:var(--red)"></div><h4>Classic Rock</h4><p>Led Zeppelin, Floyd, The Stones</p></div></div>
+            <div class="genre-card"><img src="images/crates_3.webp" alt="Jazz"><div class="genre-card-overlay"></div><div class="genre-card-content"><div class="genre-card-bar" style="background:var(--blue)"></div><h4>Jazz & Blues</h4><p>Bop, Cool, Fusion, Delta</p></div></div>
+            <div class="genre-card"><img src="images/staff_picks_1.webp" alt="Staff Picks"><div class="genre-card-overlay"></div><div class="genre-card-content"><div class="genre-card-bar" style="background:var(--purple-light)"></div><h4>Staff Picks</h4><p>Tony's weekly recommendations</p></div></div>
+            <div class="genre-card"><img src="images/grading_1.webp" alt="Audiophile"><div class="genre-card-overlay"></div><div class="genre-card-content"><div class="genre-card-bar" style="background:var(--green)"></div><h4>Audiophile Pressings</h4><p>MFSL, DCC, Analogue Productions</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Fred's Top 20 -->
+<section style="padding: 4rem 2rem; background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white;">
+    <div style="max-width: var(--max-w); margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div>
+                <p style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;">Updated Weekly by Tony Ploughman</p>
+                <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700;">Fred's Top 20</h2>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 4px; max-width: 500px;">A ranked list of what is moving right now. This has run on a handwritten chalkboard in the shop since the mid-1970s. Now it runs here.</p>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 1px; color: rgba(255,255,255,0.3);">Week of March 16, 2026</span>
+        </div>
+        <div class="top20-grid">
+            <div class="top20-col">
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">01</span>
+                    <div class="top20-info"><div class="top20-title">Rumours (1st Press, RL Stamp)</div><div class="top20-artist">Fleetwood Mac · $125</div></div>
+                    <span class="top20-badge">NEW</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">02</span>
+                    <div class="top20-info"><div class="top20-title">Kind of Blue (MFSL)</div><div class="top20-artist">Miles Davis · $95</div></div>
+                    <span class="top20-badge-muted">+2</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">03</span>
+                    <div class="top20-info"><div class="top20-title">Master of Puppets</div><div class="top20-artist">Metallica · $85</div></div>
+                    <span class="top20-badge-muted">-1</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">04</span>
+                    <div class="top20-info"><div class="top20-title">Gypsies & Lovers</div><div class="top20-artist">The Irish Descendants · $45</div></div>
+                    <span class="top20-badge">NEW</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">05</span>
+                    <div class="top20-info"><div class="top20-title">The Tortured Poets Department (Ltd.)</div><div class="top20-artist">Taylor Swift · $55</div></div>
+                    <span class="top20-badge-muted">-2</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">06</span>
+                    <div class="top20-info"><div class="top20-title">Led Zeppelin IV (Remaster)</div><div class="top20-artist">Led Zeppelin · $32</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">07</span>
+                    <div class="top20-info"><div class="top20-title">Up (Reissue)</div><div class="top20-artist">Great Big Sea · $38</div></div>
+                    <span class="top20-badge">NEW</span>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">08</span>
+                    <div class="top20-info"><div class="top20-title">Wish You Were Here</div><div class="top20-artist">Pink Floyd · $68</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span class="top20-rank">09</span>
+                    <div class="top20-info"><div class="top20-title">Abbey Road (50th Anniversary)</div><div class="top20-artist">The Beatles · $42</div></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 12px 1rem; cursor: pointer;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='none'">
+                    <span class="top20-rank">10</span>
+                    <div class="top20-info"><div class="top20-title">Blue</div><div class="top20-artist">Joni Mitchell · $55</div></div>
+                </div>
+            </div>
+            <div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">11</span>
+                    <div class="top20-info"><div class="top20-title">Back in Black</div><div class="top20-artist">AC/DC · $28</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">12</span>
+                    <div class="top20-info"><div class="top20-title">A Love Supreme</div><div class="top20-artist">John Coltrane · $72</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">13</span>
+                    <div class="top20-info"><div class="top20-title">Nevermind</div><div class="top20-artist">Nirvana · $35</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">14</span>
+                    <div class="top20-info"><div class="top20-title">Sticky Fingers (OG Zipper)</div><div class="top20-artist">Rolling Stones · $110</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">15</span>
+                    <div class="top20-info"><div class="top20-title">The Dark Side of the Moon</div><div class="top20-artist">Pink Floyd · $48</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">16</span>
+                    <div class="top20-info"><div class="top20-title">Harvest</div><div class="top20-artist">Neil Young · $52</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">17</span>
+                    <div class="top20-info"><div class="top20-title">What's Going On</div><div class="top20-artist">Marvin Gaye · $62</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">18</span>
+                    <div class="top20-info"><div class="top20-title">Songs of Leonard Cohen</div><div class="top20-artist">Leonard Cohen · $44</div></div>
+                </div>
+                <div class="top20-item" onclick="window.location.href='product.html'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">19</span>
+                    <div class="top20-info"><div class="top20-title">Electric Ladyland</div><div class="top20-artist">Jimi Hendrix · $78</div></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 12px 1rem; cursor: pointer;" onmouseover="this.style.background='rgba(255,255,255,0.04)'" onmouseout="this.style.background='none'">
+                    <span style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,0.2); width: 32px; text-align: right;">20</span>
+                    <div class="top20-info"><div class="top20-title">Headphones Logo Tee</div><div class="top20-artist">Fred's Records Merch · $35</div></div>
+                    <span class="top20-badge">NEW</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products -->
+<section class="section" id="products">
+    <div class="filter-bar">
+        <select class="filter-select"><option>All Eras</option><option>1960s</option><option>1970s</option><option>1980s</option><option>1990s</option><option>2000s+</option></select>
+        <select class="filter-select"><option>Condition</option><option>Mint (M)</option><option>Near Mint (NM)</option><option>Very Good Plus (VG+)</option></select>
+        <select class="filter-select"><option>Genre</option><option>Rock</option><option>Jazz</option><option>Folk / Celtic</option><option>Metal</option><option>Hip Hop</option><option>Electronic</option><option>Newfoundland</option></select>
+        <select class="filter-select"><option>Sort By</option><option>Latest</option><option>Price: Low to High</option><option>Price: High to Low</option></select>
+        <button class="filter-btn">Apply</button>
+    </div>
+    <div class="results-bar">
+        <span class="results-count">Showing 8 of 247 results</span>
+        <div class="view-toggle">
+            <button class="active"><span class="material-icons" style="font-size:1rem;">grid_view</span></button>
+            <button><span class="material-icons" style="font-size:1rem;">view_list</span></button>
+        </div>
+    </div>
+    <div class="grid-4">
+        <div class="product-card"><div class="product-img"><span class="badge badge-red">1 Left</span><span class="badge badge-black">VG+</span><img src="images/rumours.webp" alt="Rumours"><div class="blurb"><p class="blurb-text">"Original '77 pressing. RL master stamp in the deadwax. Plays like butter. Minor ring wear on gatefold but the music is immaculate."</p><span class="blurb-author">- Tony Plowman, Head Buyer</span></div></div><div class="product-info"><div class="product-name">Rumours (1st Press, RL Stamp)</div><div class="product-artist">Fleetwood Mac · 1977 · Warner Bros.</div><div class="product-footer"><span class="product-price">$125.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-gold">Sealed</span><img src="images/ttpd.webp" alt="TTPD"></div><div class="product-info"><div class="product-name">The Tortured Poets Department (Ltd.)</div><div class="product-artist">Taylor Swift · 2024 · Republic</div><div class="product-footer"><span class="product-price">$55.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-black">VG/VG+</span><img src="images/metallica.webp" alt="Metallica"><div class="blurb"><p class="blurb-text">"The thrash album that broke the mainstream. Clean grooves, punchy low end. Minor sleeve edge wear but this one plays like a weapon."</p><span class="blurb-author">- Tony Plowman</span></div></div><div class="product-info"><div class="product-name">Master of Puppets</div><div class="product-artist">Metallica · 1986 · Elektra</div><div class="product-footer"><span class="product-price">$85.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-green">New</span><img src="images/lz4.webp" alt="Led Zeppelin IV"></div><div class="product-info"><div class="product-name">Led Zeppelin IV (Remaster)</div><div class="product-artist">Led Zeppelin · 2014 · Atlantic</div><div class="product-footer"><span class="product-price">$32.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-red">2 Left</span><span class="badge badge-black">NM</span><img src="images/irish_desc_1.webp" alt="Irish Descendants"><div class="blurb"><p class="blurb-text">"Fred managed these boys from the back room of the shop. This press is immaculate. NL heritage at its finest."</p><span class="blurb-author">- Store Lore</span></div></div><div class="product-info"><div class="product-name">Gypsies & Lovers</div><div class="product-artist">The Irish Descendants · 1991 · WEA</div><div class="product-footer"><span class="product-price">$45.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-gold">Audiophile</span><img src="images/kind_of_blue.webp" alt="Kind of Blue"></div><div class="product-info"><div class="product-name">Kind of Blue (MFSL)</div><div class="product-artist">Miles Davis · 1959/2020 · MFSL</div><div class="product-footer"><span class="product-price">$95.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-green">New</span><img src="images/up.webp" alt="GBS"></div><div class="product-info"><div class="product-name">Up (Reissue)</div><div class="product-artist">Great Big Sea · 1995/2024</div><div class="product-footer"><span class="product-price">$38.00</span><a href="product.html" class="btn-dig">View</a></div></div></div>
+        <div class="product-card"><div class="product-img"><span class="badge badge-red">Restock</span><img src="images/merch_heritage_tee.webp" alt="Merch"></div><div class="product-info" style="border-top-color: var(--black);"><div class="product-name">Classic Headphones Logo Tee</div><div class="product-artist">Fred's Records · Heavyweight Cotton</div><div class="product-footer"><span class="product-price" style="color:var(--black);">$35.00</span><a href="merch.html" class="btn-dig" style="background:var(--black);">View</a></div></div></div>
+    </div>
+    <div style="text-align:center; margin-top:3rem;"><a href="#" class="btn-outline">Load More · View All 247 Titles →</a></div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021).</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li><li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger - Built from St. John's</span></div>
+</footer>
+
+<script>
+function updateTimer(){const n=new Date(),x=new Date(n);x.setDate(n.getDate()+((7-n.getDay())%7||7));x.setHours(12,0,0,0);const d=x-n,dy=Math.floor(d/864e5),h=Math.floor((d%864e5)/36e5),m=Math.floor((d%36e5)/6e4),s=Math.floor((d%6e4)/1e3);document.getElementById('timer').textContent=String(dy).padStart(2,'0')+'d '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';}
+updateTimer();setInterval(updateTimer,1000);
+</script>
+<script src="js/interactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Fred's Records - Est. 1972</title>
+    <meta name="description" content="The story of Fred Brokenshire, 198 Duckworth Street, and 54 years of the beating heart of Newfoundland's music scene.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Our Story | Fred's Records - Since 1972">
+    <meta property="og:description" content="The story of Fred Brokenshire and 54 years of records on Duckworth Street. The furthest record store east in North America.">
+    <meta property="og:image" content="images/fred_founder_1.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Our Story | Fred's Records - Since 1972">
+    <meta name="twitter:description" content="The story of Fred Brokenshire and 54 years of records on Duckworth Street. The furthest record store east in North America.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preload" as="image" href="images/freds_purple_1.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .timeline-section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
+        .timeline { position: relative; padding-left: 40px; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .tl-item { position: relative; padding-bottom: 3rem; }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-dot { position: absolute; left: -32px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--warm-white); }
+        .tl-dot-purple { background: var(--purple); }
+        .tl-dot-gold { background: var(--gold); }
+        .tl-dot-red { background: var(--red); }
+        .tl-year { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 2px; color: var(--purple-mid); font-weight: 700; margin-bottom: 4px; }
+        .tl-title { font-family: var(--font-ui); font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+        .tl-text { color: var(--slate); line-height: 1.7; font-size: 0.95rem; }
+
+        .photo-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem; max-width: var(--max-w); margin: 0 auto; padding: 0 2rem 4rem; }
+        .photo-grid img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-grid-tall { grid-row: span 2; }
+
+        .values-section { background: var(--bg-muted); padding: 5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .values-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .value-card { text-align: left; padding: 2rem; background: white; border: 1px solid var(--border); }
+        .value-title { font-family: var(--font-ui); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--purple); }
+        .value-text { color: var(--slate); font-size: 0.9rem; line-height: 1.6; }
+
+        .visit-section { background: var(--purple); color: white; padding: 5rem 2rem; }
+        .visit-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .visit-map { width: 100%; aspect-ratio: 16/9; border: 3px solid var(--gold); object-fit: cover; }
+
+        @media (max-width: 768px) {
+            .photo-grid { grid-template-columns: 1fr; }
+            .photo-grid-tall { grid-row: span 1; }
+            .values-grid { grid-template-columns: 1fr; }
+            .visit-inner { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD. Record Store Day 2026 pre-orders now open.</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972. St. John's</span></a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html" class="active">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search catalog..." aria-label="Search catalog"></div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items"><span class="material-icons">shopping_cart</span><span class="nav-cart-badge">3</span></div>
+            <button class="nav-cta">Join the List</button>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html" class="active">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<main id="main">
+<!-- Hero -->
+<section class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('images/freds_purple_1.webp');"></div>
+    <div class="page-hero-content">
+        <p class="heritage-eyebrow">198 Duckworth Street. St. John's, NL</p>
+        <h1 class="page-hero-title">"A Positive Force of Nature"</h1>
+        <p class="page-hero-subtitle">The story of Fred Brokenshire, a 19-year-old kid who opened a record shop on the oldest commercial street in North America. He built an institution that outlasted every chain, every format war, and every algorithm. From Duckworth Street to wherever The Rock's people landed, this is the store they carry with them.</p>
+    </div>
+</section>
+
+<!-- Photo Grid -->
+<div class="photo-grid" style="margin-top: -3rem; position: relative; z-index: 5;">
+    <img src="images/store_front.webp" alt="Fred's Records Storefront" class="photo-grid-tall" style="border: 3px solid var(--gold);" loading="lazy">
+    <img src="images/fred_founder_1.webp" alt="Fred Brokenshire" loading="lazy">
+    <img src="images/interior_1.webp" alt="Inside Fred's Records" loading="lazy">
+    <img src="images/fred_founder_2.webp" alt="Fred Brokenshire Portrait" loading="lazy">
+    <img src="images/interior_2.webp" alt="Vinyl Bins" loading="lazy">
+</div>
+
+<!-- Timeline -->
+<section class="timeline-section">
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h2 style="font-family: var(--font-ui); font-size: 2rem; font-weight: 700; color: var(--charcoal);">54 Years on The Rock</h2>
+        <p style="color: var(--slate); margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">A chronological history of Fred's Records. From 1972 to present day, tracing the growth of the shop from a small room to the epicenter of music distribution in Atlantic Canada.</p>
+    </div>
+    
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-purple"></div>
+            <div class="tl-year">1972 - The Beginning</div>
+            <div class="tl-title">Fred Opens the Doors at 19</div>
+            <div class="tl-text">Noticing a lack of authentic, specialized record shops in St. John's, 19-year-old Fred Brokenshire establishes Fred's Records at 198 Duckworth Street. With help from his father, he stocks the shelves with a vast array of genres, turning the modest purple building into an immediate hub for local music lovers. On opening day, Fred tells <em>The Muse</em> his philosophy is "hip-capitalism" &mdash; keep prices as low as possible, stock what nobody else carries, and make the store a place people actually want to be.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-gold"></div>
+            <div class="tl-year">1980s - Broadcasting and Distribution</div>
+            <div class="tl-title">Building the Industry Infrastructure</div>
+            <div class="tl-text">While the store thrives, Fred becomes an innovative producer and presenter for CBC Radio. Recognizing that Newfoundland musicians needed a way to reach the mainland, he founds Duckworth Distribution. This company becomes the primary channel for Atlantic Canadian independent labels to distribute their music nationally. He also acts as a founding member of the Music Industry Association of Newfoundland, which later becomes MusicNL.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-red"></div>
+            <div class="tl-year">1988 - Cultural Milestone</div>
+            <div class="tl-title">"All The Best" Compilation Released</div>
+            <div class="tl-text">Fred curates, advises, and markets "All The Best: Folk Music Of St. John's, Newfoundland." Released initially on cassette, this compilation becomes a definitive cultural touchstone for traditional music in the province, selling thousands of copies and cementing Fred's reputation as a taste-maker.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-purple"></div>
+            <div class="tl-year">1990s - The Management Years</div>
+            <div class="tl-title">Launching Global Careers</div>
+            <div class="tl-text">Operating from the back room of 198 Duckworth Street, Fred manages The Irish Descendants, helping them achieve massive commercial success. He plays a fundamental role in the East Coast Music Association, serves on the Juno Awards Committee, and mentors emerging artists like Damhnait Doyle.</div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-red"></div>
+            <div class="tl-year">Mid-1990s - Peak Expansion</div>
+            <div class="tl-title">The Fred's Records Empire</div>
+            <div class="tl-text">At its peak, Fred's Records operates multiple locations including a mall outlet and a store in Corner Brook. Duckworth Distribution secures a $3.5 million contract with EMI, and the company prepares to expand to Halifax. Fred has built a regional music infrastructure that goes far beyond a single shop on Duckworth Street.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-gold"></div>
+            <div class="tl-year">2000s - The Retail Survivor</div>
+            <div class="tl-title">Outlasting the Chains</div>
+            <div class="tl-text">The rise of digital downloads and big-box retailers causes HMV, Sam the Record Man, and Tower Records to fail. Sam the Record Man even opened a location across the street from Fred's in the early 90s. It closed. Fred's survived. A key reason: the family purchased the building at 198 Duckworth in 1982, eliminating rent and giving the store the financial anchor to weather every format war. Tony Ploughman, who joined in the early 80s and never left, solidifies the store's analog expertise.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-red"></div>
+            <div class="tl-year">October 27, 2021 - A Legend Passes</div>
+            <div class="tl-title">Fred Brokenshire (1952–2021)</div>
+            <div class="tl-text">At age 69, Fred passes away peacefully. The Canadian music community mourns the loss of a man repeatedly described as a "positive force of nature." Outside of music, Fred was an avid sailor who crossed the Atlantic, an aviation enthusiast, and the founder of Django's restaurant. The Brokenshire family retains ownership and commits to keeping the doors open.</div>
+        </div>
+        
+        <div class="tl-item">
+            <div class="tl-dot tl-dot-purple"></div>
+            <div class="tl-year">2026 - Digital Expansion</div>
+            <div class="tl-title">The Digital Cratedigger</div>
+            <div class="tl-text">Under the management of Tony Ploughman and the founder's own children, Fred's Records enters its next chapter. The eldest son, named Fred after his father, spent 12 years working the bins. Now, the next generation is steering the ship. The store begins shipping its curated vinyl selection and official Duckworth Street merchandise globally. The vision: Fred's around for another 100 years, proving that the independent record store model can scale without losing its soul.</div>
+        </div>
+    </div>
+</section>
+
+<!-- Fred Beyond the Counter -->
+<section style="padding: 5rem 2rem; background: var(--charcoal); color: white;">
+    <div style="max-width: var(--max-w); margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <p style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">The Full Life</p>
+            <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 900; line-height: 1.2;">Fred Beyond the Counter</h2>
+            <p style="color: rgba(255,255,255,0.5); margin-top: 0.75rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">The record store was just one piece. Fred Brokenshire lived with the kind of intensity that made everyone around him feel like they were moving in slow motion.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">The Sailor</div>
+                <div style="font-family: var(--font-ui); font-weight: 700; margin-bottom: 0.5rem;">Gibraltar to St. John's</div>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6;">Crossed the Atlantic in a 36-foot sailboat. Survived a hurricane in the open ocean. Friends said he sailed the way he ran his business: head-on, full speed, and absolutely refusing to turn back.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">The Restaurateur</div>
+                <div style="font-family: var(--font-ui); font-weight: 700; margin-bottom: 0.5rem;">Django's on Duckworth</div>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6;">In 1996, Fred opened Django's restaurant right on Duckworth Street. Live music, good food, same philosophy. Named after Django Reinhardt. It became one of the most talked-about spots in St. John's before closing its doors.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">The Collector</div>
+                <div style="font-family: var(--font-ui); font-weight: 700; margin-bottom: 0.5rem;">Newfoundland Art</div>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6;">Fred assembled a significant collection of Newfoundland art. Works by Christopher Pratt, Mary Pratt, and David Blackwood hung in his home. Curation was not something he reserved for vinyl.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;">The Broadcaster</div>
+                <div style="font-family: var(--font-ui); font-weight: 700; margin-bottom: 0.5rem;">CBC Radio: Going Solo</div>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6;">Produced and presented "Going Solo" on CBC Radio from 1985–86. 17 episodes of acoustic sessions, archived at Memorial University. Fred put the microphone in front of artists nobody else was recording.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The People of Fred's -->
+<section style="padding: 5rem 2rem; background: var(--cream);">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <p style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 1rem;">The Crew</p>
+            <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700; color: var(--charcoal);">The People of Fred's</h2>
+        </div>
+        <div style="background: white; border: 1px solid rgba(0,0,0,0.06); padding: 2.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1.5rem;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--purple); display: flex; align-items: center; justify-content: center; color: var(--gold); font-family: var(--font-display); font-weight: 900; font-size: 1.1rem;">TP</div>
+                <div>
+                    <div style="font-family: var(--font-ui); font-weight: 700; color: var(--charcoal);">Tony Ploughman</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 1px; color: var(--slate);">HEAD BUYER &bull; 40+ YEARS</div>
+                </div>
+            </div>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1rem;">Tony was asked to stick around till Christmas in 1984. He never left. Over 40 years later, he is the longest-serving employee in the store's history. He grades every used record to Goldmine standards, writes the handwritten blurbs that sit on the shelf beside each staff pick, and keeps the shop running six days a week.</p>
+            <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">Customers have mistaken him for Fred so many times that the staff stopped correcting them. Fred was 6'4" and, in his son's words, "this giant, gorgeous man." Tony is neither of these things. But he is the heartbeat of the store, and he has been for four decades.</p>
+            <div style="border-left: 3px solid var(--gold); padding-left: 1rem;">
+                <p style="font-family: var(--font-display); font-style: italic; color: var(--charcoal); font-size: 0.95rem; line-height: 1.6;">"A lot of people think he is Fred. He's not. But at this point, he's earned it."</p>
+                <span style="font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 2px; color: var(--slate); text-transform: uppercase; display: block; margin-top: 8px;">- Murray Brokenshire</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Where Careers Started -->
+<section style="padding: 5rem 2rem; background: white;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <p style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); margin-bottom: 1rem;">The Back Room</p>
+            <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700; color: var(--charcoal);">Where Careers Started</h2>
+            <p style="color: var(--slate); margin-top: 0.5rem; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.6;">The back room of 198 Duckworth Street was not just storage. It was a discovery engine. More careers launched out of that room than any label office in Atlantic Canada.</p>
+        </div>
+        <div style="display: grid; gap: 1.5rem;">
+            <div style="background: var(--cream); border-left: 4px solid var(--gold); padding: 2rem;">
+                <div style="font-family: var(--font-ui); font-weight: 700; color: var(--charcoal); margin-bottom: 0.5rem;">Con O'Brien &amp; The Irish Descendants</div>
+                <p style="color: var(--slate); line-height: 1.7; font-size: 0.9rem;">Con O'Brien bought the house on Prospect Street behind the store specifically so he could walk out his back door directly into Fred's. That is how close the relationship was. Fred managed the Irish Descendants from the back room, helping them sell over half a million records and reach mainstream radio across Canada.</p>
+            </div>
+            <div style="background: var(--cream); border-left: 4px solid var(--purple); padding: 2rem;">
+                <div style="font-family: var(--font-ui); font-weight: 700; color: var(--charcoal); margin-bottom: 0.5rem;">Damhnait Doyle</div>
+                <p style="color: var(--slate); line-height: 1.7; font-size: 0.9rem;">Damhnait was stocking shelves and singing in the back room when Fred heard her. He signed her through Duckworth Distribution and helped launch a career that would take her from Duckworth Street to Toronto's music scene. She was one of the first artists Fred championed before anyone else was paying attention.</p>
+            </div>
+            <div style="background: var(--cream); border-left: 4px solid var(--gold); padding: 2rem;">
+                <div style="font-family: var(--font-ui); font-weight: 700; color: var(--charcoal); margin-bottom: 0.5rem;">Great Big Sea, Kim Stockwood, Alan Doyle</div>
+                <p style="color: var(--slate); line-height: 1.7; font-size: 0.9rem;">The list of artists Fred discovered, managed, or championed reads like the roster of Newfoundland music. Great Big Sea played their earliest shows in the store. Kim Stockwood and Alan Doyle were part of the generation of talent that came up through Fred's network. The store was the launchpad. Fred was the fuel.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values -->
+<section class="values-section">
+    <div style="max-width: var(--max-w); margin: 0 auto; text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700; color: var(--charcoal);">How We Do Business</h2>
+    </div>
+    <div class="values-grid">
+        <div class="value-card">
+            <div class="value-title">Curation Over Algorithms</div>
+            <div class="value-text">Head buyer Tony Ploughman has worked here for 32 years. Every record in the shop is selected, graded to strict Goldmine standards, and annotated by hand. We do not use algorithms to decide what goes on the shelf.</div>
+        </div>
+        <div class="value-card">
+            <div class="value-title">Community Infrastructure</div>
+            <div class="value-text">We are a staging ground for local talent. Careers started in these aisles. We host regular in-store performances, sell tickets for local venues without massive surcharges, and actively fund regional music initiatives.</div>
+        </div>
+        <div class="value-card">
+            <div class="value-title">Edge of the Atlantic</div>
+            <div class="value-text">We are the furthest record store east in North America, situated on the oldest commercial street in the Western Hemisphere. The geography shapes our resilience. We survived the format wars because we had to.</div>
+        </div>
+    </div>
+</section>
+
+<!-- In-Store Sessions -->
+<section style="padding: 5rem 2rem; background: var(--charcoal); color: white;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+            <div>
+                <p style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;">Live Music at 198 Duckworth</p>
+                <h2 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.1;">In-Store Sessions</h2>
+                <p style="color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1.5rem;">We still host the best intimate performances in St. John's. 50 people, no stage, just music in the aisles between the bins. Artists who played here early in their careers: The Irish Descendants, Hey Rosetta!, Damhnait Doyle, and The Once.</p>
+                <div style="border-left: 3px solid var(--gold); padding-left: 1rem; margin-bottom: 2rem;">
+                    <p style="font-family: var(--font-display); font-style: italic; color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6;">"Space is limited to 50 people. We text the list 24 hours before we tell anyone else. If you're on it, you're in."</p>
+                    <span style="font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; display: block; margin-top: 8px;">- Tony Ploughman, Store Manager</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 2rem;">
+                <div style="font-family: var(--font-ui); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">Get on the List</div>
+                <p style="color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-bottom: 1.5rem;">Be the first to know about upcoming in-store sessions, new drops, and exclusive offers. No spam. Just music.</p>
+                <div style="margin-bottom: 1rem;">
+                    <input type="email" placeholder="Your email address" aria-label="Email address for mailing list" style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: white; font-size: 0.85rem; font-family: var(--font-body); outline: none;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="tel" placeholder="Phone (for session texts)" aria-label="Phone number for session texts" style="width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: white; font-size: 0.85rem; font-family: var(--font-body); outline: none;">
+                </div>
+                <button style="width: 100%; padding: 14px; background: var(--gold); color: var(--purple); border: none; font-weight: 800; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;">Join the Inner Circle</button>
+                <p style="font-family: var(--font-mono); font-size: 0.55rem; color: rgba(255,255,255,0.25); text-align: center; margin-top: 0.75rem; letter-spacing: 1px;">2,400+ locals on the list. Unsubscribe anytime.</p>
+            </div>
+        </div>
+        <!-- Recent Sessions -->
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1rem;">Recent Sessions</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                <div style="border: 1px solid rgba(255,255,255,0.06); padding: 1.25rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.55rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px;">FEB 22, 2026</div>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Matthew Byrne</div>
+                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">Traditional Newfoundland ballads. Standing room only. 48 people.</div>
+                </div>
+                <div style="border: 1px solid rgba(255,255,255,0.06); padding: 1.25rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.55rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px;">JAN 18, 2026</div>
+                    <div style="font-weight: 600; margin-bottom: 4px;">The Kubasonics</div>
+                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">Ukrainian-Newfoundland fusion. Accordion in the jazz section. Electric.</div>
+                </div>
+                <div style="border: 1px solid rgba(255,255,255,0.06); padding: 1.25rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.55rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 4px;">DEC 14, 2025</div>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Record Store Day Showcase</div>
+                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">3 local acts. Exclusive RSD pressings. Our busiest in-store ever.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Visit Us -->
+<section class="visit-section">
+    <div class="visit-inner">
+        <div>
+            <p class="heritage-eyebrow">Visit the Shop</p>
+            <h2 style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem;">Come Dig the Bins</h2>
+            <p style="color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem;">Nothing beats the real thing. Walk through the exact door Fred opened in 1972. Flip through the vintage bins. Ask Tony what arrived this week. Pay attention to the creaky wooden floors and the sound of a needle dropping on an analog pressing.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 2rem;">
+                <div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong style="color: var(--gold);">Address:</strong> 198 Duckworth Street, St. John's, NL A1C 1G5</div>
+                <div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong style="color: var(--gold);">Hours:</strong> Mon-Sat 10am-6pm. Sun 12pm-5pm</div>
+                <div style="padding: 8px 0;"><strong style="color: var(--gold);">Phone:</strong> (709) 753-9191</div>
+            </div>
+            <a href="https://maps.google.com/?q=198+Duckworth+Street+St+Johns+NL" target="_blank" class="btn-gold">Get Directions</a>
+        </div>
+        <img src="images/stjohns_3.webp" alt="St. John's Colorful Row Houses" class="visit-map" loading="lazy">
+    </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store. Five decades of curation from 198 Duckworth Street, St. John's, NL.<br><br>Fred Brokenshire (1952-2021). The music never stops.</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li><li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger - Built from St. John's</span><span style="font-size: 0.55rem; opacity: 0.35; display: block; margin-top: 0.5rem;">Formerly used as a "what not to do" example at CNA. We fixed that.</span></div>
+</footer>
+
+<script src="js/interactions.js"></script>
+</body>
+</html>

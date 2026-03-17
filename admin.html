@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's Records | Strategic Growth Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --prop-bg: #0d0d0d;
+            --prop-surface: #161616;
+            --prop-border: #2a2a2a;
+            --prop-text: #e0e0e0;
+            --prop-muted: #888;
+            --prop-gold: #D4AF37;
+            --prop-green: #22c55e;
+            --prop-red-accent: #ef4444;
+        }
+
+        body { background: var(--prop-bg); color: var(--prop-text); }
+
+        .prop-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid var(--prop-border);
+            position: sticky;
+            top: 0;
+            background: rgba(13,13,13,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .prop-nav-brand { font-family: 'Playfair Display'; font-size: 1.2rem; color: var(--prop-gold); letter-spacing: 2px; text-decoration: none; }
+        .prop-nav-label { font-family: 'Space Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prop-muted); }
+        .prop-nav-back { font-family: 'Space Mono'; font-size: 0.75rem; color: var(--prop-muted); text-decoration: none; border: 1px solid var(--prop-border); padding: 0.5rem 1rem; transition: all 0.3s; }
+        .prop-nav-back:hover { color: var(--prop-gold); border-color: var(--prop-gold); }
+
+        .prop-hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            border-bottom: 1px solid var(--prop-border);
+        }
+        .prop-hero-overline { font-family: 'Space Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--prop-gold); margin-bottom: 1.5rem; }
+        .prop-hero h1 { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; color: white; }
+        .prop-hero-sub { font-family: 'Inter'; font-size: 1.1rem; color: var(--prop-muted); max-width: 700px; margin: 0 auto; line-height: 1.7; }
+
+        .prop-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            border-bottom: 1px solid var(--prop-border);
+        }
+
+        .prop-section-number {
+            font-family: 'Playfair Display';
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.15);
+            line-height: 1;
+            margin-bottom: -1rem;
+        }
+        .prop-section h2 {
+            font-family: 'Playfair Display';
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .prop-section h3 {
+            font-family: 'Inter';
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--prop-gold);
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .prop-section h3 .material-icons { font-size: 1.1rem; }
+        .prop-section p, .prop-section li {
+            font-family: 'Inter';
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--prop-text);
+        }
+        .prop-section ul { padding-left: 1.5rem; }
+        .prop-section li { margin-bottom: 0.5rem; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-box {
+            background: var(--prop-surface);
+            border: 1px solid var(--prop-border);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-box .stat-num {
+            font-family: 'Playfair Display';
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--prop-gold);
+        }
+        .stat-box .stat-label {
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--prop-muted);
+            margin-top: 0.5rem;
+        }
+
+        .deal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .deal-box {
+            border: 1px solid var(--prop-border);
+            padding: 2.5rem;
+            position: relative;
+        }
+        .deal-box.featured {
+            border-color: var(--prop-gold);
+            background: rgba(212,175,55,0.04);
+        }
+        .deal-box .deal-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--prop-gold);
+            color: black;
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 16px;
+            font-weight: 700;
+        }
+        .deal-label {
+            font-family: 'Space Mono';
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--prop-muted);
+            margin-bottom: 1rem;
+        }
+        .deal-price {
+            font-family: 'Playfair Display';
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+        .deal-price.crossed { color: var(--prop-muted); text-decoration: line-through; font-size: 2.5rem; }
+        .deal-detail {
+            font-family: 'Inter';
+            font-size: 0.85rem;
+            color: var(--prop-muted);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+        .deal-detail strong { color: var(--prop-gold); }
+
+        .projection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-family: 'Space Mono';
+            font-size: 0.8rem;
+        }
+        .projection-table th, .projection-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid var(--prop-border);
+        }
+        .projection-table th {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--prop-muted);
+            text-align: right;
+        }
+        .projection-table th:first-child, .projection-table td:first-child { text-align: left; }
+        .projection-table td { color: var(--prop-text); }
+        .projection-table .highlight { color: var(--prop-gold); font-weight: 700; }
+        .projection-table .green { color: var(--prop-green); font-weight: 700; }
+
+        .engine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .engine-card {
+            background: var(--prop-surface);
+            border: 1px solid var(--prop-border);
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        .engine-card:hover { border-color: var(--prop-gold); }
+        .engine-card h4 {
+            font-family: 'Inter';
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .engine-card h4 .material-icons { color: var(--prop-gold); font-size: 1.1rem; }
+        .engine-card p {
+            font-family: 'Inter';
+            font-size: 0.8rem;
+            color: var(--prop-muted);
+            line-height: 1.6;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .case-card {
+            border: 1px solid var(--prop-border);
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .case-card:hover { border-color: var(--prop-gold); transform: translateY(-4px); }
+        .case-card h4 { font-family: 'Inter'; font-weight: 700; font-size: 1rem; color: white; margin-bottom: 0.5rem; }
+        .case-card .case-type { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--prop-gold); margin-bottom: 0.75rem; }
+        .case-card p { font-family: 'Inter'; font-size: 0.8rem; color: var(--prop-muted); line-height: 1.6; margin-bottom: 1rem; }
+        .case-link {
+            font-family: 'Space Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--prop-gold); text-decoration: none; border-bottom: 1px solid var(--prop-gold);
+            padding-bottom: 2px; transition: opacity 0.3s;
+        }
+        .case-link:hover { opacity: 0.7; }
+
+        .quote-block {
+            border-left: 3px solid var(--prop-gold);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            background: var(--prop-surface);
+        }
+        .quote-block p {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 1.15rem;
+            color: white;
+            line-height: 1.6;
+        }
+        .quote-block cite {
+            font-family: 'Space Mono';
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--prop-muted);
+            display: block;
+            margin-top: 0.75rem;
+            font-style: normal;
+        }
+
+        .prop-cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--prop-border);
+        }
+        .prop-cta-section h2 { font-family: 'Playfair Display'; font-size: 2.5rem; color: white; margin-bottom: 1rem; }
+        .prop-cta-section p { font-family: 'Inter'; color: var(--prop-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .prop-cta-btn {
+            display: inline-block;
+            font-family: 'Space Mono';
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: var(--prop-gold);
+            color: black;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .prop-cta-btn:hover { background: white; }
+
+        .prop-footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--prop-border);
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            color: var(--prop-muted);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .stat-grid, .deal-grid, .engine-grid, .case-grid { grid-template-columns: 1fr; }
+            .prop-nav { padding: 1rem; }
+            .prop-hero { padding: 4rem 1.5rem 3rem; }
+            .prop-section { padding: 3rem 1.5rem; }
+            .projection-table { font-size: 0.7rem; }
+            .projection-table th, .projection-table td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="prop-nav">
+        <a href="index.html" class="prop-nav-brand">FRED'S RECORDS</a>
+        <span class="prop-nav-label">Confidential Growth Proposal</span>
+        <a href="index.html" class="prop-nav-back">&larr; Back to Site</a>
+    </nav>
+
+    <header class="prop-hero">
+        <div class="prop-hero-overline">Prepared for The Brokenshire Family &middot; March 2026</div>
+        <h1>From Duckworth Street<br>to the World.</h1>
+        <p class="prop-hero-sub">A strategic partnership to take Canada's oldest record store online. Zero upfront risk. Full alignment. We only win when Fred's wins.</p>
+    </header>
+
+    <!-- SECTION 1: The Opportunity -->
+    <section class="prop-section">
+        <div class="prop-section-number">01</div>
+        <h2>The Untapped Goldmine</h2>
+        <p>Founded in 1972 by Fred Brokenshire at just 19 years old, Fred's Records isn't just a store. Fred built Newfoundland's modern music industry: Duckworth Distribution, Atlantica Records, the East Coast Music Awards. He managed The Irish Descendants. He turned 198 Duckworth Street into a cultural institution recognized by Discogs as <strong>Canada's oldest independent record store</strong>. Today, it does over <strong>$1,000,000+</strong> in annual brick-and-mortar sales with zero online presence. The current website is literally used at the College of the North Atlantic as an example of what <em>not</em> to do. The opportunity isn't theoretical. It's sitting on the shelf.</p>
+
+        <div class="stat-grid">
+            <div class="stat-box">
+                <div class="stat-num">$1M+</div>
+                <div class="stat-label">Annual In-Store Revenue</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">$0</div>
+                <div class="stat-label">Current Online Revenue</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">54</div>
+                <div class="stat-label">Years of Brand Equity</div>
+            </div>
+        </div>
+
+        <div class="quote-block">
+            <p>"We sell over a million dollars in records a year. That's insane, boys. And we don't sell anything online."</p>
+            <cite>Murray Brokenshire, Discovery Call, March 16 2026</cite>
+        </div>
+
+        <p>The vinyl market has done what gold is doing now. U.S. vinyl sales topped <strong>$1.04 billion</strong> in 2025 for the first time since 1983. That's 19 consecutive years of growth, 48.5 million units sold, and a global market projected to hit $4.18 billion in 2026. Taylor Swift alone moved 1.6 million vinyl units of a single album. Fred's has outlasted Sam the Record Man, every mall chain, and the MP3 era. The next evolution is digital. Not replacing the store. Amplifying it.</p>
+    </section>
+
+    <!-- SECTION 2: The Revenue Engines -->
+    <section class="prop-section">
+        <div class="prop-section-number">02</div>
+        <h2>Seven Revenue Engines. One Platform.</h2>
+        <p>This isn't just a website. It's seven independent revenue streams, each backed by deep research and proven e-commerce psychology, all running through a single Shopify-powered storefront.</p>
+
+        <div class="engine-grid">
+            <div class="engine-card">
+                <h4><span class="material-icons">bolt</span> The Friday Drop</h4>
+                <p>All high-value used arrivals ($50+) drop every Friday at 12:00 PM NST. Countdown timers, teaser images, and accelerated checkout (Shop Pay, Apple Pay) turn passive browsing into a weekly competitive event. Supreme proved the model. We bring it to vinyl.</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">redeem</span> Mystery Crates</h4>
+                <p>3 curated VG+ records in a sealed box for $40. Genre-themed (90s Grunge, Newfoundland Trad, Jazz Essentials). 1-in-50 chance of pulling a $200+ chase record. Clears slow-moving used inventory at premium margins while generating viral UGC on TikTok/Instagram.</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">storefront</span> Branded Merch Engine</h4>
+                <p>You sold 300 hoodies at $80 each by hand-delivering them. With an automated Shopify store, print-on-demand for testing and bulk runs for proven winners, this scales to 10,000+ units annually. Global shipping. Zero hand-delivery.</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">flight_takeoff</span> Tourist Capture Net</h4>
+                <p>Thousands walk through 198 Duckworth every summer and leave forever. Shopify POS e-receipts and dynamic QR codes capture tourist emails at zero friction. Automated "Newfoundland Hangover" Klaviyo flows trigger 3 days later: "Missing St. John's? We ship global."</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">inventory_2</span> National "Sell Us Your Wax" Portal</h4>
+                <p>A conditional-logic intake form lets collectors submit their collection details. AI-assisted cataloging cross-references Discogs market data to generate instant offers. Automated reverse-shipping labels and Store Credit payouts. Turn Canada's attics into Fred's inventory.</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">security</span> Record Store Day Defense</h4>
+                <p>RSD exclusives are worth 5-8x retail. Multi-layer bot mitigation (CAPTCHAs, virtual queues, honeypots) ensures inventory reaches real fans. Plus, the "Informational Materials" tariff exemption (50 USC 1702) drops US cross-border shipping to $8-12/record.</p>
+            </div>
+            <div class="engine-card">
+                <h4><span class="material-icons">local_shipping</span> New Release Direct-Ship</h4>
+                <p>Customers pre-order new releases through the site. Orders route straight to distributors for direct-to-door shipping. No extra shelf space, no extra staff time. The store doesn't touch the box. Pure margin on every unit.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Financial Projections -->
+    <section class="prop-section">
+        <div class="prop-section-number">03</div>
+        <h2>Conservative Financial Projections</h2>
+        <p>These aren't dream numbers. They're based on real data from the discovery call, existing inventory velocity, and comparable independent record stores that went online (Rough Trade, Amoeba, Sonic Boom). We're modeling conservatively. Murr said 5x is reasonable. We're modeling 2x.</p>
+
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Revenue Stream</th>
+                    <th>Month 3</th>
+                    <th>Month 6</th>
+                    <th>Month 12</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Online Record Sales</td>
+                    <td>$4,000</td>
+                    <td>$12,000</td>
+                    <td class="highlight">$25,000</td>
+                </tr>
+                <tr>
+                    <td>Merch & Apparel</td>
+                    <td>$1,500</td>
+                    <td>$4,000</td>
+                    <td class="highlight">$8,000</td>
+                </tr>
+                <tr>
+                    <td>Mystery Crates</td>
+                    <td>$800</td>
+                    <td>$2,000</td>
+                    <td class="highlight">$4,000</td>
+                </tr>
+                <tr>
+                    <td>Diaspora / Tourist Flow</td>
+                    <td>$200</td>
+                    <td>$1,500</td>
+                    <td class="highlight">$5,000</td>
+                </tr>
+                <tr>
+                    <td>Used Buyback Resale</td>
+                    <td>$500</td>
+                    <td>$2,500</td>
+                    <td class="highlight">$6,000</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--prop-gold);">
+                    <td><strong>Total Monthly Online Revenue</strong></td>
+                    <td><strong>$7,000</strong></td>
+                    <td><strong>$22,000</strong></td>
+                    <td class="green"><strong>$48,000</strong></td>
+                </tr>
+                <tr>
+                    <td>Less: SaaS Overhead (~$700/mo)</td>
+                    <td>($700)</td>
+                    <td>($700)</td>
+                    <td>($700)</td>
+                </tr>
+                <tr>
+                    <td>Less: Summit Digital Management Fee (10%)</td>
+                    <td>($700)</td>
+                    <td>($2,200)</td>
+                    <td>($4,800)</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--prop-green);">
+                    <td><strong>Net to Fred's Records</strong></td>
+                    <td class="green"><strong>$5,600</strong></td>
+                    <td class="green"><strong>$19,100</strong></td>
+                    <td class="green"><strong>$42,500</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="font-size: 0.8rem; color: var(--prop-muted); font-style: italic;">*Projections are conservative estimates. Does not include seasonal RSD spikes (historically 3-5x weekly average) or viral TikTok/UGC events. SaaS stack breaks even at just 46 used records/month. Existing in-store revenue is unaffected.</p>
+    </section>
+
+    <!-- SECTION 4: The Deal -->
+    <section class="prop-section">
+        <div class="prop-section-number">04</div>
+        <h2>The Deal Structure</h2>
+        <p>We don't believe in charging a family business $25,000 for a website they can't validate yet. We believe in aligning incentives. If the system doesn't generate revenue, we don't get paid. Simple as that. $5,000 is what Fred's pays for a single week of used stock. This builds the infrastructure to sell that stock to the entire country.</p>
+
+        <div class="deal-grid">
+            <div class="deal-box">
+                <div class="deal-label">Standard Agency Model</div>
+                <div class="deal-price crossed">$25,000</div>
+                <p class="deal-detail">Typical market rate for an enterprise e-commerce build with inventory integration, bot mitigation, and marketing automation. 100% of the risk falls on Fred's. We won't do this.</p>
+            </div>
+            <div class="deal-box featured">
+                <div class="deal-badge">Our Proposal</div>
+                <div class="deal-label">Performance Partnership</div>
+                <div class="deal-price" style="color: var(--prop-gold);">$5,000</div>
+                <p class="deal-detail"><strong>One-time setup fee</strong> covering core development costs, Shopify configuration, and initial inventory migration. Plus <strong>10% of online sales revenue</strong>. We carry the risk. If it scales, we all eat. If it doesn't, we lost our time, not your money.</p>
+            </div>
+        </div>
+
+        <div class="quote-block">
+            <p>"We'd rather have skin in the game. Cover our expenses with a setup, then make our profit on the profit share. That way it's a no-brainer."</p>
+            <cite>Jack Bentley, Discovery Call</cite>
+        </div>
+
+        <h3><span class="material-icons">check_circle</span> What's Included in the $5,000 Setup</h3>
+        <ul>
+            <li>Full bespoke Shopify storefront with Fred's heritage branding</li>
+            <li>Mobile-first design optimized for iPhone checkout speed</li>
+            <li>Shopify POS integration for in-store tourist email capture</li>
+            <li>Automated inventory system with Discogs cross-reference pricing</li>
+            <li>"Friday Drop" countdown timer and accelerated checkout infrastructure</li>
+            <li>Mystery Crate product architecture with gamified UI</li>
+            <li>Merch store with print-on-demand and bulk SKU support</li>
+            <li>"Sell Us Your Wax" intake portal with conditional logic</li>
+            <li>Klaviyo email marketing setup (Tourist Flow, Diaspora Segment, VIP Tier)</li>
+            <li>Bot mitigation for RSD drops (CAPTCHA, queue system, honeypots)</li>
+            <li>Cross-border shipping integration with tariff exemption documentation</li>
+            <li>Staff training documentation for daily inventory uploads via iPhone</li>
+        </ul>
+
+        <div class="quote-block">
+            <p>"No AI images. No AI copy. Every photo is real. Every word is written by hand. 54 years of heritage deserves a craftsman's touch, not a shortcut."</p>
+            <cite>Our Design Standard</cite>
+        </div>
+
+        <h3><span class="material-icons">shield</span> Risk Mitigation for Uncle Jim</h3>
+        <ul>
+            <li><strong>$5,000 is recoverable in the first month</strong> based on conservative projections</li>
+            <li>Monthly SaaS overhead is only ~$700 CAD (breaks even at 46 used records)</li>
+            <li>The 10% management fee only applies to <em>online</em> sales. In-store revenue is completely untouched</li>
+            <li>No long-term contract. <strong>90-day initial term</strong> with month-to-month after. If the numbers don't hit, walk away clean. No penalties.  You keep every line of code we write</li>
+            <li>Full NDA available upon request for sensitive financial information</li>
+            <li><strong>Tony, Matthew, and the full team keep doing exactly what they do.</strong> The only new task is snapping 2 photos per premium record on an iPhone. We handle 100% of the digital infrastructure remotely from Toronto</li>
+        </ul>
+    </section>
+
+    <!-- SECTION 5: Proven Track Record -->
+    <section class="prop-section">
+        <div class="prop-section-number">05</div>
+        <h2>Our Track Record</h2>
+        <p>We build systems that handle premium volume. Our developer built the OVO website. We serve clients across luxury construction, streetwear, and premium fitness. Here are three live examples.</p>
+
+        <div class="case-grid">
+            <div class="case-card">
+                <div class="case-type">Luxury Construction</div>
+                <h4>Meadus Contracting</h4>
+                <p><strong>79% page weight reduction.</strong> Complete visual overhaul for a 4th-generation luxury builder. 2,000+ assets integrated. Heritage-first branding centered on "4 Generations, One Standard." The same family-legacy approach we're bringing to Fred's.</p>
+                <a href="https://www.meaduscontracting.com/" target="_blank" class="case-link">View Live Site &rarr;</a>
+            </div>
+            <div class="case-card">
+                <div class="case-type">Streetwear E-Commerce</div>
+                <h4>Our True Fate</h4>
+                <p><strong>Sell-out drops in under 60 seconds.</strong> High-volume streetwear brand handling limited drops under 10K+ concurrent users. Built for speed, aesthetic fidelity, and automated sell-out states. The exact drop-culture infrastructure Fred's needs for Friday Drops.</p>
+                <a href="https://ourtruefate.com/" target="_blank" class="case-link">View Live Site &rarr;</a>
+            </div>
+            <div class="case-card">
+                <div class="case-type">Premium Fitness</div>
+                <h4>Monday's Studio</h4>
+                <p><strong>54,000 visits and 906 customers in 120 days. $42K revenue in 6.5 weeks.</strong> Built from zero web presence to the #1 pilates studio site in Waterloo. Integrated Squarespace + Mariana Tek dual-platform architecture. Same playbook we'll use for Fred's + Shopify.</p>
+                <a href="https://www.mondaysstudio.com/" target="_blank" class="case-link">View Live Site &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Why Now -->
+    <section class="prop-section">
+        <div class="prop-section-number">06</div>
+        <h2>Why This Has to Happen Now</h2>
+
+        <h3><span class="material-icons">trending_up</span> The Vinyl Market is at an All-Time High</h3>
+        <p>U.S. vinyl sales topped <strong>$1.04 billion</strong> in 2025 — the first time since 1983. That's 19 consecutive years of growth. 48.5 million units sold. A global market projected to hit $4.18 billion by 2026. Vinyl Me, Please — a Shopify subscription club — hit $11M in revenue with 30,000 subscribers. Fred's has a stronger brand, deeper inventory, and 54 years of trust. The ceiling is real.</p>
+
+        <h3><span class="material-icons">groups</span> The Generational Window</h3>
+        <p>Uncle Jim has run Fred's for 45 years. The transition of leadership to Murray, Fred Jr., and family is a once-in-a-lifetime inflection point. The digital infrastructure built now becomes the foundation for the next 50 years. This isn't an expense. It's the most productive, revenue-increasing investment the company can make right now.</p>
+
+        <h3><span class="material-icons">public</span> The Diaspora is Waiting</h3>
+        <p>Newfoundlanders are spread across Alberta, Ontario, and globally. They already know and love Fred's. They just can't buy from Fred's. Fix that, and you've unlocked an entire customer base that requires zero advertising spend to activate.</p>
+
+        <h3><span class="material-icons">local_shipping</span> Competitors Are Already Online</h3>
+        <p>Sonic Boom, Rough Trade, and hundreds of independent stores already operate high-performing Shopify e-commerce operations. Swee Lee, a music retailer that migrated to Shopify, saw a 50% increase in online revenue year-over-year. Fred's has the strongest brand name in the country. The only thing missing is the digital storefront.</p>
+
+        <div class="quote-block">
+            <p>"The most important thing is: how do we increase sales without buying more shit? Website. It'll pay for itself in 3 weeks."</p>
+            <cite>Discovery Call, March 16 2026</cite>
+        </div>
+    </section>
+
+    <!-- SECTION 7: The Timeline -->
+    <section class="prop-section">
+        <div class="prop-section-number">07</div>
+        <h2>Proposed Timeline</h2>
+
+        <table class="projection-table">
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Timeline</th>
+                    <th>Deliverables</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Discovery & Strategy</td>
+                    <td>Week 1-2</td>
+                    <td>Brand audit, inventory workflow design, Shopify config</td>
+                </tr>
+                <tr>
+                    <td>Build & Test</td>
+                    <td>Week 3-5</td>
+                    <td>Full storefront development, POS integration, staff training docs</td>
+                </tr>
+                <tr>
+                    <td>Soft Launch</td>
+                    <td>Week 6</td>
+                    <td>Invite-only launch to VIP email list, bug fixes, stress test</td>
+                </tr>
+                <tr>
+                    <td>Public Launch</td>
+                    <td class="highlight">Week 7-8</td>
+                    <td>Full go-live, first Friday Drop, social media announcement</td>
+                </tr>
+                <tr>
+                    <td>Optimize & Scale</td>
+                    <td>Month 3+</td>
+                    <td>Analytics review, Klaviyo flow optimization, Mystery Crate launch</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- CTA -->
+    <section class="prop-cta-section">
+        <h2>Let's Build Something That Lasts Another 50 Years.</h2>
+        <p>The music never stops. Let's make sure the business doesn't either.</p>
+        <a href="mailto:jack@scalingwithsummit.io?subject=Fred's Records - Let's Go" class="prop-cta-btn">Present This to Uncle Jim &rarr;</a>
+    </section>
+
+    <footer class="prop-footer">
+        &copy; 2026 Summit. Prepared exclusively for Fred's Records Ltd. All projections are estimates based on comparable market data.
+    </footer>
+</body>
+</html>

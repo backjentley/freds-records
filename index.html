@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's Records | The Digital Cratedigger - Est. 1972</title>
+    <meta name="description" content="Canada's oldest independent record store. 54 years of authority from 198 Duckworth Street. Shop rare vinyl, sealed new releases, and heritage merch - now shipping globally.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fred's Records | The Digital Cratedigger - Est. 1972">
+    <meta property="og:description" content="Canada's oldest independent record store. 54 years of authority from 198 Duckworth Street. Shop rare vinyl, sealed new releases, and heritage merch.">
+    <meta property="og:image" content="images/store_front.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fred's Records | The Digital Cratedigger - Est. 1972">
+    <meta name="twitter:description" content="Canada's oldest independent record store. 54 years of authority from 198 Duckworth Street. Shop rare vinyl, sealed new releases, and heritage merch.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preload" as="image" href="images/rumours.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== HOMEPAGE-SPECIFIC STYLES ===== */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
+        .hero-content { background: var(--warm-white); padding: 4rem 4rem 4rem 6rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #e5e5e5; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--red); color: var(--red); padding: 6px 14px; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem; width: fit-content; }
+        .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 2s infinite; }
+        .hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: var(--charcoal); line-height: 1.05; margin-bottom: 1.5rem; }
+        .hero-title em { color: var(--purple-mid); font-style: italic; }
+        .hero-text { font-size: 1.1rem; color: var(--slate); line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem; }
+        .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-meta { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e5e5; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; font-family: var(--font-mono); }
+        .hero-meta-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: var(--slate); margin-bottom: 4px; }
+        .hero-meta-value { font-size: 0.85rem; font-weight: 700; color: var(--charcoal); }
+        .hero-visual { background: var(--purple); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .hero-visual-bg { position: absolute; inset: 0; background-image: url('images/freds_purple_1.webp'); background-size: cover; background-position: center; opacity: 0.15; }
+        .hero-visual-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+        .hero-vinyl-wrap { position: relative; width: 380px; height: 380px; margin: 0 auto; }
+        .hero-vinyl { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 80px rgba(0,0,0,0.5); animation: spin 20s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .hero-vinyl-hole { position: absolute; top: 50%; left: 50%; width: 20px; height: 20px; background: var(--purple); border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid rgba(255,255,255,0.2); z-index: 5; }
+        .hero-vinyl-label { position: absolute; bottom: -20px; right: -20px; background: var(--warm-white); padding: 1rem 1.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 10; }
+        .hero-vinyl-label-icon { color: var(--gold); }
+        .hero-vinyl-label span { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 1px; color: var(--slate); }
+        .hero-vinyl-label strong { display: block; font-size: 0.9rem; color: var(--charcoal); }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .genres { padding: 5rem 0; background: #f4f4f4; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; overflow: hidden; }
+        .genres-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .heritage-grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; }
+        .heritage-photos { position: relative; }
+        .heritage-photo-float-2 { position: absolute; top: -20px; right: -20px; width: 140px; height: 140px; object-fit: cover; border: 3px solid var(--gold); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+        .collections-text { color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 2rem; }
+        .trust-list { list-style: none; margin-top: 2rem; }
+        @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } .hero { grid-template-columns: 1fr; } .hero-content { padding: 3rem 2rem; } .hero-visual { min-height: 60vh; } .hero-vinyl-wrap { width: 280px; height: 280px; } }
+        @media (max-width: 768px) {
+            .hero-meta { grid-template-columns: repeat(2, 1fr); }
+            .heritage-photo-float-2 { display: none; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Announcement Bar -->
+<div class="announce">
+    <span class="hero-eyebrow-dot" style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-right:8px;"></span>
+    Free shipping on orders over $150 CAD · Record Store Day 2026 pre-orders now open
+</div>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            FRED'S RECORDS
+            <span class="nav-brand-sub">Est. 1972 · St. John's</span>
+        </a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search">
+                <span class="material-icons">search</span>
+                <input type="text" placeholder="Search catalog..." aria-label="Search catalog">
+            </div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items">
+                <span class="material-icons">shopping_cart</span>
+                <span class="nav-cart-badge">3</span>
+            </div>
+            <button class="nav-cta">Join the List</button>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<!-- Mobile Drawer -->
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<!-- Hero -->
+<main id="main">
+<section class="hero" id="top">
+    <div class="hero-content">
+        <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            This Week's Featured Drop
+        </div>
+        <h1 class="hero-title">The Digital <em>Cratedigger</em></h1>
+        <p class="hero-text">
+            Canada's oldest record store brings 54 years of authority online. Shop rare vinyl, sealed new releases, and heritage merch - curated by the same team that launched The Irish Descendants from the back room of a purple building on Duckworth Street.
+        </p>
+        <div class="hero-actions">
+            <a href="shop.html" class="btn-primary">
+                <span class="material-icons" style="font-size:1rem;">album</span>
+                Enter the Stacks
+            </a>
+            <a href="about.html" class="btn-ghost">Read Our Story</a>
+        </div>
+        <div class="hero-meta">
+            <div><div class="hero-meta-label">Founded</div><div class="hero-meta-value">1972</div></div>
+            <div><div class="hero-meta-label">Location</div><div class="hero-meta-value">198 Duckworth St.</div></div>
+            <div><div class="hero-meta-label">Inventory</div><div class="hero-meta-value">50,000+ titles</div></div>
+            <div><div class="hero-meta-label">Ships To</div><div class="hero-meta-value">Worldwide</div></div>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="hero-visual-bg"></div>
+        <div class="hero-visual-content">
+            <div class="hero-vinyl-wrap">
+                <img src="images/rumours.webp" alt="Vinyl Record" class="hero-vinyl">
+                <div class="hero-vinyl-hole"></div>
+                <div class="hero-vinyl-label">
+                    <span class="material-icons hero-vinyl-label-icon">high_quality</span>
+                    <span>Mastering</span>
+                    <strong>AAA Analog</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Fresh in the Bins -->
+<section class="section" id="drop">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Fresh in the Bins</h2>
+            <p class="section-subtitle">Hand-picked weekly drops. When they're gone, they're gone.</p>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-family: 'Space Mono'; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--slate); margin-bottom: 4px;">Next Drop In</div>
+            <div id="timer" style="font-family: 'Space Grotesk'; font-size: 1.6rem; font-weight: 700; color: var(--red); letter-spacing: 2px;"></div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <select class="filter-select"><option>All Eras</option><option>1960s</option><option>1970s</option><option>1980s</option><option>1990s</option><option>2000s+</option></select>
+        <select class="filter-select"><option>Condition</option><option>Mint (M)</option><option>Near Mint (NM)</option><option>Very Good Plus (VG+)</option><option>Very Good (VG)</option></select>
+        <select class="filter-select"><option>Genre</option><option>Rock</option><option>Jazz</option><option>Folk / Celtic</option><option>Metal</option><option>Hip Hop</option><option>Electronic</option><option>Newfoundland</option></select>
+        <select class="filter-select"><option>Sort By</option><option>Latest Additions</option><option>Price: Low to High</option><option>Price: High to Low</option></select>
+        <button class="filter-btn">Apply</button>
+    </div>
+
+    <div class="product-grid">
+        <!-- Card 1 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="badge badge-red">1 Left</span>
+                <span class="badge badge-black">VG+</span>
+                <img src="images/rumours.webp" alt="Fleetwood Mac - Rumours">
+                <div class="blurb">
+                    <p class="blurb-text">"Original '77 pressing. RL master stamp in the deadwax. Plays like butter. Minor ring wear on gatefold but the music is immaculate. This one doesn't come around often."</p>
+                    <span class="blurb-author">- Tony Plowman, Head Buyer (32 years)</span>
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-name">Rumours (1st Press, RL Stamp)</div>
+                <div class="product-artist">Fleetwood Mac · 1977 · Warner Bros.</div>
+                <div class="product-footer">
+                    <span class="product-price">$125.00</span>
+                    <a href="product.html" class="btn-dig">Dig It</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="badge badge-gold">Mint / Sealed</span>
+                <img src="images/ttpd.webp" alt="Sealed LP">
+            </div>
+            <div class="product-info">
+                <div class="product-name">The Tortured Poets Department (Ltd.)</div>
+                <div class="product-artist">Taylor Swift · 2024 · Republic</div>
+                <div class="product-footer">
+                    <span class="product-price">$55.00</span>
+                    <a href="product.html" class="btn-dig">Dig It</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="badge badge-black">VG / VG+</span>
+                <img src="images/metallica.webp" alt="Metallica - Master of Puppets">
+                <div class="blurb">
+                    <p class="blurb-text">"The thrash album that broke the mainstream. Clean grooves, punchy low end. Minor sleeve edge wear but this one plays like a weapon."</p>
+                    <span class="blurb-author">- Tony Plowman, Head Buyer</span>
+                </div>
+            </div>
+            <div class="product-info">
+                <div class="product-name">Master of Puppets</div>
+                <div class="product-artist">Metallica · 1986 · Elektra</div>
+                <div class="product-footer">
+                    <span class="product-price">$85.00</span>
+                    <a href="product.html" class="btn-dig">Dig It</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="badge badge-red">Restock</span>
+                <img src="images/merch_heritage_tee.webp" alt="Fred's Classic Tee">
+            </div>
+            <div class="product-info" style="border-top-color: var(--black);">
+                <div class="product-name">Classic Headphones Logo Tee</div>
+                <div class="product-artist">Heavyweight Cotton · Black</div>
+                <div class="product-footer">
+                    <span class="product-price" style="color: var(--black);">$35.00</span>
+                    <a href="merch.html" class="btn-dig" style="background: var(--black);">Select Size</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <a href="shop.html" class="btn-outline">
+            View Complete Drop Catalogue →
+        </a>
+    </div>
+</section>
+
+<!-- Genre Carousel -->
+<section class="genres" id="genres">
+    <div class="genres-inner">
+        <div class="section-header" style="border-bottom-color: #d1d5db;">
+            <div>
+                <h2 class="section-title">Dig Deeper</h2>
+                <p class="section-subtitle">Browse by genre. Every section curated by hand since 1972.</p>
+            </div>
+        </div>
+        <div class="genre-scroll">
+            <div class="genre-card">
+                <img src="images/interior_2.webp" alt="Newfoundland and Celtic music" loading="lazy">
+                <div class="genre-card-overlay"></div>
+                <div class="genre-card-content">
+                    <div class="genre-card-bar" style="background: var(--gold);"></div>
+                    <h4>Newfoundland & Celtic</h4>
+                    <p>The Irish Descendants, Alan Doyle, Great Big Sea</p>
+                </div>
+            </div>
+            <div class="genre-card">
+                <img src="images/crates_2.webp" alt="Classic Rock vinyl" loading="lazy">
+                <div class="genre-card-overlay"></div>
+                <div class="genre-card-content">
+                    <div class="genre-card-bar" style="background: var(--red);"></div>
+                    <h4>Classic Rock</h4>
+                    <p>Led Zeppelin, Floyd, The Stones</p>
+                </div>
+            </div>
+            <div class="genre-card">
+                <img src="images/crates_3.webp" alt="Jazz and Blues records" loading="lazy">
+                <div class="genre-card-overlay"></div>
+                <div class="genre-card-content">
+                    <div class="genre-card-bar" style="background: #3b82f6;"></div>
+                    <h4>Jazz & Blues</h4>
+                    <p>Bop, Cool, Fusion, Delta</p>
+                </div>
+            </div>
+            <div class="genre-card">
+                <img src="images/staff_picks_1.webp" alt="Staff Picks by Tony" loading="lazy">
+                <div class="genre-card-overlay"></div>
+                <div class="genre-card-content">
+                    <div class="genre-card-bar" style="background: var(--purple-light);"></div>
+                    <h4>Staff Picks</h4>
+                    <p>Tony's weekly recommendations</p>
+                </div>
+            </div>
+            <div class="genre-card">
+                <img src="images/grading_1.webp" alt="Audiophile pressings" loading="lazy">
+                <div class="genre-card-overlay"></div>
+                <div class="genre-card-content">
+                    <div class="genre-card-bar" style="background: var(--green);"></div>
+                    <h4>Audiophile Pressings</h4>
+                    <p>MFSL, DCC, Analogue Productions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- This Week in The Telegram -->
+<section class="telegram-section">
+    <div class="telegram-container">
+        <div class="telegram-grid">
+            <!-- Telegram Ad Display -->
+            <div class="telegram-ad">
+                <div class="telegram-ad-badge">This Week's Ad</div>
+                <div style="font-family: 'Playfair Display'; font-size: 0.85rem; text-align: center; border-bottom: 2px solid var(--charcoal); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+                    <span style="font-size: 0.55rem; font-family: 'Space Mono'; letter-spacing: 3px; text-transform: uppercase; color: var(--slate); display: block; margin-bottom: 4px;">As Seen In</span>
+                    <strong style="font-size: 1.3rem;">The Telegram</strong>
+                    <span style="display: block; font-family: 'Space Mono'; font-size: 0.6rem; color: var(--slate); margin-top: 2px;">St. John's, NL - March 16, 2026</span>
+                </div>
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <div style="font-family: 'Space Grotesk'; font-weight: 800; font-size: 1.4rem; color: var(--purple); margin-bottom: 4px;">FRED'S RECORDS</div>
+                    <div style="font-family: 'Space Mono'; font-size: 0.55rem; letter-spacing: 2px; color: var(--slate);">198 DUCKWORTH ST. (709) 753-9191</div>
+                </div>
+                <div style="border-top: 1px dashed var(--charcoal); border-bottom: 1px dashed var(--charcoal); padding: 0.75rem 0; margin-bottom: 1rem;">
+                    <div style="font-family: 'Playfair Display'; font-weight: 700; font-size: 1rem; text-align: center; margin-bottom: 4px;">This Week's Highlights</div>
+                    <div style="font-size: 0.75rem; color: var(--slate); text-align: center; line-height: 1.5;">
+                        Fleetwood Mac - Rumours (1st Press) $125<br>
+                        Metallica - Master of Puppets $85<br>
+                        Miles Davis - Kind of Blue (MFSL) $95<br>
+                        Irish Descendants - Gypsies & Lovers $45<br>
+                        Great Big Sea - Up (Reissue) $38
+                    </div>
+                </div>
+                <div style="font-family: 'Space Mono'; font-size: 0.55rem; text-align: center; color: var(--slate); letter-spacing: 1px;">
+                    OPEN DAILY 10-6 · SUN 12-5<br>
+                    SHIPPING WORLDWIDE SINCE 1972
+                </div>
+                <div style="background: var(--purple); color: var(--gold); text-align: center; padding: 8px; margin-top: 1rem; font-family: 'Space Mono'; font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase;">
+                    Running weekly in The Telegram since 1972
+                </div>
+            </div>
+            <!-- Shoppable Cards -->
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--charcoal);">
+                    <div>
+                        <p style="font-family: 'Space Mono'; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 6px;">From The Newspaper to Your Doorstep</p>
+                        <h2 style="font-family: 'Space Grotesk'; font-size: 1.6rem; font-weight: 700;">This Week in The Telegram</h2>
+                        <p style="color: var(--slate); font-size: 0.85rem; margin-top: 4px;">Every week since 1972, we print an ad in The Telegram listing what just hit the bins. Now you can shop it from anywhere on earth.</p>
+                    </div>
+                    <a href="shop.html" style="font-family: 'Space Mono'; font-size: 0.65rem; letter-spacing: 1px; color: var(--purple); white-space: nowrap;">View All →</a>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+                    <div class="product-card">
+                        <div class="product-img"><span class="badge badge-red">1 Left</span><span class="badge badge-black">VG+</span><img src="images/rumours.webp" alt="Rumours"></div>
+                        <div class="product-info"><div class="product-name">Rumours (1st Press)</div><div class="product-artist">Fleetwood Mac · 1977</div><div class="product-footer"><span class="product-price">$125</span><a href="product.html" class="btn-dig">View</a></div></div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img"><span class="badge badge-black">VG/VG+</span><img src="images/metallica.webp" alt="Master of Puppets"></div>
+                        <div class="product-info"><div class="product-name">Master of Puppets</div><div class="product-artist">Metallica · 1986</div><div class="product-footer"><span class="product-price">$85</span><a href="product.html" class="btn-dig">View</a></div></div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img"><span class="badge badge-red">2 Left</span><span class="badge badge-black">NM</span><img src="images/irish_desc_1.webp" alt="Irish Descendants"></div>
+                        <div class="product-info"><div class="product-name">Gypsies & Lovers</div><div class="product-artist">Irish Descendants · 1991</div><div class="product-footer"><span class="product-price">$45</span><a href="product.html" class="btn-dig">View</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Heritage -->
+<section class="heritage" id="heritage">
+    <div class="heritage-grain"></div>
+    <div class="heritage-inner">
+        <div>
+            <p class="heritage-eyebrow">The Legacy · Since 1972</p>
+            <h2 class="heritage-title">"A Positive Force of Nature"</h2>
+            <p class="heritage-text">
+                Fred Brokenshire opened the doors at 198 Duckworth Street in 1972, at the age of 19. What began as a humble record shop became the beating heart of Newfoundland's music scene - launching The Irish Descendants, managing Damhnait Doyle, and pioneering Atlantic distribution through Duckworth Distribution.
+            </p>
+            <div class="heritage-quote">
+                <p>"Fred's is to Newfoundland what Amoeba is to LA. It's not just a store - it's an institution. The kind of place where you walk in for one record and walk out three hours later with a bag full of things you didn't know you needed."</p>
+                <cite>- Atlantic Business Magazine, 2025</cite>
+            </div>
+            <ul class="trust-list">
+                <li><span class="trust-icon">✓</span> Goldmine Standard Grading on Every Used Record</li>
+                <li><span class="trust-icon">✓</span> Triple-Ply Cruciform Mailer Shipping (Zero Damage)</li>
+                <li><span class="trust-icon">✓</span> Real-Time Discogs Inventory Sync (Never Sold Twice)</li>
+                <li><span class="trust-icon">✓</span> US Tariff-Exempt via HS "Informational Materials"</li>
+            </ul>
+        </div>
+        <div class="heritage-photos">
+            <img src="images/store_front.webp" alt="Fred's Records Storefront" class="heritage-photo-main" loading="lazy">
+            <img src="images/fred_founder_1.webp" alt="Fred Brokenshire" class="heritage-photo-float" loading="lazy">
+            <img src="images/signal_hill_1.webp" alt="Signal Hill, St. John's" class="heritage-photo-float-2" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<!-- We Buy Collections -->
+<section class="collections" id="sell">
+    <div class="collections-inner">
+        <img src="images/crates_2.webp" alt="Vinyl Record Crates" class="collections-img" loading="lazy">
+        <div class="collections-content">
+            <div class="collections-badge">We Buy Collections</div>
+            <h2 class="collections-title">Turn Your Wax<br>Into Serious Cash</h2>
+            <p class="collections-text">
+                Got 50 records or 5,000? We offer immediate localized liquidity and total transportation logistics across North America. We'll come to you, appraise on-site, and pay same-day. No Discogs listing, no eBay fees. Just fair prices from people who've been doing this for half a century.
+            </p>
+            <button class="btn-gold">Get a Free Appraisal →</button>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand">FRED'S RECORDS</div>
+            <p class="footer-text">
+                Canada's oldest independent record store. Five decades of curation from 198 Duckworth Street, St. John's, Newfoundland & Labrador.<br><br>
+                Fred Brokenshire (1952-2021). The music never stops.
+            </p>
+        </div>
+        <div>
+            <div class="footer-heading">Shop</div>
+            <ul class="footer-links">
+                <li><a href="shop.html">The Drop</a></li>
+                <li><a href="shop.html">Full Catalogue</a></li>
+                <li><a href="merch.html">Merch & Apparel</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Info</div>
+            <ul class="footer-links">
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="about.html">Visit the Shop</a></li>
+                <li><a href="sell.html">Sell Your Records</a></li>
+                <li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Connect</div>
+            <ul class="footer-links">
+                <li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li>
+                <li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li>
+            </ul>
+            <div style="margin-top: 2rem;">
+                <div class="footer-heading">Visit Us</div>
+                <p class="footer-text" style="font-family: 'Space Mono'; font-size: 0.75rem;">
+                    198 Duckworth St.<br>St. John's, NL A1C 1G5<br>Open Daily 10am-6pm
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>2026 Fred's Records Ltd. All rights reserved.</span>
+        <span>Digital Cratedigger Beta - Built from St. John's</span>
+    </div>
+</footer>
+
+<script>
+    function updateTimer() {
+        const now = new Date();
+        const next = new Date(now);
+        next.setDate(now.getDate() + ((7 - now.getDay()) % 7 || 7));
+        next.setHours(12, 0, 0, 0);
+        const d = next - now;
+        const days = Math.floor(d / 864e5);
+        const hrs = Math.floor((d % 864e5) / 36e5);
+        const min = Math.floor((d % 36e5) / 6e4);
+        const sec = Math.floor((d % 6e4) / 1e3);
+        document.getElementById('timer').textContent =
+            String(days).padStart(2,'0') + 'd ' +
+            String(hrs).padStart(2,'0') + 'h ' +
+            String(min).padStart(2,'0') + 'm ' +
+            String(sec).padStart(2,'0') + 's';
+    }
+    updateTimer(); setInterval(updateTimer, 1000);
+</script>
+<script src="js/interactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Scripts
+*.py
+
+# Internal docs (not for production)
+internal/
+research/
+stitch_screens/
+
+# Transcripts and working docs
+*.vtt
+*.transcript.*
+FRED_RECORDS_DISCOVERY_DEBRIEF.md
+FRED_RECORDS_MASTER_PRD.md
+FRED_RECORDS_PITCH_OUTLINE.md
+MURR_ASSET_REQUEST.md
+MURR_FOLLOW_UP_EMAIL.md
+UX_AUDIT_REPORT.md

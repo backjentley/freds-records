@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Records | Fred's Records - We Buy Collections</title>
+    <meta name="description" content="Turn your vinyl into cash. Fred's Records buys collections of 50 to 50,000 records. Fair appraisals, same-day payment. Serving collectors since 1972.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sell Your Records | Fred's Records - Fair Offers, Fast Payment">
+    <meta property="og:description" content="Selling your vinyl collection? We buy records in any quantity. Fair grading, transparent pricing, and 54 years of trust behind every offer.">
+    <meta property="og:image" content="images/grading_1.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sell Your Records | Fred's Records - Fair Offers, Fast Payment">
+    <meta name="twitter:description" content="Selling your vinyl collection? We buy records in any quantity. Fair grading, transparent pricing, and 54 years of trust behind every offer.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preload" as="image" href="images/crates_2.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sell-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+        .sell-hero-img { position: relative; overflow: hidden; }
+        .sell-hero-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.9); }
+        .sell-hero-content { background: var(--black); color: white; padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+        .sell-hero-badge { display: inline-block; background: var(--red); padding: 8px 16px; font-weight: 800; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; transform: rotate(-2deg); width: fit-content; }
+        .sell-hero-title { font-family: var(--font-display); font-size: 3rem; font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; }
+        .sell-hero-text { color: rgba(255,255,255,0.55); line-height: 1.8; font-size: 1rem; margin-bottom: 2rem; }
+
+        .process-section { padding: 5rem 2rem; background: var(--warm-white); }
+        .process-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .process-card { text-align: center; padding: 2rem; border: 1px solid var(--border); background: white; }
+        .process-num { font-family: var(--font-ui); font-size: 2.5rem; font-weight: 800; color: var(--purple); margin-bottom: 0.75rem; }
+        .process-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+        .process-card-text { color: var(--slate); font-size: 0.85rem; line-height: 1.6; }
+
+        .form-section { background: var(--bg-muted); padding: 5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .form-inner { max-width: 700px; margin: 0 auto; }
+        .form-title { font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; }
+        .form-subtitle { color: var(--slate); text-align: center; margin-bottom: 2.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: var(--charcoal); }
+        .form-input { width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; font-size: 0.9rem; font-family: var(--font-body); background: white; outline: none; transition: border-color var(--transition); }
+        .form-input:focus { border-color: var(--purple); }
+        .form-textarea { height: 120px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-btn { width: 100%; padding: 14px; background: var(--purple); color: white; border: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all var(--transition); }
+        .form-btn:hover { background: var(--black); }
+
+        .why-section { padding: 5rem 2rem; }
+        .why-grid { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+        .why-card { }
+        .why-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .why-title { font-family: var(--font-ui); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .why-text { color: var(--slate); font-size: 0.9rem; line-height: 1.6; }
+
+        @media (max-width: 768px) { .sell-hero { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } .sell-hero-content { padding: 3rem 2rem; } }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972</span></a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html" class="active">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search..." aria-label="Search catalog"></div>
+            <div class="nav-cart" aria-label="Shopping cart, 3 items"><span class="material-icons">shopping_cart</span><span class="nav-cart-badge">3</span></div>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+<div class="nav-drawer">
+    <div class="nav-drawer-panel">
+        <button class="nav-drawer-close" aria-label="Close menu"><span class="material-icons">close</span></button>
+        <div class="nav-drawer-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html" class="active">Sell Your Wax</a>
+        </div>
+    </div>
+</div>
+
+<main id="main">
+<!-- Hero -->
+<section class="sell-hero">
+    <div class="sell-hero-img"><img src="images/crates_2.webp" alt="Vinyl Records"></div>
+    <div class="sell-hero-content">
+        <div class="sell-hero-badge">We Buy Collections</div>
+        <h1 class="sell-hero-title">Turn Your Wax<br>Into Serious Cash</h1>
+        <p class="sell-hero-text">Got 50 records or 5,000? We offer immediate localized liquidity and total transportation logistics across North America. We'll come to you, appraise on-site, and pay same-day. No Discogs listing, no eBay fees, no months of waiting. Just fair prices from people who've been doing this for half a century.</p>
+        <a href="#form" class="btn-gold">Get a Free Appraisal →</a>
+    </div>
+</section>
+
+<!-- Process -->
+<section class="process-section">
+    <div style="max-width: var(--max-w); margin: 0 auto; text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700;">How It Works</h2>
+        <p style="color: var(--slate); margin-top: 0.5rem;">Four steps. Same day payment. No nonsense.</p>
+    </div>
+    <div class="process-grid">
+        <div class="process-card">
+            <div class="process-num">01</div>
+            <div class="process-card-title">Tell Us What You've Got</div>
+            <div class="process-card-text">Fill out the form below with approximate size, genres, and condition. Photos help but aren't required.</div>
+        </div>
+        <div class="process-card">
+            <div class="process-num">02</div>
+            <div class="process-card-title">We Come to You</div>
+            <div class="process-card-text">We handle all transportation logistics. Local in NL? We'll visit in person. Across Canada? We send pre-paid shipping supplies.</div>
+        </div>
+        <div class="process-card">
+            <div class="process-num">03</div>
+            <div class="process-card-title">Expert Appraisal</div>
+            <div class="process-card-text">Tony Plowman personally grades every record using Goldmine standards. 32 years of expertise means fair, transparent pricing.</div>
+        </div>
+        <div class="process-card">
+            <div class="process-num">04</div>
+            <div class="process-card-title">Same-Day Payment</div>
+            <div class="process-card-text">Once you approve the offer, you get paid immediately. E-transfer, cheque, or store credit (with a 15% bonus).</div>
+        </div>
+    </div>
+</section>
+
+<!-- Form -->
+<section class="form-section" id="form">
+    <div class="form-inner">
+        <h2 class="form-title">Get a Free Appraisal</h2>
+        <p class="form-subtitle">Tell us about your collection and we'll get back to you within 24 hours.</p>
+        <form>
+            <div class="form-row">
+                <div class="form-group"><label class="form-label" for="sell-fname">First Name *</label><input type="text" id="sell-fname" class="form-input" placeholder="Fred"></div>
+                <div class="form-group"><label class="form-label" for="sell-lname">Last Name *</label><input type="text" id="sell-lname" class="form-input" placeholder="Brokenshire"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label class="form-label" for="sell-email">Email *</label><input type="email" id="sell-email" class="form-input" placeholder="fred@fredsrecords.com"></div>
+                <div class="form-group"><label class="form-label" for="sell-phone">Phone</label><input type="tel" id="sell-phone" class="form-input" placeholder="(709) 753-9191"></div>
+            </div>
+            <div class="form-group"><label class="form-label" for="sell-location">Location</label><input type="text" id="sell-location" class="form-input" placeholder="City, Province / State"></div>
+            <div class="form-group"><label class="form-label" for="sell-size">Approximate Collection Size</label>
+                <select id="sell-size" class="form-input" style="appearance: auto;">
+                    <option>Select...</option><option>Under 50 records</option><option>50-200 records</option><option>200-500 records</option><option>500-1,000 records</option><option>1,000-5,000 records</option><option>5,000+ records</option>
+                </select>
+            </div>
+            <div class="form-group"><label class="form-label" for="sell-genres">Primary Genres</label><input type="text" id="sell-genres" class="form-input" placeholder="e.g. Classic Rock, Jazz, NL Folk"></div>
+            <div class="form-group"><label class="form-label" for="sell-details">Tell Us More</label><textarea id="sell-details" class="form-input form-textarea" placeholder="General condition? Any standout titles? How'd you come to have this collection?"></textarea></div>
+            <button type="submit" class="form-btn">Submit Appraisal Request →</button>
+        </form>
+    </div>
+</section>
+
+<!-- Why Sell to Us -->
+<section class="why-section">
+    <div style="max-width: var(--max-w); margin: 0 auto; text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-family: var(--font-ui); font-size: 1.8rem; font-weight: 700;">Why Sell to Fred's?</h2>
+    </div>
+    <div class="why-grid">
+        <div class="why-card"><div class="why-icon"></div><div class="why-title">No Fees, No Commission</div><div class="why-text">Unlike Discogs or eBay, we buy outright. No listing fees, no commission, no months of waiting for the right buyer.</div></div>
+        <div class="why-card"><div class="why-icon"></div><div class="why-title">Expert-Level Appraisals</div><div class="why-text">Tony Plowman has been grading vinyl for 32 years. Our appraisals use Goldmine standards - the global benchmark for condition assessment.</div></div>
+        <div class="why-card"><div class="why-icon"></div><div class="why-title">We Handle Logistics</div><div class="why-text">Local or 3,000 km away, we solve the logistics problem. Pre-paid shipping kits, on-site pickups, or partner courier services across North America.</div></div>
+    </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021).</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li><li><a href="admin.html" style="color: var(--gold);">Admin Proposal</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsrecords/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.discogs.com/seller/Freds-Records/profile" target="_blank" rel="noopener">Discogs Store</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger - Built from St. John's</span></div>
+</footer>
+
+<script src="js/interactions.js"></script>
+</body>
+</html>
