@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's Records | Intelligence Layer — Phase 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --surface2: #181818;
+            --border: #252525;
+            --text: #e0e0e0;
+            --muted: #777;
+            --gold: #D4AF37;
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+            --red: #ef4444;
+            --orange: #f97316;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+        /* NAV */
+        .nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.25rem 3rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0;
+            background: rgba(10,10,10,0.96);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+        .nav-brand { font-family: 'Playfair Display'; font-size: 1.2rem; color: var(--gold); letter-spacing: 2px; text-decoration: none; }
+        .nav-tag { font-family: 'Space Mono'; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: var(--purple); background: rgba(168,85,247,0.1); padding: 0.3rem 0.8rem; border: 1px solid rgba(168,85,247,0.3); }
+        .nav-back { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 0.4rem 0.9rem; transition: all 0.3s; }
+        .nav-back:hover { color: var(--gold); border-color: var(--gold); }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 7rem 2rem 5rem;
+            border-bottom: 1px solid var(--border);
+            background: radial-gradient(ellipse at 50% 0%, rgba(168,85,247,0.06) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-overline { font-family: 'Space Mono'; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 5px; color: var(--purple); margin-bottom: 2rem; }
+        .hero h1 { font-family: 'Playfair Display'; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; color: white; }
+        .hero h1 em { color: var(--gold); font-style: italic; }
+        .hero-sub { font-family: 'Inter'; font-size: 1.15rem; color: var(--muted); max-width: 750px; margin: 0 auto 3rem; line-height: 1.8; }
+        .hero-proof {
+            display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+            padding-top: 2.5rem; border-top: 1px solid var(--border);
+            max-width: 900px; margin: 0 auto;
+        }
+        .hero-proof-item { text-align: center; }
+        .hero-proof-num { font-family: 'Playfair Display'; font-size: 2.2rem; color: var(--gold); display: block; }
+        .hero-proof-label { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
+        .hero-source { font-family: 'Space Mono'; font-size: 0.55rem; color: rgba(119,119,119,0.5); display: block; margin-top: 0.2rem; }
+
+        /* SECTION */
+        .section {
+            padding: 5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-overline { font-family: 'Space Mono'; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 4px; color: var(--purple); margin-bottom: 0.8rem; }
+        .section-title { font-family: 'Playfair Display'; font-size: clamp(1.8rem, 3vw, 2.8rem); color: white; margin-bottom: 1rem; line-height: 1.2; }
+        .section-sub { color: var(--muted); font-size: 1rem; max-width: 700px; line-height: 1.7; margin-bottom: 3rem; }
+
+        /* PILLAR CARDS */
+        .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .pillar-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .pillar-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: var(--accent-color, var(--gold));
+        }
+        .pillar-card:hover { border-color: rgba(212,175,55,0.3); transform: translateY(-2px); }
+        .pillar-icon {
+            width: 44px; height: 44px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.2rem;
+            color: var(--accent-color, var(--gold));
+            font-size: 1.2rem;
+        }
+        .pillar-card h3 { font-family: 'Playfair Display'; font-size: 1.2rem; color: white; margin-bottom: 0.6rem; }
+        .pillar-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+        .pillar-badge {
+            display: inline-block;
+            font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid;
+            margin-bottom: 0.5rem;
+        }
+        .pillar-metric { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--green); margin-top: 0.8rem; }
+
+        /* AGENT SWARM ARCHITECTURE */
+        .swarm-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            font-family: 'Space Mono';
+            position: relative;
+            overflow: hidden;
+        }
+        .swarm-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; color: var(--muted); margin-bottom: 2rem; }
+        .swarm-title-line { font-size: 0.85rem; color: var(--purple); text-align: center; margin-bottom: 1rem; }
+        .swarm-box {
+            background: var(--surface2);
+            border: 1px solid rgba(168,85,247,0.3);
+            padding: 2rem;
+            position: relative;
+        }
+        .swarm-agents { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .agent-item {
+            background: rgba(168,85,247,0.05);
+            border: 1px solid rgba(168,85,247,0.15);
+            padding: 1rem;
+        }
+        .agent-name { font-size: 0.65rem; color: var(--purple); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.4rem; display: block; }
+        .agent-task { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+        .swarm-arrow { text-align: center; color: var(--muted); font-size: 0.8rem; margin: 1rem 0; }
+        .swarm-output {
+            background: rgba(34,197,94,0.05);
+            border: 1px solid rgba(34,197,94,0.2);
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .swarm-output span { font-size: 0.75rem; color: var(--green); }
+        .note-box {
+            font-size: 0.65rem;
+            color: var(--muted);
+            border-left: 2px solid var(--orange);
+            padding: 0.8rem 1rem;
+            margin-top: 1.5rem;
+            background: rgba(249,115,22,0.04);
+        }
+        .note-box strong { color: var(--orange); }
+
+        /* VALIDATED BENCHMARKS TABLE */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        .data-table th { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); text-align: left; padding: 1rem; border-bottom: 1px solid var(--border); }
+        .data-table td { padding: 1rem; border-bottom: 1px solid rgba(37,37,37,0.5); color: var(--text); vertical-align: top; }
+        .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+        .data-badge { font-family: 'Space Mono'; font-size: 0.6rem; padding: 0.25rem 0.6rem; border: 1px solid; display: inline-block; }
+        .badge-green { color: var(--green); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.05); }
+        .badge-blue { color: var(--blue); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+        .badge-orange { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+        .badge-purple { color: var(--purple); border-color: rgba(168,85,247,0.3); background: rgba(168,85,247,0.05); }
+        .source-tag { font-family: 'Space Mono'; font-size: 0.55rem; color: rgba(119,119,119,0.5); display: block; margin-top: 0.3rem; }
+
+        /* GROWTH PROJECTIONS */
+        .projections-container { background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
+        .projections-header {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+            gap: 0; background: var(--surface2);
+        }
+        .proj-header-cell { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 1rem 1.2rem; border-right: 1px solid var(--border); }
+        .proj-header-cell:last-child { border-right: none; }
+        .projections-row {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+            border-top: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+        .projections-row:hover { background: rgba(255,255,255,0.02); }
+        .projections-row.highlight { background: rgba(212,175,55,0.04); }
+        .proj-cell { padding: 1.2rem; border-right: 1px solid rgba(37,37,37,0.5); font-size: 0.88rem; }
+        .proj-cell:last-child { border-right: none; }
+        .proj-scenario { font-family: 'Playfair Display'; font-size: 0.95rem; color: white; }
+        .proj-scenario small { display: block; font-family: 'Inter'; font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; font-style: italic; }
+        .proj-num { font-family: 'Space Mono'; }
+        .proj-num.gold { color: var(--gold); }
+        .proj-num.green { color: var(--green); }
+        .proj-num.muted { color: var(--muted); }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 0; width: 1px; background: var(--border); }
+        .tl-item { position: relative; margin-bottom: 2.5rem; }
+        .tl-dot {
+            position: absolute; left: -2.38rem; top: 0.3rem;
+            width: 14px; height: 14px;
+            border: 2px solid var(--dot-color, var(--gold));
+            background: var(--bg);
+            border-radius: 50%;
+        }
+        .tl-item.active .tl-dot { background: var(--dot-color, var(--gold)); }
+        .tl-tag { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--dot-color, var(--gold)); margin-bottom: 0.4rem; }
+        .tl-title { font-family: 'Playfair Display'; font-size: 1.2rem; color: white; margin-bottom: 0.5rem; }
+        .tl-body { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+        .tl-deliverables { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tl-chip { font-family: 'Space Mono'; font-size: 0.6rem; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--muted); }
+        .tl-cost { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--green); margin-top: 0.6rem; }
+
+        /* REVENUE ENGINES VISUAL */
+        .engines-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; border: 1px solid var(--border); }
+        .engine-tile {
+            padding: 1.5rem;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .engine-tile:nth-child(4n) { border-right: none; }
+        .engine-tile:hover { background: rgba(212,175,55,0.03); }
+        .engine-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+        .engine-name { font-family: 'Space Mono'; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 0.4rem; }
+        .engine-rev { font-family: 'Playfair Display'; font-size: 1.1rem; color: var(--gold); }
+        .engine-timeline { font-family: 'Space Mono'; font-size: 0.55rem; color: rgba(119,119,119,0.5); margin-top: 0.3rem; }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            border-top: 1px solid var(--border);
+            background: radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.06), transparent 70%);
+        }
+        .cta-section h2 { font-family: 'Playfair Display'; font-size: clamp(2rem, 3.5vw, 3rem); color: white; margin-bottom: 1rem; }
+        .cta-section p { color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .btn-primary-gold {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-family: 'Space Mono';
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1.1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .btn-primary-gold:hover { background: #c09b30; transform: translateY(-1px); }
+        .btn-ghost {
+            display: inline-block;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: 'Space Mono';
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1.1rem 2.5rem;
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: all 0.3s;
+        }
+        .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+        .footer-note {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'Space Mono'; font-size: 0.6rem;
+            color: rgba(119,119,119,0.4);
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1rem 1.5rem; }
+            .section { padding: 3rem 1.25rem; }
+            .swarm-agents { grid-template-columns: 1fr; }
+            .projections-header, .projections-row { grid-template-columns: 1fr; }
+            .proj-header-cell, .proj-cell { border-right: none; }
+            .hero-proof { gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="index.html" class="nav-brand">FRED'S RECORDS</a>
+    <span class="nav-tag">Phase 2 · Intelligence Layer</span>
+    <a href="admin.html" class="nav-back">← Proposal Overview</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-overline">Summit Digital — Strategic Intelligence Report</div>
+    <h1>The Intelligence Layer<br><em>That Turns 54 Years Into<br>a 24/7 Sales Engine</em></h1>
+    <p class="hero-sub">Fred's Records already generates $1M+ in annual revenue from a single storefront on Duckworth Street. This document outlines the validated AI, automation, and systems architecture that Summit will build to make that number grow to $5M — without hiring new staff, without expanding the location.</p>
+    <div class="hero-proof">
+        <div class="hero-proof-item">
+            <span class="hero-proof-num">$1M+</span>
+            <span class="hero-proof-label">Current In-Store Revenue</span>
+            <span class="hero-source">Source: Murr, Discovery Call</span>
+        </div>
+        <div class="hero-proof-item">
+            <span class="hero-proof-num">5×</span>
+            <span class="hero-proof-label">Growth Target ("Reasonable")</span>
+            <span class="hero-source">Source: Murr, Discovery Call</span>
+        </div>
+        <div class="hero-proof-item">
+            <span class="hero-proof-num">$1.4B</span>
+            <span class="hero-proof-label">US Vinyl Revenue 2024</span>
+            <span class="hero-source">Source: RIAA 2024</span>
+        </div>
+        <div class="hero-proof-item">
+            <span class="hero-proof-num">$2B+</span>
+            <span class="hero-proof-label">Whatnot 2024 GMV</span>
+            <span class="hero-source">Source: Whatnot / Sacra 2024</span>
+        </div>
+    </div>
+</header>
+
+<!-- SECTION 1: THE INTELLIGENCE PILLARS -->
+<div style="max-width:1100px; margin:0 auto;">
+<section class="section">
+    <div class="section-overline">01 — Core Architecture</div>
+    <h2 class="section-title">Seven Intelligence Pillars</h2>
+    <p class="section-sub">Each pillar operates independently but feeds the others. Together they create a compounding flywheel that grows in value with every record Tony touches, every customer who visits, every collection acquired.</p>
+
+    <div class="pillars-grid">
+
+        <div class="pillar-card" style="--accent-color: #a855f7;">
+            <div class="pillar-icon" style="background:rgba(168,85,247,0.1); border-color:rgba(168,85,247,0.2); color:#a855f7;">
+                <span class="material-icons" style="font-size:1.3rem;">psychology</span>
+            </div>
+            <span class="pillar-badge" style="color:#a855f7; border-color:rgba(168,85,247,0.3);">Pillar 01</span>
+            <h3>Real-Time Price Intelligence</h3>
+            <p>An automated monitoring agent cross-references Fred's listed prices against eBay auction data. When a record is priced below market — or an arbitrage buy appears — it alerts the team in real time via Slack.</p>
+            <div class="pillar-metric">↑ 15–25% margin improvement on used inventory</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #3b82f6;">
+            <div class="pillar-icon" style="background:rgba(59,130,246,0.1); border-color:rgba(59,130,246,0.2); color:#3b82f6;">
+                <span class="material-icons" style="font-size:1.3rem;">manage_search</span>
+            </div>
+            <span class="pillar-badge" style="color:#3b82f6; border-color:rgba(59,130,246,0.3);">Pillar 02</span>
+            <h3>AI Acquisition Engine</h3>
+            <p>A semantic scraper monitors Facebook Marketplace and Kijiji every 30 minutes for bulk vinyl listings in Atlantic Canada. Leads auto-route to a CRM. Automated outreach fires before competitors even see the listing.</p>
+            <div class="pillar-metric">First-responder advantage on every Atlantic Canada listing</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #22c55e;">
+            <div class="pillar-icon" style="background:rgba(34,197,94,0.1); border-color:rgba(34,197,94,0.2); color:#22c55e;">
+                <span class="material-icons" style="font-size:1.3rem;">notifications_active</span>
+            </div>
+            <span class="pillar-badge" style="color:#22c55e; border-color:rgba(34,197,94,0.3);">Pillar 03</span>
+            <h3>Wantlist Concierge Engine</h3>
+            <p>Customers link their Discogs Wantlist. When Tony lists a matching record, the system sends that customer a 30-minute priority window before the item goes public. One-of-one records become pre-sold.</p>
+            <div class="pillar-metric">Turns listing into a sale before it's ever publicly visible</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #D4AF37;">
+            <div class="pillar-icon" style="background:rgba(212,175,55,0.1); border-color:rgba(212,175,55,0.2); color:#D4AF37;">
+                <span class="material-icons" style="font-size:1.3rem;">schedule</span>
+            </div>
+            <span class="pillar-badge" style="color:#D4AF37; border-color:rgba(212,175,55,0.3);">Pillar 04</span>
+            <h3>Friday Drop Engine</h3>
+            <p>All high-value used arrivals are held through the week and released simultaneously every Friday at 12:00 PM NST. A homepage countdown trains collectors to show up weekly. Drop culture = $0 ad spend.</p>
+            <div class="pillar-metric">OTF recorded sell-out drops in under 60 seconds</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #f97316;">
+            <div class="pillar-icon" style="background:rgba(249,115,22,0.1); border-color:rgba(249,115,22,0.2); color:#f97316;">
+                <span class="material-icons" style="font-size:1.3rem;">live_tv</span>
+            </div>
+            <span class="pillar-badge" style="color:#f97316; border-color:rgba(249,115,22,0.3);">Pillar 05</span>
+            <h3>Whatnot Live Commerce</h3>
+            <p>Tony hosts "Friday Night Record Rummage" livestreams on Whatnot — a platform processing $2B+ GMV annually. Rare records sell for 3–5× Discogs median in competitive bidding frenzies. Inventory syncs back to Shopify automatically.</p>
+            <div class="pillar-metric">66% of Whatnot sellers earn $10K+/mo — Source: Whatnot 2024</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #ec4899;">
+            <div class="pillar-icon" style="background:rgba(236,72,153,0.1); border-color:rgba(236,72,153,0.2); color:#ec4899;">
+                <span class="material-icons" style="font-size:1.3rem;">email</span>
+            </div>
+            <span class="pillar-badge" style="color:#ec4899; border-color:rgba(236,72,153,0.3);">Pillar 06</span>
+            <h3>Diaspora Marketing Automation</h3>
+            <p>Tens of thousands of expat Newfoundlanders live in Alberta and Ontario. Klaviyo flows target them with "Care Package" campaigns timed to Tibb's Eve, weather triggers, and Record Store Day. Nostalgia isn't a product — it's the marketing.</p>
+            <div class="pillar-metric">Abandoned cart RPR avg $3.07 · Top 10%: $27.12 — Klaviyo 2024</div>
+        </div>
+
+        <div class="pillar-card" style="--accent-color: #06b6d4; grid-column: span 1;">
+            <div class="pillar-icon" style="background:rgba(6,182,212,0.1); border-color:rgba(6,182,212,0.2); color:#06b6d4;">
+                <span class="material-icons" style="font-size:1.3rem;">travel_explore</span>
+            </div>
+            <span class="pillar-badge" style="color:#06b6d4; border-color:rgba(6,182,212,0.3);">Pillar 07</span>
+            <h3>SEO Domination via Schema</h3>
+            <p>Every Shopify product page is injected with MusicAlbum JSON-LD schema tagging the matrix runout codes, pressing country, and mastering stamps. A collector searching "Led Zeppelin II RL Masterdisk VG+" finds Fred's instead of Discogs.</p>
+            <div class="pillar-metric">1,000 listings = 1,000 indexed long-tail SEO positions</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 2: AGENT SWARM ARCHITECTURE -->
+<section class="section" style="border-bottom: 1px solid var(--border); padding-top: 0;">
+    <div class="section-overline">02 — The Agent Swarm</div>
+    <h2 class="section-title">How the Price Intelligence<br>System Works</h2>
+    <p class="section-sub">The monitoring system uses three agent layers operating continuously. No autonomous purchasing — every action passes through Tony or Murr for final approval. The agents find the opportunity; the humans make the call.</p>
+
+    <div class="swarm-container">
+        <div class="swarm-label">/ Architecture / Real-Time Price & Arbitrage Monitor</div>
+
+        <div class="swarm-agents">
+            <div class="agent-item">
+                <span class="agent-name">▸ Agent 01 — The Watcher</span>
+                <span class="agent-task">Monitors eBay Buy API every 15 min for specific catalog items. Monitors new Whatnot listings for vinyl in target genre clusters. Flags newly listed items matching Fred's catalog.</span>
+            </div>
+            <div class="agent-item">
+                <span class="agent-name">▸ Agent 02 — The Appraiser</span>
+                <span class="agent-task">Compares eBay "Buy It Now" price vs. 30-day sales median for that specific pressing. Flags arbitrage opportunities where eBay price is &gt;30% below market. Checks Fred's listed items for under-pricing.</span>
+            </div>
+            <div class="agent-item">
+                <span class="agent-name">▸ Agent 03 — The Alerter</span>
+                <span class="agent-task">Sends Slack/SMS alert for arbitrage buys above $20 margin. Generates weekly "Reprice Report" for Murr + Tony. Queues mis-priced items for Tony's review in Shopify dashboard.</span>
+            </div>
+            <div class="agent-item">
+                <span class="agent-name">▸ Agent 04 — The Trend Spotter</span>
+                <span class="agent-task">Monitors Reddit r/vinyl and Google Trends for albums spiking in cultural attention (artist tours, deaths, TikTok moments). Cross-references against current Fred's inventory. Alerts when action is needed.</span>
+            </div>
+        </div>
+
+        <div class="swarm-arrow">↓ All agents report via webhook to a single Supabase dashboard ↓</div>
+
+        <div class="swarm-output">
+            <span>Tony sees: "3 items to reprice. 1 arbitrage buy available. Fleetwood Mac trending — 2 copies in stock at $28, Discogs median: $65."</span>
+        </div>
+
+        <div class="note-box">
+            <strong>Important note:</strong> The Discogs API has commercial use restrictions on marketplace data. The architecture uses the eBay Developer API (legally licensed for commercial use) as the primary price benchmark, supplemented by Discogs for historical median reference via Fred's own authenticated seller account. This approach is fully compliant.
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: VALIDATED MARKET DATA -->
+<section class="section" style="padding-top: 0;">
+    <div class="section-overline">03 — Validated Benchmarks</div>
+    <h2 class="section-title">Every Number Here Has a Source</h2>
+    <p class="section-sub">The growth projections in this proposal are not estimates — they are derived from validated industry data. Here is the research behind each claim.</p>
+
+    <div style="border: 1px solid var(--border); overflow:hidden;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Claim</th>
+                    <th>Validated Data</th>
+                    <th>Source</th>
+                    <th>Relevance to Fred's</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Whatnot seller earning potential</strong></td>
+                    <td>66% of sellers earn $10K+/mo<br>Top 500 sellers each $1M+ lifetime<br>Platform GMV: $2B+ in 2024</td>
+                    <td><span class="data-badge badge-blue">Whatnot / Sacra 2024</span></td>
+                    <td>Tony's live selling ability + existing rare inventory = immediate access to Whatnot's collector base</td>
+                </tr>
+                <tr>
+                    <td><strong>Vinyl market growth</strong></td>
+                    <td>US vinyl: $1.4B in 2024 (highest since 1984)<br>3rd consecutive year LPs outsold CDs<br>44M units sold in 2024</td>
+                    <td><span class="data-badge badge-green">RIAA 2024</span></td>
+                    <td>Market tailwind confirms urgency of online expansion now, while category is in growth phase</td>
+                </tr>
+                <tr>
+                    <td><strong>Email marketing ROI</strong></td>
+                    <td>Abandoned cart flow avg RPR: $3.07<br>Top 10%: $27.12/recipient<br>Welcome flow top 10%: $20.92</td>
+                    <td><span class="data-badge badge-purple">Klaviyo Benchmarks 2024</span></td>
+                    <td>10,000 email subscribers × $3.07 abandoned cart RPR = $30,700 per campaign in recovered revenue</td>
+                </tr>
+                <tr>
+                    <td><strong>Gen Z vinyl purchasing</strong></td>
+                    <td>76% of Gen Z vinyl fans buy monthly<br>80% own a record player<br>Gen Z = fastest growing buyer segment</td>
+                    <td><span class="data-badge badge-blue">Report 01 / Industry Data</span></td>
+                    <td>Fred's existing brand authority maps directly to Gen Z's preference for authentic, story-driven retailers</td>
+                </tr>
+                <tr>
+                    <td><strong>Drop culture conversion</strong></td>
+                    <td>Scarcity heuristic bypasses purchase hesitation<br>FOMO drives higher AOV on rare items<br>Trains habitual return traffic</td>
+                    <td><span class="data-badge badge-orange">Report 13 / Behavioural Research</span></td>
+                    <td>Friday Drop requires zero ad spend. Existing collector audience + scarce inventory = immediate conversion</td>
+                </tr>
+                <tr>
+                    <td><strong>SaaS operational cost</strong></td>
+                    <td>Full Shopify + Klaviyo + apps stack: ~$688 CAD/mo<br>Break-even: 46 record sales/month</td>
+                    <td><span class="data-badge badge-green">Report 39 / SaaS Audit</span></td>
+                    <td>Fred's current volume makes break-even achievable in week one. All revenue above that is net-margin upside</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 4: GROWTH PROJECTIONS -->
+<section class="section" style="padding-top:0;">
+    <div class="section-overline">04 — Revenue Projections</div>
+    <h2 class="section-title">What Each Phase Adds<br>to the P&L</h2>
+    <p class="section-sub">Conservative projections modelled against Monday's Studio benchmarks (54,000 visits, $42K revenue in 6.5 weeks) and validated Whatnot/Klaviyo industry data. All projections are in CAD.</p>
+
+    <div class="projections-container">
+        <div class="projections-header">
+            <div class="proj-header-cell">Scenario / Active Systems</div>
+            <div class="proj-header-cell">Month 1</div>
+            <div class="proj-header-cell">Month 3</div>
+            <div class="proj-header-cell">Month 6</div>
+            <div class="proj-header-cell">Year 2</div>
+        </div>
+        <div class="projections-row">
+            <div class="proj-cell"><span class="proj-scenario">Current State<small>In-store only. Zero digital presence.</small></span></div>
+            <div class="proj-cell"><span class="proj-num muted">~$83K/mo</span></div>
+            <div class="proj-cell"><span class="proj-num muted">~$83K/mo</span></div>
+            <div class="proj-cell"><span class="proj-num muted">~$83K/mo</span></div>
+            <div class="proj-cell"><span class="proj-num muted">~$1.0M/yr</span></div>
+        </div>
+        <div class="projections-row">
+            <div class="proj-cell"><span class="proj-scenario">Tier 1 — Proof of Concept<small>Shopify live · 10 hero SKUs · Merch · Email capture</small></span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$5–8K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$12K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$20K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$300K/yr</span></div>
+        </div>
+        <div class="projections-row">
+            <div class="proj-cell"><span class="proj-scenario">Tier 2 — Revenue Engines<small>Friday Drops · Klaviyo flows · Price monitor · Wantlist</small></span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$15K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$30K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$55K</span></div>
+            <div class="proj-cell"><span class="proj-num gold">+$750K/yr</span></div>
+        </div>
+        <div class="projections-row highlight">
+            <div class="proj-cell"><span class="proj-scenario">Tier 3 — Full Intelligence Stack<small>Whatnot live · AI acquisition · Diaspora · SEO compounding</small></span></div>
+            <div class="proj-cell"><span class="proj-num green">+$30K</span></div>
+            <div class="proj-cell"><span class="proj-num green">+$65K</span></div>
+            <div class="proj-cell"><span class="proj-num green">+$100K</span></div>
+            <div class="proj-cell"><span class="proj-num green">+$1.5M+/yr</span></div>
+        </div>
+        <div class="projections-row" style="background: rgba(212,175,55,0.04); border-top: 2px solid rgba(212,175,55,0.3);">
+            <div class="proj-cell"><span class="proj-scenario" style="color:var(--gold);">Combined Total Revenue<small>In-store + full digital intelligence stack</small></span></div>
+            <div class="proj-cell"><span class="proj-num gold" style="font-size:1rem;">~$113K</span></div>
+            <div class="proj-cell"><span class="proj-num gold" style="font-size:1rem;">~$178K</span></div>
+            <div class="proj-cell"><span class="proj-num gold" style="font-size:1rem;">~$238K</span></div>
+            <div class="proj-cell"><span class="proj-num gold" style="font-size:1.1rem; font-weight:700;">~$2.5M/yr</span></div>
+        </div>
+    </div>
+
+    <p style="font-family:'Space Mono'; font-size:0.6rem; color:var(--muted); margin-top:1rem; text-align:right;">All figures CAD · Conservative model · Excludes in-store revenue growth from increased brand visibility</p>
+</section>
+
+<!-- SECTION 5: TIERED LAUNCH ROADMAP -->
+<section class="section" style="padding-top:0;">
+    <div class="section-overline">05 — Launch Roadmap</div>
+    <h2 class="section-title">From First Dollar Online<br>to Full Intelligence Stack</h2>
+    <p class="section-sub">A phased delivery model that generates revenue before each next investment is made. Summit builds; Fred's validtes results; both reinvest into the next tier based on what the data shows.</p>
+
+    <div class="timeline">
+
+        <div class="tl-item active" style="--dot-color: #22c55e;">
+            <div class="tl-dot"></div>
+            <div class="tl-tag">Week 1–2 · Tier 1</div>
+            <h3 class="tl-title">Proof of Concept — First Dollar Online</h3>
+            <p class="tl-body">Shopify store live with 10 hero SKUs (the highest-margin used records Tony has in stock). Merch store activated. Email capture on every page. New Release Direct-Ship engine enabled — distributor ships direct, Fred's takes the margin.</p>
+            <div class="tl-deliverables">
+                <span class="tl-chip">Shopify setup</span>
+                <span class="tl-chip">10 product listings</span>
+                <span class="tl-chip">Merch e-commerce</span>
+                <span class="tl-chip">Email capture</span>
+                <span class="tl-chip">Direct-ship engine</span>
+            </div>
+            <div class="tl-cost">Goal: First online transaction within 14 days. Investment unlocked: Tier 2.</div>
+        </div>
+
+        <div class="tl-item" style="--dot-color: #D4AF37;">
+            <div class="tl-dot"></div>
+            <div class="tl-tag">Week 3–6 · Tier 2</div>
+            <h3 class="tl-title">Revenue Engines — Recurring Revenue Live</h3>
+            <p class="tl-body">Friday Drop architecture goes live. Klaviyo email flows activated (Welcome, Abandoned Cart, Wantlist, Diaspora). Price monitor agent deployed — Tony gets weekly reprice reports and arbitrage alerts. Wantlist Concierge bridge built and launched.</p>
+            <div class="tl-deliverables">
+                <span class="tl-chip">Friday Drop system</span>
+                <span class="tl-chip">Klaviyo 7 flows</span>
+                <span class="tl-chip">Price monitor agent</span>
+                <span class="tl-chip">Wantlist bridge</span>
+                <span class="tl-chip">Discogs ID metafields</span>
+            </div>
+            <div class="tl-cost">Goal: Monthly revenue report in Murr's hands. Numbers on paper. Investment unlocked: Tier 3.</div>
+        </div>
+
+        <div class="tl-item" style="--dot-color: #a855f7;">
+            <div class="tl-dot"></div>
+            <div class="tl-tag">Week 7–12 · Tier 3</div>
+            <h3 class="tl-title">Full Stack — The Compounding Flywheel</h3>
+            <p class="tl-body">Whatnot seller account launched. "Friday Night Record Rummage" livestream begins. AI acquisition scraper monitors Atlantic Canada marketplace listings. SEO schema injected across all product pages. B2B wholesale portal for NL venues. Diaspora "Care Package" campaigns go monthly.</p>
+            <div class="tl-deliverables">
+                <span class="tl-chip">Whatnot live shows</span>
+                <span class="tl-chip">Acquisition scraper</span>
+                <span class="tl-chip">SEO schema</span>
+                <span class="tl-chip">B2B portal</span>
+                <span class="tl-chip">Social content calendar</span>
+            </div>
+            <div class="tl-cost">Goal: All 7 intelligence pillars active. The system now runs itself.</div>
+        </div>
+
+        <div class="tl-item" style="--dot-color: #f97316;">
+            <div class="tl-dot"></div>
+            <div class="tl-tag">Month 6+ · Tier 4</div>
+            <h3 class="tl-title">Scale — Reinvest Revenue Into What's Working</h3>
+            <p class="tl-body">Data from Tiers 1–3 identifies the highest-converting channels. Summit allocates Summit's 10% management fee back into paid ads on the best-performing drops. VIP subscription box launches. Record Store Day 2027 becomes a global digital event.</p>
+            <div class="tl-deliverables">
+                <span class="tl-chip">Paid social ads</span>
+                <span class="tl-chip">VIP subscription</span>
+                <span class="tl-chip">RSD digital event</span>
+                <span class="tl-chip">Press coverage</span>
+            </div>
+            <div class="tl-cost">Goal: $2.5M/yr combined revenue. Murr's ownership stake worth significantly more than X.</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 6: REVENUE STREAMS BREAKDOWN -->
+<section class="section" style="padding-top:0;">
+    <div class="section-overline">06 — Revenue Engine Breakdown</div>
+    <h2 class="section-title">Eight Revenue Streams,<br>One Store</h2>
+    <p class="section-sub">Each stream is independent. Each one can be switched on without the others. The 10% Summit management fee applies to total online revenue generated by all streams.</p>
+
+    <div class="engines-flow">
+        <div class="engine-tile">
+            <span class="engine-icon">🎵</span>
+            <div class="engine-name">Used Vinyl Sales</div>
+            <div class="engine-rev">$30K–60K/mo</div>
+            <div class="engine-timeline">Tier 1 · Week 2</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">🆕</span>
+            <div class="engine-name">New Release Direct-Ship</div>
+            <div class="engine-rev">$8K–15K/mo</div>
+            <div class="engine-timeline">Tier 1 · Week 2</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">👕</span>
+            <div class="engine-name">Merch & Apparel</div>
+            <div class="engine-rev">$5K–12K/mo</div>
+            <div class="engine-timeline">Tier 1 · Week 2</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">📦</span>
+            <div class="engine-name">Mystery Crate Subscriptions</div>
+            <div class="engine-rev">$3K–8K/mo</div>
+            <div class="engine-timeline">Tier 2 · Week 4</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">🔴</span>
+            <div class="engine-name">Whatnot Live Auctions</div>
+            <div class="engine-rev">$10K–40K/mo</div>
+            <div class="engine-timeline">Tier 3 · Week 8</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">💝</span>
+            <div class="engine-name">Gift Cards & Local Events</div>
+            <div class="engine-rev">$2K–5K/mo</div>
+            <div class="engine-timeline">Tier 2 · Week 5</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">🏢</span>
+            <div class="engine-name">B2B Venue Curation</div>
+            <div class="engine-rev">$4K–10K/mo</div>
+            <div class="engine-timeline">Tier 3 · Week 10</div>
+        </div>
+        <div class="engine-tile">
+            <span class="engine-icon">📰</span>
+            <div class="engine-name">Buy Collections (Buy back)</div>
+            <div class="engine-rev">Feeds inventory flywheel</div>
+            <div class="engine-timeline">Tier 2 · Week 3</div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 7: WHAT SUMMIT MANAGES -->
+<section class="section" style="padding-top:0;">
+    <div class="section-overline">07 — Summit's Role</div>
+    <h2 class="section-title">Everything Summit Owns.<br>Nothing Tony Does Differently.</h2>
+    <p class="section-sub">Tony and Matthew continue exactly as they are. Summit operates entirely in the background. The staff day-to-day workflow changes by a total of 90 seconds: photograph, confirm, publish.</p>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+        <div style="background:var(--surface); border:1px solid var(--border); padding:2rem;">
+            <div style="font-family:'Space Mono'; font-size:0.65rem; text-transform:uppercase; letter-spacing:3px; color:var(--green); margin-bottom:1rem;">Summit Manages</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.7rem;">
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">All Shopify setup, product listing templates, and store maintenance</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">All Klaviyo email flows, campaigns, and list segmentation</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">Price monitoring agent deployment and weekly reporting</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">Whatnot account setup, middleware sync, and listing management</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">Social content calendar, scheduling, and performance tracking</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">Acquisitions CRM setup and cold outreach automation</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--green); margin-top:0.1rem;">✓</span><span style="font-size:0.9rem; color:var(--text);">Monthly performance reporting for all four owners</span></li>
+            </ul>
+        </div>
+        <div style="background:var(--surface); border:1px solid var(--border); padding:2rem;">
+            <div style="font-family:'Space Mono'; font-size:0.65rem; text-transform:uppercase; letter-spacing:3px; color:var(--gold); margin-bottom:1rem;">Tony & Staff Do</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.7rem;">
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); margin-top:0.1rem;">✦</span><span style="font-size:0.9rem; color:var(--text);">Photograph record spines with iPhone — Summit's template auto-fills the listing</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); margin-top:0.1rem;">✦</span><span style="font-size:0.9rem; color:var(--text);">Confirm grade and add 1–2 lines of personal expertise to listings</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); margin-top:0.1rem;">✦</span><span style="font-size:0.9rem; color:var(--text);">Host the Whatnot stream — tell the stories only Tony can tell</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); margin-top:0.1rem;">✦</span><span style="font-size:0.9rem; color:var(--text);">Approve reprice alerts and arbitrage recommendations</span></li>
+                <li style="display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); margin-top:0.1rem;">✦</span><span style="font-size:0.9rem; color:var(--text);">Run the store exactly as they do today</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div style="font-family:'Space Mono'; font-size:0.65rem; text-transform:uppercase; letter-spacing:4px; color:var(--purple); margin-bottom:1.5rem;">The Decision Point</div>
+    <h2>Fred's Records in 100 Years<br>Starts With This Year.</h2>
+    <p>Murr said it himself — this is the first step. The intelligence layer doesn't change what Fred's is. It makes Fred's available to every collector who's never had the chance to walk through that door on Duckworth Street.</p>
+    <a href="admin.html#cta" class="btn-primary-gold">Return to Proposal →</a>
+    <a href="admin.html" class="btn-ghost">Full Deal Structure</a>
+</section>
+
+<footer class="footer-note">
+    Summit · Fred's Records Intelligence Layer · Confidential · March 2026<br>
+    Data sources: RIAA 2024, Whatnot/Sacra 2024, Klaviyo Benchmarks 2024, 42 Deep Research Reports
+</footer>
+
+<script>
+    // Animate numbers on scroll
+    const observerOptions = { threshold: 0.3 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.pillar-card, .tl-item, .engine-tile').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
