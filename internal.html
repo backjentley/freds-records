@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal · Fred's Records · Summit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808; --surface: #111; --surface2: #1a1a1a; --border: #222;
+  --text: #e0e0e0; --muted: #666; --dim: #444;
+  --gold: #D4AF37; --green: #22c55e; --red: #ef4444; --blue: #3b82f6; --purple: #a855f7; --orange: #f97316;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;}
+
+/* NAV */
+.top-bar{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0.75rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+.top-bar-label{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--red);}
+.top-bar-nav{display:flex;gap:1.5rem;}
+.top-bar-nav a{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.top-bar-nav a:hover{color:var(--gold);}
+.top-bar-date{font-family:'Space Mono';font-size:0.6rem;color:var(--dim);}
+
+/* LAYOUT */
+.page{max-width:1200px;margin:0 auto;padding:3rem 2rem 6rem;}
+.section{margin-bottom:5rem;}
+.section-label{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:4px;color:var(--muted);margin-bottom:0.75rem;}
+.section-title{font-family:'Playfair Display';font-size:1.8rem;color:white;margin-bottom:2rem;line-height:1.2;}
+hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
+
+/* STATUS BOARD */
+.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem;}
+.status-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;border-top:3px solid var(--muted);}
+.status-card.green{border-top-color:var(--green);}
+.status-card.gold{border-top-color:var(--gold);}
+.status-card.red{border-top-color:var(--red);}
+.status-card.blue{border-top-color:var(--blue);}
+.sc-label{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;}
+.sc-val{font-family:'Playfair Display';font-size:1.4rem;color:white;margin-bottom:0.25rem;}
+.sc-sub{font-size:0.75rem;color:var(--muted);}
+
+/* STAKEHOLDER */
+.stakeholder-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;}
+.sh-card{background:var(--surface);border:1px solid var(--border);padding:1.25rem;text-align:center;}
+.sh-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono';font-weight:700;font-size:0.9rem;margin:0 auto 0.75rem;}
+.sh-name{font-weight:700;font-size:0.85rem;color:white;margin-bottom:0.2rem;}
+.sh-role{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:0.75rem;}
+.sh-meter{border:1px solid var(--border);height:6px;border-radius:3px;overflow:hidden;margin-bottom:0.5rem;}
+.sh-fill{height:100%;border-radius:3px;}
+.sh-alignment{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;}
+.sh-concern{font-size:0.75rem;color:var(--muted);margin-top:0.75rem;line-height:1.5;text-align:left;}
+
+/* NUMBERS */
+.numbers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;}
+.num-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;}
+.num-label{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;}
+.num-big{font-family:'Playfair Display';font-size:2rem;color:var(--gold);margin-bottom:0.25rem;}
+.num-sub{font-size:0.8rem;color:var(--muted);line-height:1.5;}
+
+/* UNIT ECONOMICS TABLE */
+.ue-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.ue-table th{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);text-align:left;padding:0.75rem 1rem;border-bottom:1px solid var(--border);}
+.ue-table td{padding:0.85rem 1rem;border-bottom:1px solid var(--border);color:var(--text);}
+.ue-table tr:last-child td{font-weight:700;color:var(--green);background:rgba(34,197,94,0.04);}
+.ue-table .deduct{color:var(--red);}
+.ue-table .bold{font-weight:600;color:white;}
+
+/* PROJECTION TABLE */
+.proj-table{width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:1.5rem;}
+.proj-table th{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:0.75rem 1rem;border-bottom:1px solid var(--border);text-align:right;}
+.proj-table th:first-child{text-align:left;}
+.proj-table td{padding:0.85rem 1rem;border-bottom:1px solid var(--border);text-align:right;color:var(--text);}
+.proj-table td:first-child{text-align:left;color:var(--muted);font-size:0.8rem;}
+.proj-table tr.summit-row td{color:var(--gold);}
+.proj-table tr.total-row td{font-weight:700;color:white;background:var(--surface2);}
+
+/* RISK */
+.risk-table{width:100%;border-collapse:collapse;}
+.risk-table th{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);padding:0.75rem 1rem;border-bottom:1px solid var(--border);text-align:left;}
+.risk-table td{padding:1rem;border-bottom:1px solid var(--border);font-size:0.85rem;vertical-align:top;}
+.risk-pill{display:inline-block;font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:2px;}
+.risk-high{background:rgba(239,68,68,0.15);color:var(--red);}
+.risk-med{background:rgba(249,115,22,0.15);color:var(--orange);}
+.risk-low{background:rgba(34,197,94,0.15);color:var(--green);}
+
+/* ARGUMENTS */
+.arg-list{display:flex;flex-direction:column;gap:1.25rem;}
+.arg-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;}
+.arg-num{font-family:'Playfair Display';font-size:2.5rem;color:rgba(212,175,55,0.2);line-height:1;}
+.arg-title{font-weight:700;color:white;margin-bottom:0.4rem;}
+.arg-body{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+.arg-stat{font-family:'Space Mono';font-size:0.75rem;color:var(--gold);margin-top:0.5rem;}
+
+/* UNKNOWNS */
+.unknown-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.unk-card{background:var(--surface);border:1px solid rgba(249,115,22,0.3);padding:1.25rem;}
+.unk-q{font-weight:600;font-size:0.85rem;color:white;margin-bottom:0.4rem;}
+.unk-why{font-size:0.78rem;color:var(--muted);line-height:1.5;}
+.unk-when{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-top:0.5rem;}
+
+/* PLAYBOOK */
+.playbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.pb-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;}
+.pb-date{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:0.5rem;}
+.pb-title{font-family:'Playfair Display';font-size:1.1rem;color:white;margin-bottom:1rem;}
+.pb-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.pb-list li{font-size:0.82rem;color:var(--muted);padding-left:1.25rem;position:relative;line-height:1.5;}
+.pb-list li::before{content:'→';position:absolute;left:0;color:var(--green);}
+.pb-list li strong{color:var(--text);}
+
+/* EXPERT */
+.expert-bars{display:flex;flex-direction:column;gap:0.75rem;}
+.exp-row{display:grid;grid-template-columns:160px 1fr 60px;align-items:center;gap:1rem;}
+.exp-name{font-size:0.78rem;color:var(--muted);}
+.exp-track{background:var(--surface2);height:6px;border-radius:3px;overflow:hidden;}
+.exp-fill{height:100%;border-radius:3px;background:var(--gold);}
+.exp-score{font-family:'Space Mono';font-size:0.7rem;color:var(--gold);text-align:right;}
+
+/* ACTION */
+.action-list{display:flex;flex-direction:column;gap:0.75rem;}
+.action-item{display:grid;grid-template-columns:80px 1fr 120px;gap:1rem;align-items:center;background:var(--surface);border:1px solid var(--border);padding:1rem 1.25rem;}
+.action-priority{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-align:center;}
+.p-now{background:rgba(239,68,68,0.15);color:var(--red);}
+.p-soon{background:rgba(249,115,22,0.15);color:var(--orange);}
+.p-later{background:rgba(34,197,94,0.15);color:var(--green);}
+.action-text{font-size:0.85rem;color:var(--text);}
+.action-owner{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:right;}
+
+/* CONFIDENTIAL WATERMARK */
+.conf-banner{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.2);padding:0.75rem 1.5rem;text-align:center;font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--red);margin-bottom:3rem;}
+
+@media(max-width:900px){
+  .status-grid{grid-template-columns:1fr 1fr;}
+  .stakeholder-grid{grid-template-columns:1fr 1fr;}
+  .numbers-grid{grid-template-columns:1fr 1fr;}
+  .unknown-grid{grid-template-columns:1fr;}
+  .playbook-grid{grid-template-columns:1fr;}
+  .exp-row{grid-template-columns:120px 1fr 50px;}
+  .action-item{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span class="top-bar-label">⚑ Internal · Summit Eyes Only</span>
+  <nav class="top-bar-nav">
+    <a href="#situation">Situation</a>
+    <a href="#stakeholders">Stakeholders</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#risk">Risk</a>
+    <a href="#arguments">Arguments</a>
+    <a href="#unknowns">Unknowns</a>
+    <a href="#playbooks">Playbooks</a>
+    <a href="#actions">Actions</a>
+  </nav>
+  <span class="top-bar-date">Fred's Records · March 2026</span>
+</div>
+
+<div class="page">
+
+<div class="conf-banner">⚑ Summit Intelligence · Internal Use Only · Do Not Share With Client ⚑</div>
+
+<!-- ── SITUATION ────────────────────────────────── -->
+<section class="section" id="situation">
+  <div class="section-label">Current Situation</div>
+  <div class="section-title">Where We Stand Right Now</div>
+
+  <div class="status-grid">
+    <div class="status-card green">
+      <div class="sc-label">Deal Stage</div>
+      <div class="sc-val">Pre-Close</div>
+      <div class="sc-sub">Murray is sold. Family meetings pending. Approval expected March 30.</div>
+    </div>
+    <div class="status-card gold">
+      <div class="sc-label">Next Critical Date</div>
+      <div class="sc-val">March 23</div>
+      <div class="sc-sub">Siblings call. Get Fred Jr. + sister as active advocates before Jim.</div>
+    </div>
+    <div class="status-card blue">
+      <div class="sc-label">Decision Maker</div>
+      <div class="sc-val">Uncle Jim</div>
+      <div class="sc-sub">76. Majority control. Risk-averse. Legacy-protective. Meets March 30.</div>
+    </div>
+    <div class="status-card red">
+      <div class="sc-label">Biggest Gap</div>
+      <div class="sc-val">$5K TBC</div>
+      <div class="sc-sub">Setup fee unconfirmed. Confirm with Murray on Sat call. Update admin.html.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);padding:1.5rem;font-size:0.9rem;line-height:1.8;color:var(--muted);">
+    <strong style="color:white;">The Setup:</strong> Fred's Records, 54-year-old institution, 198 Duckworth St, St. John's NL. Over $1M/yr in-store revenue. Zero online sales. Four co-owners: Jim (majority, silent), Murray (champion, minority), Fred Jr. (12 yrs in-store, minority), Sister (off-site, minority). Fred Sr. died Oct 2021.
+    We are proposing a <strong style="color:var(--gold);">10% revenue share on online sales only</strong> with a $5K setup contribution + 90-day exit clause. Murray initiated. Jim controls the vote. Our job: close Jim with a united family front.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── STAKEHOLDERS ────────────────────────────── -->
+<section class="section" id="stakeholders">
+  <div class="section-label">Intelligence</div>
+  <div class="section-title">The Five People Who Matter</div>
+
+  <div class="stakeholder-grid">
+    <!-- Jim -->
+    <div class="sh-card">
+      <div class="sh-avatar" style="background:rgba(239,68,68,0.15);color:var(--red);">JB</div>
+      <div class="sh-name">Uncle Jim</div>
+      <div class="sh-role">Majority Owner · Decision Maker</div>
+      <div class="sh-meter"><div class="sh-fill" style="width:30%;background:var(--orange);"></div></div>
+      <div class="sh-alignment" style="color:var(--orange);">Skeptical · Persuadable</div>
+      <div class="sh-concern"><strong style="color:var(--text);">Fears:</strong> Disrupting what Fred built. Extra risk. Operational burden on Tony. Looking foolish. Loss of control.<br><br><strong style="color:var(--text);">What wins him:</strong> Proof that nothing changes. 90-day exit. A united family who already said yes.</div>
+    </div>
+    <!-- Murray -->
+    <div class="sh-card">
+      <div class="sh-avatar" style="background:rgba(34,197,94,0.15);color:var(--green);">MB</div>
+      <div class="sh-name">Murray Brokenshire</div>
+      <div class="sh-role">Champion · Creative Director</div>
+      <div class="sh-meter"><div class="sh-fill" style="width:95%;background:var(--green);"></div></div>
+      <div class="sh-alignment" style="color:var(--green);">Fully Aligned</div>
+      <div class="sh-concern"><strong style="color:var(--text);">His role:</strong> Delivers all pitches. Owns family relationships. We advise, he leads.<br><br><strong style="color:var(--text);">His risk:</strong> If Jim says no, Murray is in the room. Don't put him in a position he can't recover from with Jim.</div>
+    </div>
+    <!-- Fred Jr. -->
+    <div class="sh-card">
+      <div class="sh-avatar" style="background:rgba(168,85,247,0.15);color:var(--purple);">FJ</div>
+      <div class="sh-name">Freddie Jr.</div>
+      <div class="sh-role">Co-Owner · 12 Yrs In-Store</div>
+      <div class="sh-meter"><div class="sh-fill" style="width:65%;background:var(--purple);"></div></div>
+      <div class="sh-alignment" style="color:var(--purple);">Warm · Needs a Future</div>
+      <div class="sh-concern"><strong style="color:var(--text);">Unlock:</strong> Show him a path to running the digital operation. He has the institutional knowledge nobody else has. Give him a visible role in the plan — aspirationally.<br><br><strong style="color:var(--text);">Risk:</strong> If he asks for a formal commitment on March 23, we can't make one yet.</div>
+    </div>
+    <!-- Sister -->
+    <div class="sh-card">
+      <div class="sh-avatar" style="background:rgba(59,130,246,0.15);color:var(--blue);">JB</div>
+      <div class="sh-name">The Sister</div>
+      <div class="sh-role">Co-Owner · Off-Site</div>
+      <div class="sh-meter"><div class="sh-fill" style="width:55%;background:var(--blue);"></div></div>
+      <div class="sh-alignment" style="color:var(--blue);">Neutral · Protective</div>
+      <div class="sh-concern"><strong style="color:var(--text);">Wins her:</strong> Confirm zero additional workload. Her life doesn't change. Her upside as a co-owner is real.<br><br><strong style="color:var(--text);">Concern:</strong> Family dynamics. Will this create tension with Jim if it doesn't work?</div>
+    </div>
+    <!-- Tony -->
+    <div class="sh-card">
+      <div class="sh-avatar" style="background:rgba(212,175,55,0.15);color:var(--gold);">TP</div>
+      <div class="sh-name">Tony Plowman</div>
+      <div class="sh-role">Store Manager · 40+ Yrs · Not an Owner</div>
+      <div class="sh-meter"><div class="sh-fill" style="width:50%;background:var(--gold);"></div></div>
+      <div class="sh-alignment" style="color:var(--gold);">Unknown · Critical</div>
+      <div class="sh-concern"><strong style="color:var(--text);">Why he matters:</strong> Jim trusts Tony above almost anyone. If Tony signals discomfort, Jim will feel it. We don't pitch Tony — Murray talks to him informally before March 23. No surprises.<br><br><strong style="color:var(--text);">Key message for Murray to relay:</strong> "Nothing changes for you. Your rhythm, your floor, your call."</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── NUMBERS ─────────────────────────────────── -->
+<section class="section" id="numbers">
+  <div class="section-label">Financial Intelligence</div>
+  <div class="section-title">The Numbers, Unfiltered</div>
+
+  <div class="numbers-grid">
+    <div class="num-card">
+      <div class="num-label">Summit's Take at Month 12 (Conservative)</div>
+      <div class="num-big">$4,200–4,800</div>
+      <div class="num-sub">10% of $42K–48K projected monthly online revenue. Recurring, every month.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-label">Total Year 1 Revenue to Summit (Est.)</div>
+      <div class="num-big">~$28K–36K</div>
+      <div class="num-sub">Ramping from ~$0 at launch to $4.8K/month by Month 12. Based on conservative ramp curve.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-label">Monthly SaaS Burn (Fred's Cost)</div>
+      <div class="num-big">$688</div>
+      <div class="num-sub">Break-even at 46 records sold online/month. Fred's is absorbing this from online revenue.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-label">Setup Contribution (TBC)</div>
+      <div class="num-big">~$5,000</div>
+      <div class="num-sub">One-time. Confirm exact figure with Murray Saturday. Do not show Jim until confirmed.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-label">Comparable: Rough Trade Online (UK)</div>
+      <div class="num-big">£2M+/yr</div>
+      <div class="num-sub">Independent record store, heritage brand, launched e-commerce mid-size. Used as internal benchmark only.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-label">Vinyl Market CAGR (2024–2028)</div>
+      <div class="num-big">9.8%</div>
+      <div class="num-sub">Global vinyl revenue growing. Fred's enters an expanding market, not a contracting one.</div>
+    </div>
+  </div>
+
+  <div style="font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:1rem;">Unit Economics · Per $75 Used Record Sold Online</div>
+  <table class="ue-table">
+    <thead><tr><th>Line Item</th><th>Amount</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="bold">Gross Sale Price</td><td class="bold">$75.00</td><td style="color:var(--muted);font-size:0.8rem;">Customer pays this</td></tr>
+      <tr><td>Summit 10% fee</td><td class="deduct">– $7.50</td><td style="color:var(--muted);font-size:0.8rem;">Only on online revenue</td></tr>
+      <tr><td>Shopify payment processing (2.5%)</td><td class="deduct">– $1.88</td><td style="color:var(--muted);font-size:0.8rem;">Standard Shopify Advanced rate</td></tr>
+      <tr><td>Packaging materials</td><td class="deduct">– $3.00</td><td style="color:var(--muted);font-size:0.8rem;">Mailer + inner sleeve + LP outer bag</td></tr>
+      <tr><td>Shipping label (domestic CA, Chit Chats)</td><td class="deduct">– $8.50</td><td style="color:var(--muted);font-size:0.8rem;">Est. avg. Chit Chats rate, NL origin</td></tr>
+      <tr><td><strong>Net to Fred's Records</strong></td><td><strong>$54.12</strong></td><td style="color:var(--muted);font-size:0.8rem;">Before COGS. Still strong margin for a $75 used record.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin:2rem 0 1rem;">Revenue Projections by Month (Online Only · Conservative Curve)</div>
+  <table class="proj-table">
+    <thead><tr><th>Stream</th><th>Month 3</th><th>Month 6</th><th>Month 9</th><th>Month 12</th></tr></thead>
+    <tbody>
+      <tr><td>Used / Rare Vinyl</td><td>$4,200</td><td>$9,800</td><td>$16,000</td><td>$24,000</td></tr>
+      <tr><td>New Releases &amp; RSD</td><td>$1,800</td><td>$3,900</td><td>$7,200</td><td>$11,000</td></tr>
+      <tr><td>Merch &amp; Apparel</td><td>$800</td><td>$2,100</td><td>$4,200</td><td>$7,000</td></tr>
+      <tr><td>Gift Cards / Bundles</td><td>$400</td><td>$900</td><td>$1,800</td><td>$3,000</td></tr>
+      <tr class="total-row"><td>Total Online Revenue</td><td>$7,200</td><td>$16,700</td><td>$29,200</td><td>$45,000</td></tr>
+      <tr class="summit-row"><td>Summit Take (10%)</td><td>$720</td><td>$1,670</td><td>$2,920</td><td>$4,500</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- ── RISK ────────────────────────────────────── -->
+<section class="section" id="risk">
+  <div class="section-label">Risk Register</div>
+  <div class="section-title">What Could Go Wrong</div>
+
+  <table class="risk-table">
+    <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Our Mitigation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td style="color:white;font-weight:600;">Jim says no on March 30th</td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">Two-meeting strategy creates coalition first. 90-day exit removes permanence. If no: respect it, leave the door open 90 days, offer to revisit when Jim sees another indie go digital successfully.</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">Tony signals resistance to Jim</td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">Murray has an informal conversation with Tony before March 23. Not a pitch — just a heads-up. "Nothing changes for you. No surprises. If it ever touches your work, you talk to me first."</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">Catalog audit is more expensive than expected</td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">Build this into the roadmap as Phase 0. Start small: 200 rare used records photographed and graded before launch. Don't try to put all 1M records online. Start with what sells best.</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">$5K setup fee kills the deal</td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">It's one month's online revenue at Month 3. Frame it as: "We pay our own costs for the first 30 days — equipment, configuration, design. This is the split." Confirm exact figure Saturday before discussing with Jim.</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">Sister or Fred Jr. don't show up on March 30th</td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">On March 23, get a verbal commitment from both: "Can you be there on the 30th? Even 30 minutes matters." Jim needs to see the united front physically present.</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">Discogs API rate limits delay go-live</td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">Batch overnight uploads, 500 records/hr. Use DisConnect middleware. Don't promise a go-live date to Jim — promise a "first drop" date (4-6 weeks post-approval).</td>
+      </tr>
+      <tr>
+        <td style="color:white;font-weight:600;">Online/in-store inventory conflict (double sell)</td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td><span class="risk-pill risk-med">Medium</span></td>
+        <td style="color:var(--muted);font-size:0.82rem;">Digital Quarantine Bin is the physical fix. DisConnect sync is the technical fix. Redundancy matters here — both must be operational before the first public drop.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- ── STRONGEST ARGUMENTS ─────────────────────── -->
+<section class="section" id="arguments">
+  <div class="section-label">Sales Intelligence</div>
+  <div class="section-title">Our 7 Strongest Arguments</div>
+
+  <div class="arg-list">
+    <div class="arg-card">
+      <div class="arg-num">1</div>
+      <div>
+        <div class="arg-title">The 90-Day Exit — No Lock-In</div>
+        <div class="arg-body">This is the single strongest deal feature. Jim doesn't have to commit to anything permanent. If Month 3 doesn't show meaningful progress, he walks away with zero penalty, zero contract, and every line of code we wrote belongs to Fred's. This is the closer. Use it first when he pushes back on risk.</div>
+        <div class="arg-stat">Objection it defeats: "What if it doesn't work?"</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">2</div>
+      <div>
+        <div class="arg-title">We Only Eat When Fred's Eats</div>
+        <div class="arg-body">10% of online revenue only. No retainer. No monthly fee from Summit. Zero dollars change hands until an online sale happens. Summit's incentives are perfectly aligned with Fred's. If we don't perform, we don't get paid. There is no scenario where Fred's loses money to Summit while online isn't working.</div>
+        <div class="arg-stat">Objection it defeats: "How do I know you won't take money and disappear?"</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">3</div>
+      <div>
+        <div class="arg-title">The Diaspora: Customers Who Cannot Buy From You Today</div>
+        <div class="arg-body">There are estimated tens of thousands of Newfoundlanders in Alberta, Ontario, and internationally who grew up with Fred's and cannot walk through the door. This isn't speculative demand — it's existing brand loyalty with no purchase channel. Every dollar of diaspora revenue is genuinely new money. This is not cannibalizing in-store sales.</div>
+        <div class="arg-stat">Market data: 330,000+ Newfoundlanders live outside the province. Platform vinyl spend: $85–$140 avg order.</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">4</div>
+      <div>
+        <div class="arg-title">The Vinyl Market Is Growing. Right Now.</div>
+        <div class="arg-body">Vinyl revenue surpassed CDs for the first time since 1987 in 2022. It has continued to grow every year since. Gen Z (18-24) is now the fastest-growing vinyl buyer demographic — 80% own a record player. Fred's is entering an expanding market, not a declining one. The question is not whether online record sales will grow — they will — but whether Fred's will capture any of it.</div>
+        <div class="arg-stat">CAGR: 9.8% (2024-2028). Gen Z vinyl buyers: +22% YoY.</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">5</div>
+      <div>
+        <div class="arg-title">Tony Never Ships a Box</div>
+        <div class="arg-body">The operational burden question will come from Jim. The answer is airtight: Tony and the floor staff do exactly what they do today. The only change is a structured photography step when premium used records arrive. As online volume grows, the revenue it generates pays for a dedicated part-time packer. Tony's daily rhythm is protected by design, not by hope.</div>
+        <div class="arg-stat">Objection it defeats: "This is going to overload the staff."</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">6</div>
+      <div>
+        <div class="arg-title">Sam the Record Man Opened Across the Street. It Closed. Fred's Didn't.</div>
+        <div class="arg-body">Fred's survived every format war, every chain store, and every industry collapse because of institutional adaptability. Fred Sr. launched Duckworth Distribution, signed to EMI, launched Atlantica Records — he moved before anyone asked him to. Going digital in 2026 is the same instinct. This is what Fred would have done. Use this with both Jim and the siblings. It reframes digital expansion as continuity, not disruption.</div>
+        <div class="arg-stat">Response to: "Why change what's working?"</div>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">7</div>
+      <div>
+        <div class="arg-title">Fred's Owns the Building. The Online Store Costs Almost Nothing in Fixed Overhead.</div>
+        <div class="arg-body">Most retail businesses that go online carry rent, payroll, and inventory risk. Fred's already owns the building (acquired 1982 — the anchor that let them outlast HMV). The online store adds a revenue layer on top of a zero-rent infrastructure. The marginal cost of selling a record online vs. in-store is almost entirely packaging + shipping. This is one of the most capital-efficient digital expansions possible.</div>
+        <div class="arg-stat">SaaS burn: $688/mo. Break-even: 46 records sold online.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── UNKNOWNS ────────────────────────────────── -->
+<section class="section" id="unknowns">
+  <div class="section-label">Open Questions</div>
+  <div class="section-title">What We Don't Know Yet</div>
+
+  <div class="unknown-grid">
+    <div class="unk-card">
+      <div class="unk-q">What is the exact setup fee?</div>
+      <div class="unk-why">Admin.html currently says "starts at $5,000" pending confirmation. Do not show Jim a number we can't defend. Confirm this Saturday with Murray before March 23.</div>
+      <div class="unk-when">⚑ Confirm Saturday</div>
+    </div>
+    <div class="unk-card">
+      <div class="unk-q">Has Murray spoken to Tony yet?</div>
+      <div class="unk-why">Tony's informal alignment is mission-critical. Jim trusts Tony above anyone. If Tony is surprised or resistant, Jim will sense it. Murray needs to have this conversation before the siblings call.</div>
+      <div class="unk-when">⚑ Confirm Saturday</div>
+    </div>
+    <div class="unk-card">
+      <div class="unk-q">What is Jim's current read?</div>
+      <div class="unk-why">Murray mentioned Jim "isn't opposed" but we don't know his specific objection. Is it risk? Control? Trust in us personally? Knowing his exact concern changes how Murray opens on March 30.</div>
+      <div class="unk-when">⚑ Ask Murray Saturday</div>
+    </div>
+    <div class="unk-card">
+      <div class="unk-q">What POS does Fred's currently run?</div>
+      <div class="unk-why">The DisConnect Discogs→Shopify bridge depends on what Fred's already uses for in-store POS. If they're on an older system, the switchover to Shopify POS is a larger lift than quoted. Need to scope this before committing a go-live date.</div>
+      <div class="unk-when">⚑ Ask Murray Saturday</div>
+    </div>
+    <div class="unk-card">
+      <div class="unk-q">Are the siblings definitely attending March 30?</div>
+      <div class="unk-why">Jim seeing a united family front is the strategy. Fred Jr. and the sister need to be physically present — or on Zoom at minimum. This is worth confirming explicitly on March 23, not assuming.</div>
+      <div class="unk-when">⚑ Confirm on March 23 call</div>
+    </div>
+    <div class="unk-card">
+      <div class="unk-q">What does Jane Brokenshire's role actually look like?</div>
+      <div class="unk-why">Murray mentioned Jane (architectural photographer, admin2.html). Her photography for the site could be significant brand value. But we've never confirmed whether she's willing to contribute or whether this is Murray's assumption. Don't promise Jim her involvement without confirming.</div>
+      <div class="unk-when">⚑ Clarify with Murray</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── MEETING PLAYBOOKS ───────────────────────── -->
+<section class="section" id="playbooks">
+  <div class="section-label">Meeting Strategy</div>
+  <div class="section-title">How We Play Each Room</div>
+
+  <div class="playbook-grid">
+    <div class="pb-card">
+      <div class="pb-date">Monday, March 23</div>
+      <div class="pb-title">The Siblings Call · Getting to Yes Before Jim</div>
+      <ul class="pb-list">
+        <li><strong>Murray leads entirely.</strong> Jack and Brandon are available for technical questions only. Do not present to them.</li>
+        <li><strong>Open with upside, not risk mitigation.</strong> They're not skeptics. Don't give them reasons to doubt by over-addressing risk.</li>
+        <li><strong>Fred Jr. beat is the most important 5 minutes.</strong> Murray should deliver it without the doc open. Rehearse it.</li>
+        <li><strong>The explicit ask:</strong> "Can you both be in the room on March 30th? Even for 30 minutes?" Get a yes to physical presence.</li>
+        <li><strong>Give them language.</strong> "The 90-day trial means no permanent commitment." "Tony's floor doesn't change." Practice saying it now so it feels natural with Jim.</li>
+        <li><strong>If Fred Jr. asks for a commitment on his future role:</strong> "We want to build that around you — when the revenue justifies it. Right now, we're proving the model."</li>
+      </ul>
+    </div>
+    <div class="pb-card">
+      <div class="pb-date">Sunday, March 30</div>
+      <div class="pb-title">The Jim Meeting · The Single Ask</div>
+      <ul class="pb-list">
+        <li><strong>Jack and Brandon present — but Murray opens.</strong> Heritage first. "This is what Dad would have done."</li>
+        <li><strong>Show admin.html on a screen.</strong> Let Jim read the numbers in his own time. Don't narrate everything — let silence work.</li>
+        <li><strong>The one ask:</strong> "90 days. If the numbers aren't there, we walk away clean. No penalty." Say it once. Don't oversell.</li>
+        <li><strong>When he pushes back: stop talking.</strong> Let the siblings answer. Their voices are worth more than ours in that room.</li>
+        <li><strong>If he says "let me think on it":</strong> "That's fair. When can we check back in?" Do not chase. Give him the room.</li>
+        <li><strong>If he says no:</strong> "Respect it completely. The offer stands if you change your mind." Leave on the best possible terms. This is a family business and Murray lives with Jim's opinion forever.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── EXPERT PANEL ────────────────────────────── -->
+<section class="section" id="expert">
+  <div class="section-label">Quality Assessment</div>
+  <div class="section-title">Expert Panel Scores · 8.05 / 10 Overall</div>
+  <div class="expert-bars">
+    <div class="exp-row"><span class="exp-name">Sales &amp; Negotiation</span><div class="exp-track"><div class="exp-fill" style="width:95%;"></div></div><span class="exp-score">9.5</span></div>
+    <div class="exp-row"><span class="exp-name">Vinyl Industry</span><div class="exp-track"><div class="exp-fill" style="width:90%;"></div></div><span class="exp-score">9.0</span></div>
+    <div class="exp-row"><span class="exp-name">Brand Strategy</span><div class="exp-track"><div class="exp-fill" style="width:90%;"></div></div><span class="exp-score">9.0</span></div>
+    <div class="exp-row"><span class="exp-name">E-Commerce Strategy</span><div class="exp-track"><div class="exp-fill" style="width:85%;"></div></div><span class="exp-score">8.5</span></div>
+    <div class="exp-row"><span class="exp-name">Digital Marketing</span><div class="exp-track"><div class="exp-fill" style="width:80%;"></div></div><span class="exp-score">8.0</span></div>
+    <div class="exp-row"><span class="exp-name">Family Business</span><div class="exp-track"><div class="exp-fill" style="width:75%;"></div></div><span class="exp-score">7.5</span></div>
+    <div class="exp-row"><span class="exp-name">UX &amp; Product</span><div class="exp-track"><div class="exp-fill" style="width:75%;"></div></div><span class="exp-score">7.5</span></div>
+    <div class="exp-row"><span class="exp-name">Technical Architecture</span><div class="exp-track"><div class="exp-fill" style="width:75%;"></div></div><span class="exp-score">7.5</span></div>
+    <div class="exp-row"><span class="exp-name">Financial Analysis</span><div class="exp-track"><div class="exp-fill" style="width:70%;"></div></div><span class="exp-score">7.0</span></div>
+    <div class="exp-row"><span class="exp-name">Logistics &amp; Operations</span><div class="exp-track"><div class="exp-fill" style="width:70%;"></div></div><span class="exp-score">7.0</span></div>
+  </div>
+  <div style="margin-top:1.5rem;background:var(--surface);border:1px solid var(--border);padding:1.25rem;font-size:0.85rem;color:var(--muted);line-height:1.7;">
+    <strong style="color:white;">Panel consensus:</strong> Deal structure and brand instinct are genuinely excellent — top-tier. Financial transparency and logistics realism are the weak points. Both are fixable before March 30. The foundation is strong enough to close on.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── ACTIONS ────────────────────────────────── -->
+<section class="section" id="actions">
+  <div class="section-label">Immediate Next Steps</div>
+  <div class="section-title">What We Do This Week</div>
+
+  <div class="action-list">
+    <div class="action-item">
+      <span class="action-priority p-now">Do Now</span>
+      <div class="action-text"><strong>Murray: Informal Tony conversation.</strong> Not a pitch. "Nothing changes for you. No surprises."</div>
+      <span class="action-owner">Murray · Before March 23</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-now">Do Now</span>
+      <div class="action-text"><strong>Jack: Mobile-test admin.html on a real iPhone.</strong> Fix any layout breaks before any family member opens it.</div>
+      <span class="action-owner">Jack · Before March 23</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-now">Do Now</span>
+      <div class="action-text"><strong>Confirm $5K setup figure on Saturday's call.</strong> Update admin.html from "starts at" to exact number.</div>
+      <span class="action-owner">Jack + Murray · Saturday</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-now">Do Now</span>
+      <div class="action-text"><strong>Murray rehearses Fred Jr. beat out loud.</strong> No screen. Not scripted — feels like a brother, not a presenter.</div>
+      <span class="action-owner">Murray · Before March 23</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-now">Do Now</span>
+      <div class="action-text"><strong>Remove the CNA joke from the about.html footer</strong> (Line 398). It's confidential and shouldn't be on the live site.</div>
+      <span class="action-owner">Jack · Now</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-soon">Before March 30</span>
+      <div class="action-text"><strong>Add unit economics table to admin.html.</strong> $75 record → Fred's net. Show it proactively before Jim's accountant finds it.</div>
+      <span class="action-owner">Jack</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-soon">Before March 30</span>
+      <div class="action-text"><strong>Ask Murray's permission to name Meadus Contracting</strong> as social proof in the Jim meeting. It's our only real comparable right now.</div>
+      <span class="action-owner">Jack + Brandon</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-soon">Before March 30</span>
+      <div class="action-text"><strong>Find one public indie record store Month 12 revenue data point.</strong> Rough Trade, Amoeba, or a documented Shopify case study. One real comparable number.</div>
+      <span class="action-owner">Brandon</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-later">Pre-Launch</span>
+      <div class="action-text"><strong>Write a Fred's Brand Voice Guide.</strong> Six rules. On-brand vs. off-brand examples. Use before any copy goes to the site.</div>
+      <span class="action-owner">Jack</span>
+    </div>
+    <div class="action-item">
+      <span class="action-priority p-later">Pre-Launch</span>
+      <div class="action-text"><strong>Map Phase 0: Catalog Audit.</strong> Define which 200 records get photographed and listed first. Tony's time must be scoped honestly.</div>
+      <span class="action-owner">Murray + Jack</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<div style="text-align:center;font-family:'Space Mono';font-size:0.6rem;color:var(--dim);letter-spacing:2px;padding-bottom:3rem;">
+  Summit · Internal Intelligence · Fred's Records Engagement · March 2026<br>
+  <span style="opacity:0.4;margin-top:0.5rem;display:block;">Do not share. Not for client distribution.</span>
+</div>
+
+</div><!-- /.page -->
+</body>
+</html>

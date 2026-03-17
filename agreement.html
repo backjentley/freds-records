@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Partnership Agreement · Fred's Records & Summit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --dim: #888;
+    --border: #d4d0c8;
+    --gold: #b8952a;
+    --cream: #faf8f4;
+    --rule: #e8e4dc;
+    --red: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .no-print { display: none !important; }
+    header { border-bottom: 2px solid #000; }
+    .page { max-width: 100%; padding: 2rem; box-shadow: none; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* Top bar (screen only) */
+  .top-bar {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    font-family: 'Space Mono';
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.6rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-family: 'Space Mono';
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+  }
+
+  /* Document wrapper */
+  .page {
+    max-width: 820px;
+    margin: 2rem auto 4rem;
+    background: white;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+    padding: 3.5rem 4rem;
+  }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .doc-eyebrow {
+    font-family: 'Space Mono';
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .doc-title {
+    font-family: 'Playfair Display';
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .doc-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Parties block */
+  .parties {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+  .party-label {
+    font-family: 'Space Mono';
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.4rem;
+  }
+  .party-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .party-detail {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 0.25rem;
+  }
+  .party-and {
+    font-family: 'Playfair Display';
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--dim);
+    text-align: center;
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 2.5rem;
+  }
+  .section-num {
+    font-family: 'Space Mono';
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.35rem;
+  }
+  h2 {
+    font-family: 'Inter';
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  p {
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.85rem;
+    line-height: 1.8;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* Terms table */
+  .terms-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+  .terms-table tr { border-bottom: 1px solid var(--rule); }
+  .terms-table tr:last-child { border-bottom: none; }
+  .terms-table td {
+    padding: 0.85rem 0.75rem;
+    vertical-align: top;
+  }
+  .terms-table td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+    width: 38%;
+    font-size: 0.82rem;
+  }
+  .terms-table td:last-child {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* Obligations list */
+  .ob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .ob-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: 1.25rem;
+  }
+  .ob-card-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ob-list {
+    list-style: none;
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .ob-list li { padding-left: 1rem; position: relative; line-height: 1.55; }
+  .ob-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+  /* Alert box */
+  .alert {
+    border-left: 3px solid var(--gold);
+    background: #fefdf6;
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+  .alert strong { color: var(--ink); }
+
+  /* Signature block */
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 1.5rem;
+  }
+  .sig-block { }
+  .sig-line {
+    border-bottom: 1px solid var(--ink);
+    height: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .sig-label {
+    font-family: 'Space Mono';
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.2rem;
+  }
+  .sig-name { font-weight: 700; font-size: 0.85rem; color: var(--ink); }
+  .sig-title { font-size: 0.78rem; color: var(--muted); }
+  .sig-date { font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem; }
+
+  /* Footer */
+  .doc-footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .doc-footer-text {
+    font-family: 'Space Mono';
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    background: #fff8f8;
+    border: 1px solid #f0d5d5;
+    padding: 1rem 1.25rem;
+    font-size: 0.78rem;
+    color: var(--red);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+  .disclaimer strong { color: var(--red); }
+
+  @media (max-width: 700px) {
+    .page { padding: 2rem 1.5rem; }
+    .parties { grid-template-columns: 1fr; }
+    .party-and { display: none; }
+    .ob-grid { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar (screen only) -->
+<div class="top-bar no-print">
+  <span>Digital Partnership Agreement · Fred's Records × Summit</span>
+  <button onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="doc-eyebrow">Letter of Intent · Digital Partnership</div>
+    <div class="doc-title">Fred's Records Online<br>Partnership Agreement</div>
+    <div class="doc-subtitle">Draft for Review · March 2026 · Subject to legal review before execution</div>
+  </div>
+
+  <!-- Legal disclaimer -->
+  <div class="disclaimer">
+    <strong>Important:</strong> This document is a working term sheet prepared for discussion purposes. It is not a legally binding contract. Both parties should have this reviewed by independent legal counsel before signing. This document establishes the intended commercial framework and serves as the basis for a formal agreement.
+  </div>
+
+  <!-- Parties -->
+  <div class="parties">
+    <div>
+      <div class="party-label">The Store</div>
+      <div class="party-name">Fred's Records Ltd.</div>
+      <div class="party-detail">198 Duckworth Street<br>St. John's, NL, Canada<br>fredsrecords.com</div>
+    </div>
+    <div class="party-and">and</div>
+    <div>
+      <div class="party-label">The Partner</div>
+      <div class="party-name">Summit Digital Inc.</div>
+      <div class="party-detail">Digital Strategy & E-Commerce<br>St. John's, NL, Canada<br>Represented by: Jack Bentley &amp; Brandon [Last Name]</div>
+    </div>
+  </div>
+
+  <!-- 1. Purpose -->
+  <section>
+    <div class="section-num">Section 01</div>
+    <h2>Purpose &amp; Scope</h2>
+    <p>This Agreement establishes the terms under which Summit Digital Inc. ("Summit") will design, build, launch, and manage an e-commerce operation for Fred's Records Ltd. ("Fred's Records") at fredsrecords.com. The goal of this partnership is to generate a new, incremental online revenue stream for Fred's Records — one that does not interfere with in-store operations, does not require additional workload from existing floor staff, and is consistent with the values and legacy of the store.</p>
+    <p>All work performed under this Agreement is in addition to Fred's Records' existing in-store business. The in-store operation, existing staff responsibilities, and Tony Plowman's daily workflow remain unchanged and are not subject to this Agreement.</p>
+  </section>
+
+  <!-- 2. Services -->
+  <section>
+    <div class="section-num">Section 02</div>
+    <h2>Services Provided by Summit</h2>
+    <div class="ob-card" style="margin-bottom:0;">
+      <ul class="ob-list">
+        <li>Design and development of the Shopify e-commerce storefront at fredsrecords.com</li>
+        <li>Configuration of inventory management middleware (Discogs sync, POS integration, digital quarantine bin system)</li>
+        <li>Integration and setup of email marketing platform (Klaviyo), including automated flows: Welcome Series, New Arrivals, Diaspora Care Package, Wantlist Alerts</li>
+        <li>Shipping carrier integration via aggregator API (Shippo or equivalent) including NL weather delay protocol</li>
+        <li>Photography station setup specification and staff training for product listing workflow</li>
+        <li>SEO configuration including structured data markup (MusicAlbum JSON-LD), Google Merchant feed, and Discogs SEO strategy</li>
+        <li>Ongoing digital marketing management: weekly "Fresh in the Bins" drop execution, Instagram content calendar, and email list growth</li>
+        <li>Monthly reporting: online revenue, conversion rate, email list growth, and top-selling SKUs</li>
+        <li>All reasonable technical maintenance and platform updates during the term of this Agreement</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Revenue Share -->
+  <section>
+    <div class="section-num">Section 03</div>
+    <h2>Compensation &amp; Revenue Share</h2>
+
+    <div class="alert">
+      <strong>How Summit gets paid:</strong> Summit receives no retainer, no monthly management fee, and no upfront payment other than the one-time setup contribution in Section 3.2. Summit is compensated exclusively as a percentage of online revenue. If the online store generates no revenue, Summit receives no compensation.
+    </div>
+
+    <table class="terms-table">
+      <tr>
+        <td>Revenue Share Rate</td>
+        <td><strong>10% of Gross Online Revenue.</strong> "Gross Online Revenue" means the total value of completed online orders placed through fredsrecords.com, before deduction of Shopify processing fees, shipping carrier costs, or packaging expenses. Orders that are subsequently refunded in full are excluded. Partial refunds are deducted proportionally.</td>
+      </tr>
+      <tr>
+        <td>What Is Included</td>
+        <td>All product sales completed through the fredsrecords.com Shopify storefront: used vinyl, new releases, merchandise, gift cards, and any future product categories launched under this agreement.</td>
+      </tr>
+      <tr>
+        <td>What Is Excluded</td>
+        <td>In-store sales, phone orders, Discogs marketplace sales (unless routed through the Shopify storefront), wholesale orders, and any revenue generated entirely outside the online platform.</td>
+      </tr>
+      <tr>
+        <td>Payment Schedule</td>
+        <td>Summit invoices Fred's Records on the 1st of each calendar month for the prior month's online revenue. Fred's Records remits payment within <strong>10 business days</strong> of invoice receipt. Payments are made by e-transfer or pre-authorized bank transfer.</td>
+      </tr>
+      <tr>
+        <td>Reporting &amp; Verification</td>
+        <td>Summit provides a monthly revenue report with a direct link to the Shopify revenue dashboard. Fred's Records retains read-only Shopify dashboard access at all times and may verify reported figures independently. Disputes must be raised within 15 days of invoice receipt.</td>
+      </tr>
+      <tr>
+        <td>One-Time Setup Contribution</td>
+        <td>Fred's Records agrees to a one-time contribution of <strong>$________ CAD</strong> (to be confirmed between parties) toward the cost of initial platform setup, photography equipment, and third-party software licensing. This amount is payable upon signing. It is not a retainer and does not reduce the ongoing revenue share rate.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 4. Term & Trial -->
+  <section>
+    <div class="section-num">Section 04</div>
+    <h2>Term, Trial Period &amp; Exit Clause</h2>
+
+    <table class="terms-table">
+      <tr>
+        <td>Initial Trial Period</td>
+        <td><strong>90 days</strong> from the date the Shopify storefront accepts its first public order ("Launch Date"). During this period, either party may terminate the Agreement without penalty and without cause.</td>
+      </tr>
+      <tr>
+        <td>Termination During Trial</td>
+        <td>Either party gives <strong>14 days written notice</strong> to terminate. All work completed and assets created up to the termination date remain the property of Fred's Records Ltd. Summit has no claim over the domain, Shopify account, email list, product photography, or any digital asset. Summit transfers all administrative access within 48 hours of termination.</td>
+      </tr>
+      <tr>
+        <td>Continuation After Trial</td>
+        <td>If neither party terminates within the 90-day trial, the Agreement automatically converts to a <strong>12-month rolling term</strong>, renewable annually by mutual written agreement.</td>
+      </tr>
+      <tr>
+        <td>Termination After Trial</td>
+        <td>After the 90-day trial, either party may terminate with <strong>30 days written notice</strong>. Summit provides a complete handover package to Fred's Records within 14 days of the termination date, including all platform credentials, automation documentation, and a 60-day email/SMS archive.</td>
+      </tr>
+      <tr>
+        <td>Performance Review</td>
+        <td>At Day 60 from Launch and at every 90-day interval thereafter, both parties review online revenue performance against the projections outlined in the attached Appendix A. If Month 12 online revenue falls below 50% of projection for two consecutive quarters, either party may invoke an early exit with only 14 days notice.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 5. Asset Ownership -->
+  <section>
+    <div class="section-num">Section 05</div>
+    <h2>Digital Asset Ownership</h2>
+
+    <div class="alert">
+      <strong>The principle:</strong> Fred's Records owns everything. Summit operates as a trusted service provider. Upon any termination of this Agreement, Fred's Records retains full, unencumbered ownership of all digital assets with no conditions attached.
+    </div>
+
+    <table class="terms-table">
+      <tr>
+        <td>Shopify Account</td>
+        <td>The Shopify account is registered to, billed to, and owned by Fred's Records Ltd. Summit holds "Collaborator" access only. Fred's Records holds the Owner role at all times.</td>
+      </tr>
+      <tr>
+        <td>Domain</td>
+        <td>fredsrecords.com is owned by Fred's Records Ltd. and remains so regardless of the status of this Agreement. Summit does not manage the domain registrar account.</td>
+      </tr>
+      <tr>
+        <td>Customer Email List</td>
+        <td>All email subscribers, SMS opt-ins, and customer data collected through fredsrecords.com are the sole property of Fred's Records Ltd. Summit may not use this data for any purpose other than managing the Fred's Records online store.</td>
+      </tr>
+      <tr>
+        <td>Product Photography</td>
+        <td>All photographs taken of Fred's Records inventory under this Agreement are owned by Fred's Records Ltd.</td>
+      </tr>
+      <tr>
+        <td>Brand &amp; Intellectual Property</td>
+        <td>The Fred's Records name, logo, store identity, and all associated trademarks remain the exclusive property of Fred's Records Ltd. Summit may reference the partnership in its portfolio with Fred's Records' prior written consent.</td>
+      </tr>
+      <tr>
+        <td>Code &amp; Technical Work</td>
+        <td>Custom Shopify theme code, Liquid templates, automation scripts, and third-party app configurations created under this Agreement are assigned to Fred's Records Ltd. upon creation. Summit retains the right to use non-proprietary methods and general approaches in other engagements.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 6. Obligations -->
+  <section>
+    <div class="section-num">Section 06</div>
+    <h2>Mutual Obligations</h2>
+
+    <div class="ob-grid">
+      <div class="ob-card">
+        <div class="ob-card-title">Fred's Records Agrees To</div>
+        <ul class="ob-list">
+          <li>Provide Summit with accurate inventory data and timely access to records selected for online listing</li>
+          <li>Designate a primary point of contact (Murray Brokenshire) for operational decisions</li>
+          <li>Provide a dedicated physical space ("Digital Quarantine Bin") for records queued for online sale</li>
+          <li>Remit Summit's monthly revenue share invoice within 10 business days of receipt</li>
+          <li>Maintain the Shopify account subscription in good standing (monthly subscription billed to Fred's Records)</li>
+          <li>Provide honest feedback within 5 business days on all submitted marketing content for approval</li>
+          <li>Comply with CASL (Canada's Anti-Spam Legislation) requirements, including record-keeping of all opt-in consents</li>
+        </ul>
+      </div>
+      <div class="ob-card">
+        <div class="ob-card-title">Summit Agrees To</div>
+        <ul class="ob-list">
+          <li>Deliver a functional Shopify storefront accepting public orders within 45 days of signing</li>
+          <li>Provide monthly revenue and performance reports by the 5th of each month</li>
+          <li>Never use Fred's Records customer data for any purpose outside this engagement</li>
+          <li>Obtain Fred's Records' written approval before publishing any marketing content on Fred's behalf</li>
+          <li>Maintain operational access to the Shopify platform during agreed business hours (Mon–Fri, 9am–5pm NST)</li>
+          <li>Respond to technical issues affecting the storefront within 4 business hours</li>
+          <li>Provide a complete written handover package within 14 days of any termination</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Returns & Policy -->
+  <section>
+    <div class="section-num">Section 07</div>
+    <h2>Returns, Disputes &amp; Chargebacks</h2>
+
+    <table class="terms-table">
+      <tr>
+        <td>Return Policy (Used Vinyl)</td>
+        <td>Returns are accepted within <strong>14 days of delivery</strong> if the item is demonstrably misgraded relative to the published grade. "Demonstrably misgraded" means: the item plays with an audible skip not noted in the listing, or the visual grade differs by more than one tier from the published Goldmine grade. Buyer pays return shipping. Fred's Records issues a full refund upon receipt and inspection.</td>
+      </tr>
+      <tr>
+        <td>Return Policy (New Vinyl &amp; Merch)</td>
+        <td>Returns accepted within <strong>30 days</strong> if the item is unopened or defective. Buyer pays return shipping on unopened items. Fred's Records covers shipping on defective items.</td>
+      </tr>
+      <tr>
+        <td>Chargeback Responsibility</td>
+        <td>Chargebacks resulting from Summit's operational errors (incorrect item shipped, wrong price charged) are Summit's responsibility. Chargebacks resulting from customer fraud or buyer's remorse are Fred's Records' responsibility (borne by Shopify Payments as standard).</td>
+      </tr>
+      <tr>
+        <td>Revenue Share on Returns</td>
+        <td>If an order is fully refunded, the corresponding Summit revenue share for that order is credited against the next monthly invoice. Partial refunds are deducted proportionally.</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 8. Confidentiality -->
+  <section>
+    <div class="section-num">Section 08</div>
+    <h2>Confidentiality</h2>
+    <p>Both parties agree to keep the financial terms of this Agreement confidential. Neither party will disclose the revenue share rate, the setup contribution amount, or the monthly revenue figures to any third party without the other party's written consent, except as required by law or for the purposes of legal or financial advisors bound by professional confidentiality obligations.</p>
+    <p>This clause does not prevent Fred's Records from disclosing the existence of its partnership with Summit to family members, employees, or advisors as needed for the operation of the business.</p>
+  </section>
+
+  <!-- 9. Liability -->
+  <section>
+    <div class="section-num">Section 09</div>
+    <h2>Limitation of Liability</h2>
+    <p>Summit's total cumulative liability under this Agreement shall not exceed the total revenue share payments received by Summit in the three months preceding the event giving rise to the claim. Summit is not liable for lost profits, indirect damages, or consequential damages arising from platform outages, third-party service failures (Shopify, Klaviyo, Discogs), or shipping carrier delays beyond Summit's reasonable control.</p>
+    <p>Fred's Records is responsible for ensuring all products listed online comply with applicable Canadian laws, including but not limited to accurate product grading, CASL-compliant email collection, and applicable provincial sales tax registration obligations.</p>
+  </section>
+
+  <!-- 10. Governing Law -->
+  <section>
+    <div class="section-num">Section 10</div>
+    <h2>Governing Law &amp; Dispute Resolution</h2>
+    <p>This Agreement is governed by the laws of the Province of Newfoundland and Labrador and the applicable federal laws of Canada. Any disputes arising from this Agreement that cannot be resolved through good-faith negotiation between the parties shall be referred to mediation before any legal proceedings are commenced. Both parties agree to a minimum 30-day mediation period before litigation.</p>
+  </section>
+
+  <!-- 11. Entire Agreement -->
+  <section>
+    <div class="section-num">Section 11</div>
+    <h2>Entire Agreement &amp; Amendments</h2>
+    <p>This Agreement, together with Appendix A (Revenue Projections) and Appendix B (Scope of Work Timeline), constitutes the entire agreement between the parties and supersedes all prior oral or written discussions. Amendments must be agreed in writing and signed by both parties.</p>
+  </section>
+
+  <!-- Signatures -->
+  <section>
+    <div class="section-num">Section 12</div>
+    <h2>Signatures</h2>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">By signing below, both parties agree to the terms set out in this Letter of Intent and commit to engaging legal counsel to convert this document into a formal binding agreement.</p>
+
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-label">For Fred's Records Ltd.</div>
+        <div class="sig-line"></div>
+        <div class="sig-name">________________________</div>
+        <div class="sig-title">Authorized Signing Officer</div>
+        <div class="sig-date">Date: ____________________</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-label">For Summit Digital Inc.</div>
+        <div class="sig-line"></div>
+        <div class="sig-name">________________________</div>
+        <div class="sig-title">Jack Bentley · Co-Founder</div>
+        <div class="sig-date">Date: ____________________</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <div class="doc-footer-text">Fred's Records × Summit · Partnership Agreement · Draft v1.0 · March 2026</div>
+    <div class="doc-footer-text">Confidential · Not for Distribution</div>
+  </div>
+
+</div><!-- /.page -->
+
+</body>
+</html>

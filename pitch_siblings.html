@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Siblings Script · Fred's Records</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@0,400;0,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --surface: #161616;
+            --border: #2a2a2a;
+            --text: #e0e0e0;
+            --muted: #888;
+            --gold: #D4AF37;
+            --green: #22c55e;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --purple: #a855f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 6rem;
+        }
+
+        .script-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .script-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--green);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .script-header h1 {
+            font-family: 'Playfair Display';
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: white;
+            line-height: 1.2;
+        }
+        .script-header h1 em { color: var(--green); font-style: italic; }
+        .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            font-family: 'Space Mono';
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .meta-item strong { color: var(--text); }
+
+        .instruction-box {
+            background: rgba(34,197,94,0.05);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-left: 3px solid var(--green);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .instruction-box strong { color: var(--green); }
+
+        /* Sibling profiles */
+        .sibling-profiles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .sibling-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-top: 3px solid var(--purple);
+        }
+        .sibling-name {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--purple);
+            margin-bottom: 0.5rem;
+        }
+        .sibling-role {
+            font-family: 'Playfair Display';
+            font-size: 1rem;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+        .sibling-concern {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .sibling-concern strong { color: var(--text); }
+
+        .beat {
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 3.5rem;
+        }
+        .beat:last-of-type { border-bottom: none; }
+
+        .beat-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .beat-num {
+            font-family: 'Playfair Display';
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(34,197,94,0.2);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .beat-meta { flex: 1; }
+        .beat-tag {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--green);
+            margin-bottom: 0.3rem;
+        }
+        .beat-title {
+            font-family: 'Playfair Display';
+            font-size: 1.35rem;
+            color: white;
+        }
+        .beat-duration {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        .script-text {
+            font-family: 'Playfair Display';
+            font-size: 1.15rem;
+            font-style: italic;
+            color: white;
+            line-height: 1.75;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.75rem 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--green);
+        }
+        .script-text mark {
+            background: rgba(34,197,94,0.15);
+            color: var(--green);
+            font-style: normal;
+            padding: 0 3px;
+            border-radius: 2px;
+        }
+        .pause {
+            display: block;
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted);
+            margin: 1.25rem 0;
+            text-align: center;
+        }
+        .pause::before, .pause::after { content: '—— '; color: var(--border); }
+
+        .note {
+            font-family: 'Inter';
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            padding: 0.75rem 1rem;
+            border-left: 2px solid var(--border);
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+        .note strong { color: var(--text); font-style: normal; }
+
+        .upside-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .upside-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+            border-top: 2px solid var(--gold);
+        }
+        .upside-num {
+            font-family: 'Playfair Display';
+            font-size: 1.8rem;
+            color: var(--gold);
+            display: block;
+        }
+        .upside-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-top: 0.3rem;
+            display: block;
+        }
+        .upside-sub {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .objection-block {
+            background: rgba(239,68,68,0.04);
+            border: 1px solid rgba(239,68,68,0.2);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .objection-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 0.75rem;
+        }
+        .objection-q {
+            font-family: 'Inter';
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        .objection-a {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 1rem;
+            color: white;
+            line-height: 1.7;
+            border-left: 2px solid var(--green);
+            padding-left: 1rem;
+        }
+
+        /* The alignment goal */
+        .alignment-box {
+            background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.03));
+            border: 2px solid var(--green);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .alignment-box .al-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+        .alignment-box h3 {
+            font-family: 'Playfair Display';
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .alignment-box p {
+            font-family: 'Inter';
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* Jim prep section */
+        .jim-prep {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .jim-prep-label {
+            font-family: 'Space Mono';
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+        }
+        .jim-prep ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .jim-prep li {
+            font-size: 0.9rem;
+            color: var(--text);
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        .jim-prep li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        .jim-prep li em {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+            font-style: normal;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13,13,13,0.95);
+            border-top: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .pb-label { font-family: 'Space Mono'; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); white-space: nowrap; }
+        .pb-track { flex: 1; height: 2px; background: var(--border); position: relative; }
+        .pb-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--green); width: 0%; transition: width 0.3s ease; }
+        .pb-time { font-family: 'Space Mono'; font-size: 0.65rem; color: var(--green); white-space: nowrap; }
+
+        @media (max-width: 500px) {
+            body { padding: 1.5rem 1rem 6rem; }
+            .sibling-profiles, .upside-grid { grid-template-columns: 1fr; }
+            .script-text { padding: 1.25rem; font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="script-header">
+        <span class="script-label">Speaking Notes · Internal · Confidential</span>
+        <h1>The Siblings Script<br><em>Getting to a United Front</em></h1>
+        <div class="meta-row">
+            <div class="meta-item">Date <strong>Monday, March 23</strong></div>
+            <div class="meta-item">Format <strong>Call or In-Person</strong></div>
+            <div class="meta-item">Duration <strong>~20 Minutes</strong></div>
+            <div class="meta-item">Goal <strong>Active Advocates</strong></div>
+        </div>
+    </header>
+
+    <div class="instruction-box">
+        <strong>This meeting is different from Jim's.</strong> Fred Jr. and the sister are not skeptics — they're already on Murray's side. The goal isn't to convince them it's a good idea. The goal is to make them feel <em>seen</em> in the plan, give them language to use on March 30th, and make sure they walk into that room excited, not just compliant.<br><br>
+        Murray leads. Jack and Brandon support. Show them <strong>admin.html</strong> but lead with the parts about their future — not the risk mitigation language that's written for Jim.
+    </div>
+
+    <!-- Who you're talking to -->
+    <div class="sibling-profiles">
+        <div class="sibling-card">
+            <div class="sibling-name">Freddie Brokenshire Jr.</div>
+            <div class="sibling-role">12 Years In-Store<br>Government Job</div>
+            <div class="sibling-concern">
+                <strong>What he cares about:</strong> His dad's legacy. The store's survival. Whether he has a real future there. He's already doing the work — he just doesn't have a path to being properly compensated for it.
+            </div>
+        </div>
+        <div class="sibling-card">
+            <div class="sibling-name">The Sister</div>
+            <div class="sibling-role">Co-Owner<br>Kids, Other Commitments</div>
+            <div class="sibling-concern">
+                <strong>What she cares about:</strong> Not being burdened. Protecting what the family built. Whether this complicates Jim's position or family dynamics. She needs to know nobody is asking her to do more work.
+            </div>
+        </div>
+    </div>
+
+    <!-- BEAT 1 -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">1</div>
+            <div class="beat-meta">
+                <div class="beat-tag">Opening · ~2 minutes</div>
+                <div class="beat-title">Start With What This Is Really About</div>
+                <div class="beat-duration">They already know the problem. Don't oversell the setup.</div>
+            </div>
+        </div>
+
+        <div class="note"><strong>Note:</strong> Murray delivers this part. Jack and Brandon are in the room to answer technical questions, not to pitch. The siblings trust Murray — they don't need to trust us yet.</div>
+
+        <div class="script-text">
+            "I want to show you guys something. Jack and Brandon have been working on this for the past week, and it's further along than I expected.
+
+            <span class="pause">pause</span>
+
+            Before we get into it — you both know the conversation we've been having for years. How do we grow this thing? How do we actually pay the people who built it what they deserve? How does Fred's look in another twenty years?
+
+            <mark>This is the answer.</mark> And it doesn't require anyone to quit their job, take on debt, or convince Jim of anything he's not already open to hearing."
+        </div>
+    </div>
+
+    <!-- BEAT 2 -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">2</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Upside · ~5 minutes</div>
+                <div class="beat-title">What This Actually Means for the Family</div>
+                <div class="beat-duration">Lead with ownership value — not just revenue. They're co-owners.</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "Here's what Jack put together. The conservative case — and they've been deliberate about keeping these numbers low — is that within the first year, Fred's is generating forty to fifty thousand dollars a month online, on top of what it already does in the store.
+
+            <span class="pause">pause</span>
+
+            That's not a guess. That's based on what other independent record stores have done on Shopify, what the vinyl market is doing globally right now, and what Fred's brand is already worth to the diaspora — all those Newfoundlanders in Alberta and Ontario who can't buy from us today.
+
+            <mark>Every dollar of that online revenue belongs to the four owners.</mark> It's new money — it doesn't touch the store, doesn't affect Jim's operations, doesn't change anything about how Tony and Matthew run the floor."
+        </div>
+
+        <div class="upside-grid">
+            <div class="upside-card">
+                <span class="upside-num">$42K–48K</span>
+                <span class="upside-label">Conservative Monthly Online — Month 12</span>
+                <div class="upside-sub">Distributed across four co-owners. New money on top of existing in-store revenue.</div>
+            </div>
+            <div class="upside-card">
+                <span class="upside-num">90 days</span>
+                <span class="upside-label">Trial Period — No Long-Term Commitment</span>
+                <div class="upside-sub">If the numbers aren't there after 90 days, walk away. No penalty. No contract.</div>
+            </div>
+            <div class="upside-card">
+                <span class="upside-num">10%</span>
+                <span class="upside-label">Summit's Cut — Only on Online Revenue</span>
+                <div class="upside-sub">Nothing from in-store. Nothing if it doesn't sell. Fully aligned incentives.</div>
+            </div>
+            <div class="upside-card">
+                <span class="upside-num">$0</span>
+                <span class="upside-label">Change to In-Store Revenue</span>
+                <div class="upside-sub">The store runs exactly as it does today. This adds a layer; it doesn't replace anything.</div>
+            </div>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If the sister asks: "Is this going to add work for me?"</div>
+            <div class="objection-q">"I have kids and a full-time job. I can't take on more."</div>
+            <div class="objection-a">"Nothing here falls on you. The only people whose daily life changes at all are Tony and Matthew — and even then, it's one structured photography step when premium records come in. Jack and Brandon run every part of the digital operation from Ontario. Your role is exactly what it's always been: co-owner."</div>
+        </div>
+    </div>
+
+    <!-- BEAT 3 — Fred Jr. specific -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">3</div>
+            <div class="beat-meta">
+                <div class="beat-tag">Fred Jr. · ~4 minutes</div>
+                <div class="beat-title">What This Means for You Specifically, Fred</div>
+                <div class="beat-duration">This is the most important beat. Speak directly to him here.</div>
+            </div>
+        </div>
+
+        <div class="note"><strong>Note:</strong> Fred Jr. has 12 years of institutional knowledge in that store. He's the one person who could step into an operations leadership role as the digital side grows. Make him feel that — without overpromising. This is his moment to see himself in the plan.</div>
+
+        <div class="script-text">
+            "Fred — I want to say something directly to you. You've been in that store for twelve years. You know every supplier, every shelf, every process. There's nobody on earth who understands Fred's the way you do.
+
+            <span class="pause">pause</span>
+
+            The way we see this going: the digital side grows, volume grows, and the natural person to run that operation is someone who already knows every part of the business. That's you. Not right away — the revenue has to justify it first, and we want to prove it pays for itself before we make any decisions. But that's the direction.
+
+            <mark>This is how you build a career at Fred's</mark> — not just a job. And that's what Dad would have wanted."
+        </div>
+
+        <div class="note"><strong>Do not frame Fred Jr.'s future role as a definitive plan.</strong> Nobody has had that conversation with him formally yet. This is about painting the possibility — giving him something to believe in. Aspirational language only.</div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If Fred Jr. asks: "So what would I actually be doing?"</div>
+            <div class="objection-q">"What does this look like for me practically?"</div>
+            <div class="objection-a">"Right now, nothing changes. You keep doing what you do. But as online volume grows — as we're shipping 50, 100, 200 records a month — someone needs to own that operation from the inside. That person needs to understand the store, the stock, the staff. We think that's you. When the revenue justifies the role, we want to build it around you."</div>
+        </div>
+    </div>
+
+    <!-- BEAT 4 — Dad's legacy -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">4</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Legacy · ~3 minutes</div>
+                <div class="beat-title">What Your Dad Would Have Done</div>
+                <div class="beat-duration">Emotional anchor. Only Murray can deliver this one.</div>
+            </div>
+        </div>
+
+        <div class="note"><strong>Only Murray delivers this beat.</strong> Jack and Brandon should be quiet. This is a family moment. Do not interject with data.</div>
+
+        <div class="script-text">
+            "Dad built this place when he was nineteen years old. He figured out the music industry before anyone else in this province did. He took shots nobody else took — Duckworth Distribution, Atlantica Records, the East Coast Music Awards. He wasn't afraid to move.
+
+            <span class="pause">pause</span>
+
+            I think about that a lot. He would have been all over this. He would have had the e-commerce store running before anyone asked him to. That's the thing about Dad — he always saw the next thing coming.
+
+            <mark>We have the same chance right now.</mark> The vinyl market is bigger than it's been since 1983. There are Newfoundlanders all over the country who love this store and can't buy from it. We can fix that. I want us to do this together — and then I want us to walk into that room with Jim and show him we're already aligned."
+        </div>
+    </div>
+
+    <!-- BEAT 5 — The Jim meeting prep -->
+    <div class="beat">
+        <div class="beat-header">
+            <div class="beat-num">5</div>
+            <div class="beat-meta">
+                <div class="beat-tag">The Jim Meeting · ~5 minutes</div>
+                <div class="beat-title">How We Walk In on March 30th</div>
+                <div class="beat-duration">This is what you're actually here to align on. The ask is their active participation.</div>
+            </div>
+        </div>
+
+        <div class="script-text">
+            "Here's what I need from you both on March 30th. Not a lot — but it matters.
+
+            <span class="pause">pause</span>
+
+            Jim is going to look at all three of us when we walk in. He needs to see that this isn't just my idea — that the whole family looked at this, asked the hard questions, and got comfortable with it. <mark>Your presence in that room is the signal.</mark> It tells him this is a family decision, not a pitch from two guys from Ontario.
+
+            When he pushes back — and he will, on something — I need you both to be able to say: 'Jim, we looked at this. We asked those same questions. Here's what we found.' That's it. You don't have to sell him. You just have to be real."
+        </div>
+
+        <div class="jim-prep">
+            <div class="jim-prep-label">What to Be Ready to Say on March 30th</div>
+            <ul>
+                <li>
+                    <strong>"We've looked at this, and we think it's worth trying."</strong>
+                    <em>The unified voice. This alone carries more weight than any data point.</em>
+                </li>
+                <li>
+                    <strong>"The 90-day trial means there's no lock-in. If it doesn't work, we walk away clean."</strong>
+                    <em>Address his biggest fear directly — loss of control.</em>
+                </li>
+                <li>
+                    <strong>"Tony's job doesn't change. This adds something on top of what he already does."</strong>
+                    <em>Jim trusts Tony. Anything that protects Tony's workflow protects Jim.</em>
+                </li>
+                <li>
+                    <strong>"The store doesn't change. We're just adding a way for people who can't get to Duckworth Street to still buy from Fred's."</strong>
+                    <em>Frame it as extension, not transformation. Legacy language.</em>
+                </li>
+            </ul>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If the sister asks: "What if Jim says no?"</div>
+            <div class="objection-q">"If Jim doesn't go for it, what happens?"</div>
+            <div class="objection-a">"Then we respect it. Jim has majority say and we're not going around him. But the stronger our case is on the 30th, the more likely we get a yes — or at least a 90-day trial. That's all we're asking him for. One try."</div>
+        </div>
+
+        <div class="objection-block">
+            <div class="objection-label">⚑ If Fred Jr. asks: "Is there any risk of this hurting the store's reputation?"</div>
+            <div class="objection-q">"What if the online store looks bad and damages what Fred's has built?"</div>
+            <div class="objection-a">"It's a genuine concern — and it's why the design matters as much as the strategy. Jack, do you want to show them the mockup?" [Pull up Freds_MVP_Mockup.html or the main index.html here.]</div>
+        </div>
+    </div>
+
+    <!-- Alignment goal -->
+    <div class="alignment-box">
+        <div class="al-label">The Goal of This Meeting</div>
+        <h3>Leave Here with Two Active Advocates,<br>Not Two Passive Okays.</h3>
+        <p>By the end of this call, Fred Jr. and the sister should be able to say — genuinely — that they looked at this, they believe in it, and they're going into the Jim meeting together. That's the unit that wins on March 30th.</p>
+    </div>
+
+    <div style="margin-top: 3rem; text-align: center; font-family: 'Space Mono'; font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; padding-top: 2rem; border-top: 1px solid var(--border);">
+        Summit · For Internal Use Only · Monday, March 23, 2026 · Confidential
+    </div>
+
+    <div class="progress-bar">
+        <span class="pb-label">Reading</span>
+        <div class="pb-track"><div class="pb-fill" id="pbFill"></div></div>
+        <span class="pb-time" id="pbTime">~20 min</span>
+    </div>
+
+    <script>
+        const fill = document.getElementById('pbFill');
+        const time = document.getElementById('pbTime');
+        const totalMinutes = 20;
+        window.addEventListener('scroll', () => {
+            const scrollEl = document.documentElement;
+            const scrolled = scrollEl.scrollTop / (scrollEl.scrollHeight - scrollEl.clientHeight);
+            const pct = Math.min(scrolled * 100, 100);
+            fill.style.width = pct + '%';
+            const remaining = Math.max(0, Math.round(totalMinutes * (1 - scrolled)));
+            time.textContent = remaining === 0 ? 'Ready' : '~' + remaining + ' min left';
+        });
+    </script>
+
+</body>
+</html>
