@@ -4,37 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Master Considerations · Fred's Records</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1a1a1a;--muted:#555;--dim:#888;--border:#e0dbd0;--gold:#b8952a;--cream:#faf8f4;--red:#c0392b;--green:#1a7a4a;--blue:#1a4d8a;}
+:root{--ink:#1c1c1e;--muted:#54586a;--dim:#8e929e;--border:#dcd6ca;--gold:#b8922a;--gold-light:#e2b84a;--cream:#faf8f4;--surface:#ffffff;--red:#b8372a;--green:#1a7540;--blue:#1a4a8a;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;}
 .top-bar{background:var(--ink);color:rgba(255,255,255,.5);font-family:'Space Mono';font-size:.55rem;letter-spacing:2px;text-transform:uppercase;padding:.6rem 2rem;display:flex;justify-content:space-between;}
 .shell{max-width:1100px;margin:0 auto;padding:2rem 2rem 4rem;}
 .doc-header{border-bottom:3px solid var(--ink);padding-bottom:1.5rem;margin-bottom:2rem;}
 .eyebrow{font-family:'Space Mono';font-size:.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
-h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
+h1{font-family:'DM Serif Display',serif;font-size:2rem;font-weight:400;letter-spacing:-0.02em;line-height:1.1;color:var(--ink);}
 .subtitle{color:var(--muted);font-size:.85rem;margin-top:.25rem;}
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
-.section{background:white;border:1px solid var(--border);padding:1.5rem;}
+.section{background:var(--surface);border:1px solid var(--border);padding:1.5rem;border-top:3px solid var(--border);}
+.section.priority-critical{border-top-color:var(--red);}
+.section.priority-high{border-top-color:var(--gold);}
 .section-header{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--ink);}
 .section-icon{font-size:1.1rem;}
-.section-title{font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:2px;}
+.section-title{font-family:'DM Serif Display',serif;font-weight:400;font-size:0.95rem;letter-spacing:0.02em;color:var(--ink);}
 .item{display:flex;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem;line-height:1.55;}
 .item:last-child{border-bottom:none;padding-bottom:0;}
-.item-dot{flex-shrink:0;width:6px;height:6px;border-radius:50%;margin-top:.45rem;}
-.dot-gold{background:var(--gold);}
+.item-dot{flex-shrink:0;width:7px;height:7px;border-radius:50%;margin-top:.47rem;}
+.dot-gold{background:var(--gold-light);}
 .dot-red{background:var(--red);}
 .dot-green{background:var(--green);}
-.dot-blue{background:var(--blue);}
+.dot-blue{background:var(--gold);}
 .dot-ink{background:var(--ink);}
 .item strong{color:var(--ink);font-weight:600;}
 .item span{color:var(--muted);}
 .tag{display:inline-block;font-family:'Space Mono';font-size:.5rem;letter-spacing:1px;text-transform:uppercase;padding:.15rem .5rem;border-radius:2px;margin-left:.4rem;vertical-align:middle;}
-.tag-urgent{background:#fef3cd;color:#856404;border:1px solid #ffc107;}
-.tag-done{background:#d4edda;color:#155724;border:1px solid #28a745;}
-.tag-watch{background:#cce5ff;color:#004085;border:1px solid #004085;}
+.tag-urgent{background:#fef6e4;color:#8a5c00;border:1px solid #f0c04a;}
+.tag-done{background:#e6f7ee;color:#145a30;border:1px solid #2ecc71;}
+.tag-watch{background:#e8eefc;color:#1a3270;border:1px solid #3b7ff5;}
 .unknowns{background:#fff8f2;border:2px solid var(--gold);}
 .footer{border-top:1px solid var(--border);margin-top:2rem;padding-top:1rem;font-family:'Space Mono';font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;}
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
@@ -113,9 +115,18 @@ h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
 .item-dot {
   transition: transform 0.2s ease;
 }
-.item:hover .item-dot { transform: scale(1.5); }
+.item:hover .item-dot { transform: scale(1.6); }
 .item { transition: background 0.2s; }
-.item:hover { background: rgba(184,149,42,0.03); }
+.item:hover { background: rgba(184,146,42,0.04); }
+
+/* ── PRIORITY LEGEND ── */
+.priority-legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center;}
+.pl-item{display:flex;align-items:center;gap:0.4rem;font-family:'Space Mono';font-size:0.5rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.pl-dot{width:8px;height:8px;border-radius:50%;}
+
+/* ── ITEM ENTRANCE ANIMATION ── */
+.item-anim{opacity:0;transform:translateX(-8px);transition:opacity 0.45s ease,transform 0.45s ease;}
+.item-anim.in{opacity:1;transform:translateX(0);}
 </style>
 </head>
 <body>
@@ -135,6 +146,15 @@ h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
   <div class="eyebrow">Master Reference · All Departments</div>
   <h1>Strategic Considerations</h1>
   <div class="subtitle">Synthesized from: Transcript · 42 Research Reports · Expert Panel · Ad ROI Analysis · Legal Review · Bottleneck Audit · March 16, 2026</div>
+</div>
+
+<!-- Priority Legend -->
+<div class="priority-legend">
+  <span style="font-family:'Space Mono';font-size:0.52rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);">Priority Key</span>
+  <div class="pl-item"><div class="pl-dot" style="background:var(--red);"></div>Critical · Do Before Mar 30</div>
+  <div class="pl-item"><div class="pl-dot" style="background:var(--gold-light);"></div>High · Phase 0</div>
+  <div class="pl-item"><div class="pl-dot" style="background:var(--gold);"></div>Medium · Phase 1</div>
+  <div class="pl-item"><div class="pl-dot" style="background:var(--green);"></div>Confirmed / Done</div>
 </div>
 
 <!-- Row 1: Strategy, Sales, Fulfillment -->
@@ -330,6 +350,20 @@ h1{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;}
     el.style.transitionDelay = (i * 0.05) + 's';
     obs.observe(el);
   });
+
+  /* ── Item entrance animations ── */
+  const itemObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const items = e.target.querySelectorAll('.item');
+      items.forEach((item, i) => {
+        item.classList.add('item-anim');
+        setTimeout(() => item.classList.add('in'), 60 + i * 45);
+      });
+      itemObs.unobserve(e.target);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section').forEach(s => itemObs.observe(s));
 })();
 </script>
 </body>

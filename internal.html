@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Internal · Fred's Records · Summit</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808; --surface: #111; --surface2: #1a1a1a; --border: #222;
-  --text: #e0e0e0; --muted: #666; --dim: #444;
-  --gold: #D4AF37; --green: #22c55e; --red: #ef4444; --blue: #3b82f6; --purple: #a855f7; --orange: #f97316;
+  --bg: #080a0e; --surface: #10131a; --surface2: #181c26; --border: #1e2230;
+  --text: #dde2ec; --muted: #5e687a; --dim: #363d4e;
+  --gold: #C9A227; --gold-light: #e8c84a; --green: #1fb86a; --red: #e84040; --blue: #3b7ff5; --purple: #a366f5; --orange: #f78020;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -27,7 +27,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-
 .page{max-width:1200px;margin:0 auto;padding:3rem 2rem 6rem;}
 .section{margin-bottom:5rem;}
 .section-label{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:4px;color:var(--muted);margin-bottom:0.75rem;}
-.section-title{font-family:'Playfair Display';font-size:1.8rem;color:white;margin-bottom:2rem;line-height:1.2;}
+.section-title{font-family:'DM Serif Display',serif;font-size:1.9rem;color:white;margin-bottom:2rem;line-height:1.15;letter-spacing:-0.01em;}
 hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 
 /* STATUS BOARD */
@@ -38,7 +38,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 .status-card.red{border-top-color:var(--red);}
 .status-card.blue{border-top-color:var(--blue);}
 .sc-label{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;}
-.sc-val{font-family:'Playfair Display';font-size:1.4rem;color:white;margin-bottom:0.25rem;}
+.sc-val{font-family:'DM Serif Display',serif;font-size:1.5rem;color:white;margin-bottom:0.25rem;letter-spacing:-0.01em;}
 .sc-sub{font-size:0.75rem;color:var(--muted);}
 
 /* STAKEHOLDER */
@@ -56,7 +56,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 .numbers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;}
 .num-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;}
 .num-label{font-family:'Space Mono';font-size:0.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;}
-.num-big{font-family:'Playfair Display';font-size:2rem;color:var(--gold);margin-bottom:0.25rem;}
+.num-big{font-family:'DM Serif Display',serif;font-size:2.1rem;color:var(--gold);margin-bottom:0.25rem;letter-spacing:-0.02em;}
 .num-sub{font-size:0.8rem;color:var(--muted);line-height:1.5;}
 
 /* UNIT ECONOMICS TABLE */
@@ -88,7 +88,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 /* ARGUMENTS */
 .arg-list{display:flex;flex-direction:column;gap:1.25rem;}
 .arg-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;}
-.arg-num{font-family:'Playfair Display';font-size:2.5rem;color:rgba(212,175,55,0.2);line-height:1;}
+.arg-num{font-family:'DM Serif Display',serif;font-size:3rem;color:rgba(201,162,39,0.18);line-height:1;}
 .arg-title{font-weight:700;color:white;margin-bottom:0.4rem;}
 .arg-body{font-size:0.85rem;color:var(--muted);line-height:1.7;}
 .arg-stat{font-family:'Space Mono';font-size:0.75rem;color:var(--gold);margin-top:0.5rem;}
@@ -104,7 +104,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 .playbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
 .pb-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;}
 .pb-date{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:0.5rem;}
-.pb-title{font-family:'Playfair Display';font-size:1.1rem;color:white;margin-bottom:1rem;}
+.pb-title{font-family:'DM Serif Display',serif;font-size:1.15rem;color:white;margin-bottom:1rem;}
 .pb-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
 .pb-list li{font-size:0.82rem;color:var(--muted);padding-left:1.25rem;position:relative;line-height:1.5;}
 .pb-list li::before{content:'→';position:absolute;left:0;color:var(--green);}
@@ -129,7 +129,35 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 .action-owner{font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:right;}
 
 /* CONFIDENTIAL WATERMARK */
-.conf-banner{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.2);padding:0.75rem 1.5rem;text-align:center;font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--red);margin-bottom:3rem;}
+.conf-banner{background:rgba(232,64,64,0.04);border:1px solid rgba(232,64,64,0.18);padding:0.75rem 1.5rem;text-align:center;font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:3px;color:var(--red);margin-bottom:3rem;}
+
+/* ── DEAL PIPELINE ── */
+.deal-pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:2rem 0;}
+.dp-step{text-align:center;position:relative;}
+.dp-step::after{content:'';position:absolute;top:14px;right:-1px;width:calc(100% - 28px);height:2px;background:var(--border);z-index:0;}
+.dp-step:last-child::after{display:none;}
+.dp-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;margin:0 auto 0.5rem;position:relative;z-index:1;font-size:0.55rem;font-family:'Space Mono';color:var(--muted);transition:all 0.4s ease;}
+.dp-step.done .dp-dot{background:var(--green);border-color:var(--green);color:white;}
+.dp-step.done::after{background:linear-gradient(90deg,var(--green),var(--border));}
+.dp-step.active .dp-dot{background:var(--gold);border-color:var(--gold);color:white;box-shadow:0 0 0 4px rgba(201,162,39,0.2),0 0 14px rgba(201,162,39,0.4);}
+.dp-step.active .dp-dot::after{content:'';position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid rgba(201,162,39,0.35);animation:pulse-ring 1.8s ease-out infinite;}
+@keyframes pulse-ring{0%{transform:scale(0.85);opacity:1;}100%{transform:scale(1.4);opacity:0;}}
+.dp-label{font-family:'Space Mono';font-size:0.5rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);line-height:1.3;}
+.dp-step.done .dp-label{color:var(--green);}
+.dp-step.active .dp-label{color:var(--gold-light);font-weight:700;}
+
+/* ── REVENUE RAMP CHART ── */
+.chart-wrap{margin:2.5rem 0 1rem;}
+.chart-label-row{display:flex;justify-content:space-between;font-family:'Space Mono';font-size:0.52rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;}
+.chart-svg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1.5rem 1.5rem 1rem;overflow:hidden;}
+.ramp-svg{width:100%;height:180px;overflow:visible;}
+.ramp-bar{transition:height 1.2s cubic-bezier(0.34,1.56,0.64,1),y 1.2s cubic-bezier(0.34,1.56,0.64,1);}
+.chart-legend{display:flex;gap:1.5rem;margin-top:0.75rem;flex-wrap:wrap;}
+.leg-item{display:flex;align-items:center;gap:0.4rem;font-family:'Space Mono';font-size:0.52rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.leg-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+
+/* ── ANIMATED COUNTERS ── */
+.counter{font-family:'DM Serif Display',serif;font-size:2.1rem;color:var(--gold);letter-spacing:-0.02em;display:inline-block;}
 
 @media(max-width:900px){
   .status-grid{grid-template-columns:1fr 1fr;}
@@ -280,6 +308,33 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
     </div>
   </div>
 
+  <!-- Deal Pipeline Tracker -->
+  <div style="margin:2.5rem 0;">
+    <div style="font-family:'Space Mono';font-size:0.52rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin-bottom:1.25rem;">Deal Stage Tracker</div>
+    <div class="deal-pipeline">
+      <div class="dp-step done">
+        <div class="dp-dot">✓</div>
+        <div class="dp-label">Discovery<br>Murray</div>
+      </div>
+      <div class="dp-step done">
+        <div class="dp-dot">✓</div>
+        <div class="dp-label">Champion<br>Aligned</div>
+      </div>
+      <div class="dp-step active">
+        <div class="dp-dot">★</div>
+        <div class="dp-label">Siblings<br>Mar 23</div>
+      </div>
+      <div class="dp-step">
+        <div class="dp-dot">4</div>
+        <div class="dp-label">Jim<br>Mar 30</div>
+      </div>
+      <div class="dp-step">
+        <div class="dp-dot">5</div>
+        <div class="dp-label">Sign &<br>Launch</div>
+      </div>
+    </div>
+  </div>
+
   <div style="background:var(--surface);border:1px solid var(--border);padding:1.5rem;font-size:0.9rem;line-height:1.8;color:var(--muted);">
     <strong style="color:white;">The Setup:</strong> Fred's Records, 54-year-old institution, 198 Duckworth St, St. John's NL. Over $1M/yr in-store revenue. Zero online sales. Four co-owners: Jim (majority, silent), Murray (champion, minority), Fred Jr. (12 yrs in-store, minority), Sister (off-site, minority). Fred Sr. died Oct 2021.
     We are proposing a <strong style="color:var(--gold);">10% revenue share on online sales only</strong> with a $5K setup contribution + 90-day exit clause. Murray initiated. Jim controls the vote. Our job: close Jim with a united family front.
@@ -349,6 +404,25 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
   <div class="section-label">Financial Intelligence</div>
   <div class="section-title">The Numbers, Unfiltered</div>
 
+  <!-- Key Metrics with Animated Counters -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:2rem;background:var(--border);border:1px solid var(--border);">
+    <div style="background:var(--surface);padding:1.5rem;">
+      <div style="font-family:'Space Mono';font-size:0.52rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;">Online Rev · Month 12</div>
+      $<span class="counter" data-target="45000" data-prefix="" data-suffix="">0</span>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.25rem;">Conservative projection</div>
+    </div>
+    <div style="background:var(--surface);padding:1.5rem;">
+      <div style="font-family:'Space Mono';font-size:0.52rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;">Summit Take · Month 12</div>
+      $<span class="counter" data-target="4500" data-prefix="" data-suffix="">0</span>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.25rem;">10% recurring · every month</div>
+    </div>
+    <div style="background:var(--surface);padding:1.5rem;">
+      <div style="font-family:'Space Mono';font-size:0.52rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:0.5rem;">Break-Even Point</div>
+      <span class="counter" data-target="46" data-prefix="" data-suffix="">0</span> <span style="font-family:'Space Mono';font-size:0.7rem;color:var(--gold);">records</span>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.25rem;">Sold online per month</div>
+    </div>
+  </div>
+
   <div class="numbers-grid">
     <div class="num-card">
       <div class="num-label">Summit's Take at Month 12 (Conservative)</div>
@@ -395,18 +469,56 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
     </tbody>
   </table>
 
-  <div style="font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin:2rem 0 1rem;">Revenue Projections by Month (Online Only · Conservative Curve)</div>
-  <table class="proj-table">
-    <thead><tr><th>Stream</th><th>Month 3</th><th>Month 6</th><th>Month 9</th><th>Month 12</th></tr></thead>
-    <tbody>
-      <tr><td>Used / Rare Vinyl</td><td>$4,200</td><td>$9,800</td><td>$16,000</td><td>$24,000</td></tr>
-      <tr><td>New Releases &amp; RSD</td><td>$1,800</td><td>$3,900</td><td>$7,200</td><td>$11,000</td></tr>
-      <tr><td>Merch &amp; Apparel</td><td>$800</td><td>$2,100</td><td>$4,200</td><td>$7,000</td></tr>
-      <tr><td>Gift Cards / Bundles</td><td>$400</td><td>$900</td><td>$1,800</td><td>$3,000</td></tr>
-      <tr class="total-row"><td>Total Online Revenue</td><td>$7,200</td><td>$16,700</td><td>$29,200</td><td>$45,000</td></tr>
-      <tr class="summit-row"><td>Summit Take (10%)</td><td>$720</td><td>$1,670</td><td>$2,920</td><td>$4,500</td></tr>
-    </tbody>
-  </table>
+  <div style="font-family:'Space Mono';font-size:0.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin:2rem 0 1rem;">Revenue Ramp · Online Only · Conservative Curve</div>
+
+  <!-- Animated Bar Chart -->
+  <div class="chart-wrap">
+    <div class="chart-label-row">
+      <span>Month 3</span><span>Month 6</span><span>Month 9</span><span>Month 12</span>
+    </div>
+    <div class="chart-svg-wrap">
+      <svg class="ramp-svg" id="revenueChart" viewBox="0 0 600 180" preserveAspectRatio="none">
+        <!-- Grid lines -->
+        <line x1="0" y1="0" x2="600" y2="0" stroke="#1e2230" stroke-width="1"/>
+        <line x1="0" y1="45" x2="600" y2="45" stroke="#1e2230" stroke-width="1"/>
+        <line x1="0" y1="90" x2="600" y2="90" stroke="#1e2230" stroke-width="1"/>
+        <line x1="0" y1="135" x2="600" y2="135" stroke="#1e2230" stroke-width="1"/>
+        <!-- Y-axis labels -->
+        <text x="0" y="3" fill="#5e687a" font-size="9" font-family="monospace">$45K</text>
+        <text x="0" y="48" fill="#5e687a" font-size="9" font-family="monospace">$34K</text>
+        <text x="0" y="93" fill="#5e687a" font-size="9" font-family="monospace">$22K</text>
+        <text x="0" y="138" fill="#5e687a" font-size="9" font-family="monospace">$11K</text>
+        <!-- Grouped bars: Month 3 -->
+        <!-- Used Vinyl -->
+        <rect class="ramp-bar" data-h="16.8" x="40" width="28" fill="#C9A227" rx="1"/>
+        <!-- New Releases -->
+        <rect class="ramp-bar" data-h="7.2" x="70" width="28" fill="#1fb86a" rx="1"/>
+        <!-- Merch -->
+        <rect class="ramp-bar" data-h="3.2" x="100" width="28" fill="#3b7ff5" rx="1"/>
+        <!-- Month 6 -->
+        <rect class="ramp-bar" data-h="39.2" x="190" width="28" fill="#C9A227" rx="1"/>
+        <rect class="ramp-bar" data-h="15.6" x="220" width="28" fill="#1fb86a" rx="1"/>
+        <rect class="ramp-bar" data-h="8.4" x="250" width="28" fill="#3b7ff5" rx="1"/>
+        <!-- Month 9 -->
+        <rect class="ramp-bar" data-h="64" x="340" width="28" fill="#C9A227" rx="1"/>
+        <rect class="ramp-bar" data-h="28.8" x="370" width="28" fill="#1fb86a" rx="1"/>
+        <rect class="ramp-bar" data-h="16.8" x="400" width="28" fill="#3b7ff5" rx="1"/>
+        <!-- Month 12 -->
+        <rect class="ramp-bar" data-h="96" x="490" width="28" fill="#C9A227" rx="1"/>
+        <rect class="ramp-bar" data-h="44" x="520" width="28" fill="#1fb86a" rx="1"/>
+        <rect class="ramp-bar" data-h="28" x="550" width="28" fill="#3b7ff5" rx="1"/>
+        <!-- Summit take curve line -->
+        <polyline id="summitLine" points="54,179 204,173 354,150 504,162" fill="none" stroke="#e8c84a" stroke-width="2" stroke-dasharray="4,3" opacity="0"/>
+        <polyline id="summitLine" points="54,179 204,173 354,163 504,144" fill="none" stroke="#e8c84a" stroke-width="2" stroke-dasharray="4,3" opacity="0"/>
+      </svg>
+    </div>
+    <div class="chart-legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A227;"></div>Used / Rare Vinyl</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#1fb86a;"></div>New Releases &amp; RSD</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#3b7ff5;"></div>Merch &amp; Apparel</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#e8c84a;border-radius:0;"></div>Summit 10% (dashed)</div>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
@@ -703,25 +815,22 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
 
 <script>
 (function(){
+  /* ── Entrance animations ── */
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.08 });
-
-  // Animate sections and cards on scroll
   document.querySelectorAll('.status-card,.sh-card,.num-card,.arg-card,.unk-card,.pb-card,.action-item,.section').forEach((el, i) => {
     el.classList.add('anim-in');
     el.style.transitionDelay = (i % 5) * 0.06 + 's';
     obs.observe(el);
   });
 
-  // Animate stakeholder meter bars
+  /* ── Stakeholder / expert bars ── */
   const barObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const fill = e.target;
-        const w = fill.style.width || fill.getAttribute('data-width') || '70%';
-        fill.style.setProperty('--fill-width', w);
-        // Extract inline width and animate it
+        const w = fill.style.width || '70%';
         const iw = parseInt(w);
         fill.style.width = '0';
         requestAnimationFrame(() => { fill.style.width = iw + '%'; });
@@ -730,6 +839,63 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:4rem 0;}
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.sh-fill, .exp-fill').forEach(el => { barObs.observe(el); });
+
+  /* ── Animated number counters ── */
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const val = Math.round(ease * target);
+        el.textContent = val.toLocaleString();
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      counterObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+  /* ── SVG Revenue Bar Chart ── */
+  const chartObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const svg = e.target.querySelector('svg');
+      if (!svg) return;
+      const svgH = 180;
+      const maxVal = 96; // largest data-h value
+      svg.querySelectorAll('.ramp-bar').forEach((bar, i) => {
+        const h = parseFloat(bar.dataset.h);
+        bar.setAttribute('y', svgH);
+        bar.setAttribute('height', 0);
+        setTimeout(() => {
+          bar.style.transition = 'none';
+          bar.setAttribute('y', svgH - h);
+          bar.setAttribute('height', h);
+          // force reflow then animate
+          bar.getBoundingClientRect();
+          bar.style.transition = `y 0.8s cubic-bezier(0.34,1.2,0.64,1) ${i*0.07}s, height 0.8s cubic-bezier(0.34,1.2,0.64,1) ${i*0.07}s`;
+          bar.setAttribute('y', svgH - h);
+          bar.setAttribute('height', h);
+        }, 80);
+      });
+      // Fade in Summit line after bars finish
+      setTimeout(() => {
+        svg.querySelectorAll('polyline').forEach(pl => {
+          pl.style.transition = 'opacity 0.6s ease';
+          pl.setAttribute('opacity', '1');
+        });
+      }, 900);
+      chartObs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  const chartWrap = document.querySelector('.chart-wrap');
+  if (chartWrap) chartObs.observe(chartWrap);
 })();
 </script>
 </body>

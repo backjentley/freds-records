@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Jim Script · Fred's Records</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@0,400;0,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@0,400;0,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0d0d0d;
@@ -98,12 +98,17 @@
             margin-bottom: 1.5rem;
         }
         .beat-num {
-            font-family: 'Playfair Display';
-            font-size: 3rem;
-            font-weight: 700;
-            color: rgba(212,175,55,0.2);
+            font-family: 'DM Serif Display', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, rgba(201,162,39,0.6) 0%, rgba(232,200,74,0.15) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
             flex-shrink: 0;
+            letter-spacing: -0.03em;
+            min-width: 70px;
         }
         .beat-meta { flex: 1; }
         .beat-tag {
@@ -115,9 +120,12 @@
             margin-bottom: 0.3rem;
         }
         .beat-title {
-            font-family: 'Playfair Display';
-            font-size: 1.35rem;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
             color: white;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
         }
         .beat-duration {
             font-family: 'Space Mono';
@@ -140,12 +148,40 @@
             border-left: 3px solid var(--gold);
         }
         .script-text mark {
-            background: rgba(212,175,55,0.2);
+            background: linear-gradient(135deg, rgba(201,162,39,0.25), rgba(232,200,74,0.1));
             color: var(--gold);
             font-style: normal;
-            padding: 0 3px;
+            padding: 0 4px;
             border-radius: 2px;
         }
+
+        /* --- BEAT PROGRESS TRACKER --- */
+        .beat-tracker {
+            display: flex;
+            gap: 0;
+            margin: 2.5rem 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .bt-step {
+            flex: 1;
+            padding: 0.6rem 0.4rem;
+            text-align: center;
+            font-family: 'Space Mono';
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            border-right: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            line-height: 1.3;
+        }
+        .bt-step:last-child { border-right: none; }
+        .bt-step:hover { background: rgba(201,162,39,0.05); color: var(--gold); }
+        .bt-step.active { background: rgba(201,162,39,0.1); color: var(--gold); border-bottom: 2px solid var(--gold); }
+        .bt-num { font-size: 0.65rem; display: block; margin-bottom: 0.15rem; color: rgba(201,162,39,0.5); }
         .pause {
             display: block;
             font-family: 'Space Mono';
@@ -483,6 +519,17 @@
         Murray presents. Jack and Brandon are in the room for credibility but let Murray lead. Siblings should be aligned before this meeting — that's the buffer.
     </div>
 
+    <!-- Beat Progress Tracker -->
+    <div class="beat-tracker" id="beatTracker">
+      <div class="bt-step active" data-beat="1"><span class="bt-num">1</span>Legacy<br>Open</div>
+      <div class="bt-step" data-beat="2"><span class="bt-num">2</span>The<br>Diaspora</div>
+      <div class="bt-step" data-beat="3"><span class="bt-num">3</span>The<br>Numbers</div>
+      <div class="bt-step" data-beat="4"><span class="bt-num">4</span>Tony<br>Protected</div>
+      <div class="bt-step" data-beat="5"><span class="bt-num">5</span>90-Day<br>Exit</div>
+      <div class="bt-step" data-beat="6"><span class="bt-num">6</span>Objection<br>Handles</div>
+      <div class="bt-step" data-beat="7"><span class="bt-num">7</span>Single<br>Ask</div>
+    </div>
+
     <!-- ===================== BEAT 1 ===================== -->
     <div class="beat">
         <div class="beat-header">
@@ -719,6 +766,33 @@
     el.style.transitionDelay = (i * 0.04) + 's';
     obs.observe(el);
   });
+
+  // Beat tracker: click to scroll, highlight on scroll
+  const trackerSteps = document.querySelectorAll('.bt-step');
+  const beats = document.querySelectorAll('.beat');
+  trackerSteps.forEach((step) => {
+    step.addEventListener('click', () => {
+      const beatNum = parseInt(step.dataset.beat, 10);
+      const target = beats[beatNum - 1];
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      trackerSteps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+    });
+  });
+
+  // Sync tracker highlight as user scrolls
+  const syncObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(beats).indexOf(e.target);
+        if (idx >= 0) {
+          trackerSteps.forEach(s => s.classList.remove('active'));
+          if (trackerSteps[idx]) trackerSteps[idx].classList.add('active');
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+  beats.forEach(b => syncObs.observe(b));
 })();
 </script>
 
