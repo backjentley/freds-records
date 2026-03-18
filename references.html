@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fred's Records | References & Case Studies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --prop-bg: #0d0d0d;
+            --prop-surface: #161616;
+            --prop-border: #2a2a2a;
+            --prop-text: #e0e0e0;
+            --prop-muted: #888;
+            --prop-gold: #D4AF37;
+            --prop-green: #22c55e;
+            --prop-red-accent: #ef4444;
+        }
+
+        body { background: var(--prop-bg); color: var(--prop-text); margin: 0; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+        /* ===== NAV ===== */
+        .prop-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid var(--prop-border);
+            position: sticky;
+            top: 0;
+            background: rgba(13,13,13,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .prop-nav-brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--prop-gold); letter-spacing: 2px; text-decoration: none; }
+        .prop-nav-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prop-muted); }
+        .prop-nav-back { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--prop-muted); text-decoration: none; border: 1px solid var(--prop-border); padding: 0.5rem 1rem; transition: all 0.3s; }
+        .prop-nav-back:hover { color: var(--prop-gold); border-color: var(--prop-gold); }
+
+        /* ===== HERO ===== */
+        .prop-hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            border-bottom: 1px solid var(--prop-border);
+            position: relative;
+            overflow: hidden;
+        }
+        .prop-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .prop-hero-overline { font-family: 'Space Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--prop-gold); margin-bottom: 1.5rem; position: relative; }
+        .prop-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin: 0 0 1.5rem; color: white; position: relative; }
+        .prop-hero-sub { font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--prop-muted); max-width: 700px; margin: 0 auto; line-height: 1.7; position: relative; }
+
+        /* ===== CASE STUDY CARDS ===== */
+        .cases-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .case-study {
+            border: 1px solid var(--prop-border);
+            background: var(--prop-surface);
+            margin-bottom: 2rem;
+            transition: border-color 0.3s;
+            overflow: hidden;
+        }
+        .case-study:hover { border-color: var(--prop-gold); }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 2.5rem 2.5rem 0;
+            gap: 1.5rem;
+        }
+        .case-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.15);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .case-title-block { flex: 1; }
+        .case-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 0.25rem;
+        }
+        .case-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--prop-gold);
+        }
+
+        .case-body {
+            padding: 1.5rem 2.5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .case-col h5 {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--prop-gold);
+            margin: 0 0 0.75rem;
+        }
+        .case-col p, .case-col li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--prop-text);
+            line-height: 1.7;
+            margin: 0 0 0.5rem;
+        }
+        .case-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .case-col li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .case-col li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--prop-gold);
+            font-weight: 700;
+        }
+
+        .case-pitch {
+            background: rgba(212,175,55,0.05);
+            border-top: 1px solid var(--prop-border);
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .case-pitch-icon {
+            color: var(--prop-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .case-pitch p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .case-footer {
+            border-top: 1px solid var(--prop-border);
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .case-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--prop-gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .case-link:hover { border-bottom-color: var(--prop-gold); }
+        .case-link .material-icons { font-size: 0.9rem; }
+
+        /* ===== CTA ===== */
+        .prop-cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--prop-border);
+        }
+        .prop-cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: white; margin: 0 0 1rem; }
+        .prop-cta-section p { font-family: 'Inter', sans-serif; color: var(--prop-muted); margin: 0 auto 2rem; max-width: 500px; line-height: 1.7; }
+        .prop-cta-btn {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: var(--prop-gold);
+            color: black;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .prop-cta-btn:hover { background: white; }
+
+        /* ===== FOOTER ===== */
+        .prop-footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--prop-border);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--prop-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .prop-nav { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+            .case-header { flex-direction: column; gap: 0.5rem; padding: 1.5rem 1.5rem 0; }
+            .case-body { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
+            .case-pitch { padding: 1.5rem; }
+            .case-footer { padding: 1rem 1.5rem; }
+            .case-num { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="prop-nav">
+        <span class="prop-nav-brand">FRED'S RECORDS</span>
+        <span class="prop-nav-label">Summit References & Case Studies</span>
+    </nav>
+
+    <header class="prop-hero">
+        <div class="prop-hero-overline">Track Record</div>
+        <h1>References & Case Studies</h1>
+        <p class="prop-hero-sub">The following case studies demonstrate Summit's ability to build high-volume, premium platforms while preserving brand heritage and driving massive online conversion.</p>
+    </header>
+
+    <div class="cases-container">
+
+        <!-- ===== CASE 1: OVO ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">01</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">OVO (October's Very Own)</h2>
+                    <span class="case-subtitle">Global Scale & Brand Prestige</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>Managing one of the world's most recognizable lifestyle brands, where every digital touchpoint must reflect "Luxury Streetwear" while surviving extreme traffic spikes.</p>
+                    <h5>Our Role</h5>
+                    <p>Our Lead Developer was instrumental in the architectural execution of the OVO digital ecosystem.</p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results</h5>
+                    <ul>
+                        <li>Seamlessly handled global product launches with zero downtime</li>
+                        <li>Maintained a "boutique" aesthetic while processing thousands of transactions per minute</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"We don't just build websites; we build digital flagships. If our team can handle the infrastructure for a global icon like OVO, we can ensure your brand remains stable and sophisticated under any amount of pressure."</p>
+            </div>
+        </article>
+
+        <!-- ===== CASE 2: MEADUS ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">02</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">Meadus Contracting</h2>
+                    <span class="case-subtitle">Heritage Modernization</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>A 4th-generation family business with decades of "offline" trust that wasn't translating to their digital presence.</p>
+                    <h5>The Strategy</h5>
+                    <p>We implemented the "Heritage-First" framework, centering the brand on <strong style="color:var(--prop-gold)">"4 Generations, One Standard."</strong></p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results</h5>
+                    <ul>
+                        <li>79% reduction in page load weight for a smoother user experience</li>
+                        <li>Integration of 2,000+ high-resolution assets without sacrificing speed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"We specialize in 'Digital Preservation.' For legacy businesses, we don't 'rebrand'—we amplify. We take the soul of your family history and give it a premium, modern edge that attracts the next generation of clientele."</p>
+            </div>
+            <div class="case-footer">
+                <a href="https://www.meaduscontracting.com/" class="case-link" target="_blank">View Live Site <span class="material-icons">open_in_new</span></a>
+            </div>
+        </article>
+
+        <!-- ===== CASE 3: OUR TRUE FATE ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">03</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">Our True Fate</h2>
+                    <span class="case-subtitle">High-Velocity E-Commerce</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>Managing the "Hype Cycle"—limited drops that cause massive traffic surges and require perfect inventory synchronization.</p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results</h5>
+                    <ul>
+                        <li>7-figure revenue generated on a fully automated "autopilot" system</li>
+                        <li>Consistent 60-second sell-outs with 10,000+ concurrent users</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"We build 'Drop-Culture' architecture. If your business relies on limited inventory or high-demand events, our systems are engineered to prevent site crashes and automate the path from 'Live' to 'Sold Out' in seconds."</p>
+            </div>
+            <div class="case-footer">
+                <a href="https://ourtruefate.com/" class="case-link" target="_blank">View Live Site <span class="material-icons">open_in_new</span></a>
+            </div>
+        </article>
+
+        <!-- ===== CASE 4: MONDAY'S STUDIO ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">04</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">Monday's Studio</h2>
+                    <span class="case-subtitle">Start-to-Scale Velocity</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>Launching a brand-new luxury fitness concept in a competitive market and achieving immediate profitability.</p>
+                    <h5>The Strategy</h5>
+                    <p>A complex dual-platform integration (Squarespace + Mariana Tek) to balance high-end design with functional booking.</p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results (Dec 2025 – Mar 2026)</h5>
+                    <ul>
+                        <li>73,000 pageviews and 43,000 unique visitors in the first 90 days</li>
+                        <li>$41,600 in revenue generated during the launch phase alone</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"We deliver 'Velocity-to-Market.' We took Monday's Studio from zero web presence to the #1 Pilates site in their region in three months. We don't just launch sites; we launch revenue-generating engines."</p>
+            </div>
+            <div class="case-footer">
+                <a href="https://www.mondaysstudio.com/" class="case-link" target="_blank">View Live Site <span class="material-icons">open_in_new</span></a>
+            </div>
+        </article>
+
+        <!-- ===== CASE 5: KIN CREATIVE ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">05</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">KIN Creative</h2>
+                    <span class="case-subtitle">Conversion Engineering</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>B2B service scaling where "clicks" mean nothing without "closes."</p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results</h5>
+                    <ul>
+                        <li>Engineered funnels that helped clients scale past $100,000/month</li>
+                        <li>Optimized lead flows resulting in 70%–80% closing rates</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"Our approach is data-driven, not just design-driven. We look at your digital presence through the lens of a sales professional. Every pixel is placed to move a visitor closer to a transaction or a high-value lead."</p>
+            </div>
+            <div class="case-footer">
+                <a href="https://kincreative.io/" class="case-link" target="_blank">View Live Site <span class="material-icons">open_in_new</span></a>
+            </div>
+        </article>
+
+        <!-- ===== CASE 6: BUILT BY BIRD ===== -->
+        <article class="case-study">
+            <div class="case-header">
+                <span class="case-num">06</span>
+                <div class="case-title-block">
+                    <h2 class="case-title">Built by Bird</h2>
+                    <span class="case-subtitle">Local Trust & Digital Conversion</span>
+                </div>
+            </div>
+            <div class="case-body">
+                <div class="case-col">
+                    <h5>The Challenge</h5>
+                    <p>Translating the craftsmanship of a high-end custom home builder into a digital format that justifies premium pricing.</p>
+                </div>
+                <div class="case-col">
+                    <h5>The Results</h5>
+                    <ul>
+                        <li>Generated $250,000 in revenue directly from targeted social traffic ads</li>
+                        <li>Established a "Digital Showroom" that mirrors the quality of their physical builds</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="case-pitch">
+                <span class="material-icons case-pitch-icon">format_quote</span>
+                <p>"We bridge the gap between 'Offline Craft' and 'Online Authority.' For businesses in Barrie and beyond, we turn local reputation into a scalable digital asset that proactively finds and converts your ideal high-ticket clients."</p>
+            </div>
+            <div class="case-footer">
+                <a href="https://builtbybirdconstruction.com/" class="case-link" target="_blank">View Live Site <span class="material-icons">open_in_new</span></a>
+            </div>
+        </article>
+
+    </div>
+
+    <section class="prop-cta-section">
+        <h2>Ready to Start the Conversation?</h2>
+        <p>These results speak for themselves. Let's discuss how we can bring this same velocity to Fred's Records.</p>
+    </section>
+
+    <footer class="prop-footer">
+        CONFIDENTIAL PROPOSAL &bull; SUMMIT DIGITAL &bull; NOT FOR PUBLIC DISTRIBUTION
+    </footer>
+
+</body>
+</html>
