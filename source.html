@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source a Record | Fred's Records</title>
+    <meta name="description" content="Can't find what you're looking for? Fred's Records will source it. 50+ years of supplier relationships and global vinyl network access.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .source-hero { background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white; padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .source-hero::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1; mix-blend-mode: overlay; }
+        .source-hero-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+        .source-hero-icon { font-size: 3.5rem; color: var(--gold); margin-bottom: 1rem; }
+        .source-hero-eyebrow { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+        .source-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 1rem; }
+        .source-hero p { color: rgba(255,255,255,0.65); font-size: 1.1rem; line-height: 1.7; }
+
+        .source-main { max-width: var(--max-w); margin: 0 auto; padding: 4rem 2rem; }
+        .source-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; align-items: start; }
+
+        /* How It Works */
+        .how-works { margin-bottom: 3rem; }
+        .how-works-title { font-family: var(--font-ui); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .how-step { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; align-items: flex-start; }
+        .how-step-num { width: 44px; height: 44px; background: var(--purple); color: var(--gold); border-radius: 50%; font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .how-step-content {}
+        .how-step-label { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+        .how-step-desc { color: var(--slate); font-size: 0.9rem; line-height: 1.6; }
+
+        /* Request Form */
+        .source-form-wrap { background: #faf8f4; border: 1px solid var(--border); padding: 2.5rem; }
+        .source-form-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .source-form-sub { color: var(--slate); font-size: 0.9rem; margin-bottom: 2rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-row.full { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-label { font-weight: 600; font-size: 0.8rem; color: var(--charcoal); }
+        .form-label .optional { color: var(--slate); font-weight: 400; }
+        .form-input { padding: 12px 14px; border: 1.5px solid var(--border); font-size: 0.95rem; font-family: var(--font-body); transition: border-color var(--transition); background: white; }
+        .form-input:focus { border-color: var(--purple); outline: none; }
+        .form-input::placeholder { color: #bbb; }
+        .form-textarea { min-height: 120px; resize: vertical; }
+        .form-hint { font-size: 0.75rem; color: var(--slate); margin-top: 2px; }
+        .form-checkbox-row { display: flex; align-items: center; gap: 8px; margin: 0.75rem 0; }
+        .form-checkbox-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--purple); }
+        .form-checkbox-row label { font-size: 0.85rem; color: var(--charcoal); }
+
+        .source-submit { width: 100%; margin-top: 1rem; padding: 18px; font-size: 0.9rem; justify-content: center; }
+        .source-guarantee { display: flex; align-items: center; gap: 8px; margin-top: 1rem; font-size: 0.8rem; color: var(--slate); font-style: italic; }
+        .source-guarantee .material-icons { color: var(--green); font-size: 1rem; }
+
+        /* Sidebar */
+        .source-sidebar {}
+        .source-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .source-stat { text-align: center; padding: 1.5rem; border: 1px solid var(--border); background: white; }
+        .source-stat-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; color: var(--purple); }
+        .source-stat-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--slate); margin-top: 4px; }
+
+        .source-faq { margin-top: 2rem; }
+        .source-faq-title { font-family: var(--font-ui); font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+        .faq-q { font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-a { color: var(--slate); font-size: 0.85rem; line-height: 1.6; margin-top: 0.5rem; display: none; }
+        .faq-item.open .faq-a { display: block; }
+
+        .source-quote { background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white; padding: 2rem; margin-top: 2rem; }
+        .source-quote p { font-family: var(--font-display); font-style: italic; font-size: 1rem; line-height: 1.6; border-left: 3px solid var(--gold); padding-left: 1.25rem; margin-bottom: 0.75rem; }
+        .source-quote cite { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-style: normal; }
+
+        /* Success State */
+        .source-success { display: none; text-align: center; padding: 3rem 2rem; }
+        .source-success-icon { width: 64px; height: 64px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+        .source-success h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .source-success p { color: var(--slate); margin-bottom: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .source-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .source-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972</span></a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search..." aria-label="Search catalog"></div>
+            <a href="checkout.html" class="nav-crate" aria-label="Shopping crate"><span class="material-icons">shopping_bag</span><span class="nav-crate-badge">0</span></a>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+
+<main id="main">
+
+<section class="source-hero">
+    <div class="source-hero-content">
+        <span class="material-icons source-hero-icon">manage_search</span>
+        <p class="source-hero-eyebrow">Fred's Sourcing Service</p>
+        <h1>Can't Find It?<br>We'll Source It.</h1>
+        <p>Just because it's not on our shelf doesn't mean we can't get it. With 50+ years of supplier relationships, exclusive distributor access, and deep connections across the global vinyl network — if it exists on wax, we can track it down.</p>
+    </div>
+</section>
+
+<section class="source-main">
+    <div class="source-grid">
+        <div>
+            <!-- How It Works -->
+            <div class="how-works">
+                <div class="how-works-title">How It Works</div>
+                <div class="how-step">
+                    <div class="how-step-num">1</div>
+                    <div class="how-step-content">
+                        <div class="how-step-label">Tell Us What You Want</div>
+                        <div class="how-step-desc">Artist, album, pressing, year — the more detail you give us, the faster we find it. Specific pressing variants, matrix numbers, and country of origin all help narrow the search.</div>
+                    </div>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">2</div>
+                    <div class="how-step-content">
+                        <div class="how-step-label">We Hunt It Down</div>
+                        <div class="how-step-desc">Our buyers check distributor catalogues, private collections, estate sales, and trusted dealer networks across North America. If it exists, there's a good chance we know somebody who has it.</div>
+                    </div>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">3</div>
+                    <div class="how-step-content">
+                        <div class="how-step-label">We Quote & Confirm</div>
+                        <div class="how-step-desc">Once located, we email you a price (always fair market value), condition report with photos, and estimated shipping time. You approve before we charge anything.</div>
+                    </div>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">4</div>
+                    <div class="how-step-content">
+                        <div class="how-step-label">Straight to Your Door</div>
+                        <div class="how-step-desc">Graded, packed in triple-ply cruciform mailers, and shipped direct. Same quality guarantee as everything in our shop.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Form -->
+            <div class="source-form-wrap" id="sourceForm">
+                <h2 class="source-form-title">Submit a Sourcing Request</h2>
+                <p class="source-form-sub">No obligation. No fees until we find it and you approve the purchase.</p>
+
+                <form onsubmit="submitRequest(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Artist / Band *</label><input type="text" class="form-input" placeholder="Fleetwood Mac" required></div>
+                        <div class="form-group"><label class="form-label">Album Title *</label><input type="text" class="form-input" placeholder="Rumours" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Format *</label>
+                            <select class="form-input" required>
+                                <option value="">Select format...</option>
+                                <option>12" Vinyl LP</option>
+                                <option>7" Single / 45</option>
+                                <option>10" EP</option>
+                                <option>12" Single</option>
+                                <option>Box Set</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label class="form-label">Year / Era <span class="optional">(optional)</span></label><input type="text" class="form-input" placeholder="1977 or 'original pressing'"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Label <span class="optional">(optional)</span></label><input type="text" class="form-input" placeholder="Warner Bros."></div>
+                        <div class="form-group"><label class="form-label">Country of Pressing <span class="optional">(optional)</span></label>
+                            <select class="form-input">
+                                <option value="">Any country</option>
+                                <option>US</option>
+                                <option>UK</option>
+                                <option>Canada</option>
+                                <option>Japan</option>
+                                <option>Germany</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="form-group"><label class="form-label">Minimum Acceptable Condition</label>
+                            <select class="form-input">
+                                <option>VG+ (Very Good Plus) — Light marks, plays great</option>
+                                <option>NM (Near Mint) — Nearly perfect</option>
+                                <option>VG (Very Good) — Some surface noise, still enjoyable</option>
+                                <option>Any playable condition</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label class="form-label">Budget Range (CAD)</label>
+                            <select class="form-input">
+                                <option>Under $50</option>
+                                <option>$50 – $100</option>
+                                <option>$100 – $200</option>
+                                <option>$200 – $500</option>
+                                <option>$500+</option>
+                                <option>No budget limit — just find it</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label class="form-label">Additional Notes <span class="optional">(optional)</span></label>
+                            <textarea class="form-input form-textarea" placeholder="Anything else that helps us find the right pressing — matrix numbers, specific variants (e.g. 'RL master stamp'), gift deadline, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 0.5rem;">
+                        <div class="form-row">
+                            <div class="form-group"><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Murray Brokenshire" required></div>
+                            <div class="form-group"><label class="form-label">Email *</label><input type="email" class="form-input" placeholder="murray@fredsrecords.com" required></div>
+                        </div>
+                        <div class="form-row full">
+                            <div class="form-group"><label class="form-label">Phone <span class="optional">(optional)</span></label><input type="tel" class="form-input" placeholder="+1 (709) 555-0198"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-checkbox-row">
+                        <input type="checkbox" id="notify" checked>
+                        <label for="notify">Email me when Fred's sources similar titles in the future</label>
+                    </div>
+
+                    <button type="submit" class="btn-gold source-submit"><span class="material-icons" style="font-size:1.1rem;vertical-align:middle;">manage_search</span> Submit Sourcing Request</button>
+                    <div class="source-guarantee"><span class="material-icons">verified</span> No obligation. No fees until we find it. Most requests fulfilled within 7-14 days.</div>
+                </form>
+            </div>
+
+            <!-- Success State -->
+            <div class="source-success" id="sourceSuccess">
+                <div class="source-success-icon"><span class="material-icons" style="font-size: 2rem; color: white;">check</span></div>
+                <h3>Request Submitted!</h3>
+                <p>Our buyers are on it. We'll email you within 48 hours with an update — usually sooner. If we find your record, we'll send photos, condition details, and pricing for your approval before charging anything.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="shop.html" class="btn-primary"><span class="material-icons" style="font-size:1rem">album</span> Browse the Shop</a>
+                    <button class="btn-ghost" onclick="resetForm()"><span class="material-icons" style="font-size:1rem">add</span> Submit Another Request</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="source-sidebar">
+            <div class="source-stats">
+                <div class="source-stat"><div class="source-stat-num">87%</div><div class="source-stat-label">Success Rate</div></div>
+                <div class="source-stat"><div class="source-stat-num">7-14</div><div class="source-stat-label">Days Average</div></div>
+                <div class="source-stat"><div class="source-stat-num">50+</div><div class="source-stat-label">Years of Contacts</div></div>
+                <div class="source-stat"><div class="source-stat-num">$0</div><div class="source-stat-label">Upfront Fees</div></div>
+            </div>
+
+            <div class="source-quote">
+                <p>"Just because we don't have it doesn't mean we can't get it. We know everybody. We've been doing this for 50 years."</p>
+                <cite>Murray Brokenshire · Fred's Records</cite>
+            </div>
+
+            <div class="source-faq">
+                <div class="source-faq-title">Common Questions</div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-q">Is there a fee for searching? <span class="material-icons" style="font-size:1rem">expand_more</span></div>
+                    <div class="faq-a">No. We only charge when we find your record and you approve the purchase. The sourcing service itself is completely free.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-q">How are records priced? <span class="material-icons" style="font-size:1rem">expand_more</span></div>
+                    <div class="faq-a">We price at fair market value based on Discogs data, condition, and rarity. We'll always give you a price with the option to approve or pass before we charge anything.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-q">What if you can't find it? <span class="material-icons" style="font-size:1rem">expand_more</span></div>
+                    <div class="faq-a">If we can't locate the record within 30 days, we'll let you know and add it to our watch list. When one surfaces in the future, you'll get first dibs.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-q">Can I request multiple records? <span class="material-icons" style="font-size:1rem">expand_more</span></div>
+                    <div class="faq-a">Absolutely. Submit as many requests as you like. Each one gets treated individually by our buying team.</div>
+                </div>
+                <div class="faq-item" onclick="this.classList.toggle('open')">
+                    <div class="faq-q">Do you ship internationally? <span class="material-icons" style="font-size:1rem">expand_more</span></div>
+                    <div class="faq-a">Yes. We ship worldwide. US orders are tariff-exempt under the "Informational Materials" statute. All records ship in triple-ply cruciform mailers.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021).</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsltd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger — Built from St. John's</span></div>
+</footer>
+
+<script>
+function submitRequest(e) {
+    e.preventDefault();
+    document.getElementById('sourceForm').style.display = 'none';
+    document.getElementById('sourceSuccess').style.display = 'block';
+    document.querySelector('.how-works').style.display = 'none';
+    window.scrollTo({ top: document.getElementById('sourceSuccess').offsetTop - 100, behavior: 'smooth' });
+}
+function resetForm() {
+    document.getElementById('sourceForm').style.display = 'block';
+    document.getElementById('sourceSuccess').style.display = 'none';
+    document.querySelector('.how-works').style.display = 'block';
+    document.querySelector('#sourceForm form').reset();
+    window.scrollTo({ top: document.getElementById('sourceForm').offsetTop - 100, behavior: 'smooth' });
+}
+</script>
+<script src="js/interactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Crate | Fred's Records</title>
+    <meta name="description" content="Review your crate and complete your order. Free shipping on orders over $150 CAD.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-wrap { max-width: var(--max-w); margin: 0 auto; padding: 2rem; }
+        .checkout-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; }
+        .checkout-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; }
+        .checkout-subtitle { color: var(--slate); font-size: 0.9rem; margin-bottom: 2.5rem; }
+
+        /* Crate Items */
+        .crate-items { border: 1px solid var(--border); }
+        .crate-item { display: grid; grid-template-columns: 100px 1fr auto; gap: 1.25rem; padding: 1.25rem; border-bottom: 1px solid var(--border); align-items: center; }
+        .crate-item:last-child { border-bottom: none; }
+        .crate-item-img { width: 100px; height: 100px; object-fit: cover; background: var(--bg-img); }
+        .crate-item-details {}
+        .crate-item-name { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+        .crate-item-artist { color: var(--slate); font-size: 0.85rem; margin-bottom: 4px; }
+        .crate-item-meta { font-family: var(--font-mono); font-size: 0.7rem; color: var(--slate); }
+        .crate-item-grade { display: inline-block; background: var(--black); color: white; padding: 2px 8px; font-size: 0.6rem; font-weight: 800; letter-spacing: 1px; margin-right: 6px; }
+        .crate-item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+        .crate-item-price { font-family: var(--font-ui); font-size: 1.3rem; font-weight: 700; color: var(--purple); }
+        .crate-item-remove { background: none; border: none; color: var(--slate); font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: color var(--transition); }
+        .crate-item-remove:hover { color: var(--red); }
+
+        .crate-empty { text-align: center; padding: 4rem 2rem; }
+        .crate-empty-icon { font-size: 4rem; color: var(--border); margin-bottom: 1rem; }
+        .crate-empty h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .crate-empty p { color: var(--slate); margin-bottom: 2rem; }
+
+        .crate-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+        .crate-continue { color: var(--purple); font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; }
+
+        /* Order Summary */
+        .order-summary { background: #faf8f4; border: 1px solid var(--border); padding: 2rem; position: sticky; top: 90px; }
+        .order-summary-title { font-family: var(--font-ui); font-weight: 700; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--charcoal); }
+        .order-line { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.9rem; }
+        .order-line.muted { color: var(--slate); }
+        .order-line.total { font-weight: 800; font-size: 1.2rem; padding-top: 1rem; margin-top: 0.5rem; border-top: 2px solid var(--charcoal); }
+        .order-line .green { color: var(--green); }
+        .order-shipping-note { font-size: 0.75rem; color: var(--slate); margin-top: 0.5rem; font-style: italic; }
+        .order-cta { width: 100%; margin-top: 1.5rem; padding: 18px; font-size: 0.9rem; justify-content: center; }
+        .order-trust { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        .order-trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--slate); }
+        .order-trust-item .material-icons { font-size: 1rem; color: var(--green); }
+
+        /* Checkout Form */
+        .checkout-form { margin-top: 2.5rem; }
+        .form-section { margin-bottom: 2.5rem; }
+        .form-section-title { font-family: var(--font-ui); font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+        .form-section-title .material-icons { font-size: 1.1rem; color: var(--purple); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-row.full { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-label { font-weight: 600; font-size: 0.8rem; color: var(--charcoal); }
+        .form-input { padding: 12px 14px; border: 1.5px solid var(--border); font-size: 0.95rem; font-family: var(--font-body); transition: border-color var(--transition); background: white; }
+        .form-input:focus { border-color: var(--purple); outline: none; }
+        .form-input::placeholder { color: #bbb; }
+
+        /* Payment Methods */
+        .payment-methods { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .payment-method { flex: 1; padding: 1rem; border: 2px solid var(--border); text-align: center; cursor: pointer; transition: all var(--transition); font-weight: 600; font-size: 0.8rem; }
+        .payment-method.active { border-color: var(--purple); background: rgba(74,44,90,0.04); }
+        .payment-method:hover { border-color: var(--purple-light); }
+
+        /* Card mockup */
+        .card-visual { background: linear-gradient(135deg, var(--purple), var(--purple-mid)); color: white; padding: 1.5rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .card-visual::after { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(204,168,72,0.15); }
+        .card-brand { font-family: var(--font-ui); font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: auto; }
+        .card-number { font-family: var(--font-mono); font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 0.75rem; }
+        .card-bottom { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 1px; color: rgba(255,255,255,0.5); }
+
+        /* Steps */
+        .checkout-steps { display: flex; gap: 0; margin-bottom: 2.5rem; }
+        .checkout-step { flex: 1; padding: 1rem; text-align: center; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 3px solid var(--border); color: var(--slate); transition: all var(--transition); }
+        .checkout-step.active { border-bottom-color: var(--purple); color: var(--charcoal); }
+        .checkout-step.completed { border-bottom-color: var(--green); color: var(--green); }
+        .checkout-step-num { font-family: var(--font-mono); display: block; font-size: 1.2rem; margin-bottom: 4px; }
+
+        @media (max-width: 768px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+            .order-summary { position: static; }
+            .form-row { grid-template-columns: 1fr; }
+            .crate-item { grid-template-columns: 80px 1fr; }
+            .crate-item-actions { flex-direction: row; align-items: center; grid-column: 1 / -1; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="announce"><span class="pulse-dot"></span> Free shipping on orders over $150 CAD</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">FRED'S RECORDS <span class="nav-brand-sub">Est. 1972</span></a>
+        <div class="nav-links">
+            <a href="shop.html">The Drop</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">Our Story</a>
+            <a href="sell.html">Sell Your Wax</a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-search"><span class="material-icons">search</span><input type="text" placeholder="Search..." aria-label="Search catalog"></div>
+            <div class="nav-crate" aria-label="Shopping crate, 3 items" id="navCrate" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">
+                <span class="material-icons">shopping_bag</span>
+                <span class="nav-crate-badge" id="crateBadge">3</span>
+            </div>
+            <button class="nav-hamburger" aria-label="Open menu"><span class="material-icons">menu</span></button>
+        </div>
+    </div>
+</nav>
+
+<main id="main">
+<div class="checkout-wrap">
+
+    <!-- Steps -->
+    <div class="checkout-steps">
+        <div class="checkout-step active" id="step1"><span class="checkout-step-num">01</span> Your Crate</div>
+        <div class="checkout-step" id="step2"><span class="checkout-step-num">02</span> Shipping</div>
+        <div class="checkout-step" id="step3"><span class="checkout-step-num">03</span> Payment</div>
+        <div class="checkout-step" id="step4"><span class="checkout-step-num">04</span> Confirmation</div>
+    </div>
+
+    <!-- STEP 1: Crate Review -->
+    <div id="crateStep" class="checkout-step-content">
+        <h1 class="checkout-title">Your Crate</h1>
+        <p class="checkout-subtitle">3 records ready to ship from 198 Duckworth Street</p>
+
+        <div class="checkout-grid">
+            <div>
+                <div class="crate-items" id="crateItems">
+                    <div class="crate-item" data-id="1" data-price="125">
+                        <img src="images/rumours.webp" alt="Rumours" class="crate-item-img">
+                        <div class="crate-item-details">
+                            <div class="crate-item-name">Rumours</div>
+                            <div class="crate-item-artist">Fleetwood Mac</div>
+                            <div class="crate-item-meta"><span class="crate-item-grade">NM</span> 1977 · 1st Press · Warner Bros.</div>
+                        </div>
+                        <div class="crate-item-actions">
+                            <div class="crate-item-price">$125.00</div>
+                            <button class="crate-item-remove" onclick="removeItem(this)"><span class="material-icons" style="font-size:0.9rem">close</span> Remove</button>
+                        </div>
+                    </div>
+                    <div class="crate-item" data-id="2" data-price="65">
+                        <img src="images/rumours.webp" alt="Led Zeppelin IV" class="crate-item-img" style="filter: sepia(100%) hue-rotate(180deg) opacity(0.7);">
+                        <div class="crate-item-details">
+                            <div class="crate-item-name">Led Zeppelin IV</div>
+                            <div class="crate-item-artist">Led Zeppelin</div>
+                            <div class="crate-item-meta"><span class="crate-item-grade">VG+</span> 1971 · Atlantic</div>
+                        </div>
+                        <div class="crate-item-actions">
+                            <div class="crate-item-price">$65.00</div>
+                            <button class="crate-item-remove" onclick="removeItem(this)"><span class="material-icons" style="font-size:0.9rem">close</span> Remove</button>
+                        </div>
+                    </div>
+                    <div class="crate-item" data-id="3" data-price="80">
+                        <img src="images/rumours.webp" alt="The Dark Side of the Moon" class="crate-item-img" style="filter: invert(1) opacity(0.5);">
+                        <div class="crate-item-details">
+                            <div class="crate-item-name">The Dark Side of the Moon</div>
+                            <div class="crate-item-artist">Pink Floyd</div>
+                            <div class="crate-item-meta"><span class="crate-item-grade">VG</span> 1973 · Harvest</div>
+                        </div>
+                        <div class="crate-item-actions">
+                            <div class="crate-item-price">$80.00</div>
+                            <button class="crate-item-remove" onclick="removeItem(this)"><span class="material-icons" style="font-size:0.9rem">close</span> Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="crate-actions">
+                    <a href="shop.html" class="crate-continue"><span class="material-icons" style="font-size:1rem">arrow_back</span> Continue digging</a>
+                    <a href="source.html" style="color: var(--gold-mid); font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; background: rgba(204,168,72,0.1); padding: 8px 16px; border: 1px solid var(--gold-dim);"><span class="material-icons" style="font-size:1rem">manage_search</span> Can't find something? We'll source it</a>
+                </div>
+            </div>
+
+            <div class="order-summary" id="orderSummary">
+                <div class="order-summary-title">Order Summary</div>
+                <div class="order-line muted"><span>Subtotal (3 items)</span><span id="subtotal">$270.00</span></div>
+                <div class="order-line muted"><span>Shipping</span><span class="green" id="shippingCost">FREE</span></div>
+                <div class="order-line muted"><span>HST (15%)</span><span id="taxAmount">$40.50</span></div>
+                <div class="order-line total"><span>Total</span><span id="totalAmount">$310.50 CAD</span></div>
+                <p class="order-shipping-note">Ships in triple-ply cruciform mailers. Zero damage guarantee.</p>
+                <button class="btn-primary order-cta" onclick="goToStep(2)"><span class="material-icons" style="font-size:1.1rem">local_shipping</span> Proceed to Shipping</button>
+                <div class="order-trust">
+                    <div class="order-trust-item"><span class="material-icons">verified</span> Goldmine Standard Grading</div>
+                    <div class="order-trust-item"><span class="material-icons">lock</span> Secure SSL Checkout</div>
+                    <div class="order-trust-item"><span class="material-icons">public</span> US Tariff-Exempt Shipping</div>
+                    <div class="order-trust-item"><span class="material-icons">replay</span> 14-Day Returns on Mis-Grades</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: Shipping -->
+    <div id="shippingStep" class="checkout-step-content" style="display:none;">
+        <h1 class="checkout-title">Shipping Details</h1>
+        <p class="checkout-subtitle">Where should we send your records?</p>
+        <div class="checkout-grid">
+            <div class="checkout-form">
+                <div class="form-section">
+                    <div class="form-section-title"><span class="material-icons">person</span> Contact</div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Murray"></div>
+                        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Brokenshire"></div>
+                    </div>
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="murray@fredsrecords.com"></div></div>
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Phone (for delivery updates)</label><input type="tel" class="form-input" placeholder="+1 (709) 555-0198"></div></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-section-title"><span class="material-icons">local_shipping</span> Shipping Address</div>
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Address</label><input type="text" class="form-input" placeholder="198 Duckworth Street"></div></div>
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Apartment, suite, etc. (optional)</label><input type="text" class="form-input" placeholder="Apt 4B"></div></div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">City</label><input type="text" class="form-input" placeholder="St. John's"></div>
+                        <div class="form-group"><label class="form-label">Province / State</label>
+                            <select class="form-input"><option>Newfoundland & Labrador</option><option>Ontario</option><option>British Columbia</option><option>Alberta</option><option>Quebec</option><option>Nova Scotia</option><option>Manitoba</option><option>Saskatchewan</option><option>New Brunswick</option><option>Prince Edward Island</option><option>Other (US/International)</option></select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Postal / ZIP Code</label><input type="text" class="form-input" placeholder="A1C 1G5"></div>
+                        <div class="form-group"><label class="form-label">Country</label>
+                            <select class="form-input"><option>Canada</option><option>United States</option><option>United Kingdom</option><option>Australia</option><option>Germany</option><option>Japan</option></select>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <button class="btn-ghost" onclick="goToStep(1)"><span class="material-icons" style="font-size:0.9rem;vertical-align:middle;">arrow_back</span> Back to Crate</button>
+                    <button class="btn-primary" onclick="goToStep(3)"><span class="material-icons" style="font-size:1.1rem">payment</span> Continue to Payment</button>
+                </div>
+            </div>
+            <div class="order-summary">
+                <div class="order-summary-title">Order Summary</div>
+                <div class="order-line muted"><span>Subtotal (3 items)</span><span>$270.00</span></div>
+                <div class="order-line muted"><span>Shipping</span><span class="green">FREE</span></div>
+                <div class="order-line muted"><span>HST (15%)</span><span>$40.50</span></div>
+                <div class="order-line total"><span>Total</span><span>$310.50 CAD</span></div>
+                <div class="order-trust" style="margin-top:1rem; padding-top:1rem;">
+                    <div class="order-trust-item"><span class="material-icons">verified</span> Goldmine Standard Grading</div>
+                    <div class="order-trust-item"><span class="material-icons">lock</span> Secure SSL Checkout</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 3: Payment -->
+    <div id="paymentStep" class="checkout-step-content" style="display:none;">
+        <h1 class="checkout-title">Payment</h1>
+        <p class="checkout-subtitle">All transactions are secure and encrypted</p>
+        <div class="checkout-grid">
+            <div class="checkout-form">
+                <div class="payment-methods">
+                    <div class="payment-method active" onclick="selectPayment(this)">💳 Credit Card</div>
+                    <div class="payment-method" onclick="selectPayment(this)"> Shop Pay</div>
+                    <div class="payment-method" onclick="selectPayment(this)"> Apple Pay</div>
+                </div>
+                <div class="card-visual">
+                    <div class="card-brand">Fred's Records</div>
+                    <div class="card-number">•••• •••• •••• 4242</div>
+                    <div class="card-bottom"><span>CARDHOLDER NAME</span><span>MM/YY</span></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Card Number</label><input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19"></div></div>
+                    <div class="form-row full"><div class="form-group"><label class="form-label">Name on Card</label><input type="text" class="form-input" placeholder="Murray Brokenshire"></div></div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Expiration</label><input type="text" class="form-input" placeholder="MM / YY" maxlength="7"></div>
+                        <div class="form-group"><label class="form-label">CVV</label><input type="text" class="form-input" placeholder="123" maxlength="4"></div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <button class="btn-ghost" onclick="goToStep(2)"><span class="material-icons" style="font-size:0.9rem;vertical-align:middle;">arrow_back</span> Back to Shipping</button>
+                    <button class="btn-gold" onclick="goToStep(4)" style="padding: 18px 48px; font-size: 0.9rem;"><span class="material-icons" style="font-size:1.1rem;vertical-align:middle;">lock</span> Place Order · $310.50 CAD</button>
+                </div>
+            </div>
+            <div class="order-summary">
+                <div class="order-summary-title">Order Summary</div>
+                <div class="order-line muted"><span>Subtotal (3 items)</span><span>$270.00</span></div>
+                <div class="order-line muted"><span>Shipping</span><span class="green">FREE</span></div>
+                <div class="order-line muted"><span>HST (15%)</span><span>$40.50</span></div>
+                <div class="order-line total"><span>Total</span><span>$310.50 CAD</span></div>
+                <div class="order-trust" style="margin-top:1rem; padding-top:1rem;">
+                    <div class="order-trust-item"><span class="material-icons">lock</span> 256-bit SSL Encryption</div>
+                    <div class="order-trust-item"><span class="material-icons">verified</span> PCI DSS Compliant</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 4: Confirmation -->
+    <div id="confirmStep" class="checkout-step-content" style="display:none;">
+        <div style="text-align: center; padding: 4rem 2rem;">
+            <div style="width: 80px; height: 80px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                <span class="material-icons" style="font-size: 2.5rem; color: white;">check</span>
+            </div>
+            <h1 class="checkout-title" style="margin-bottom: 0.5rem;">Order Confirmed!</h1>
+            <p style="color: var(--slate); font-size: 1.1rem; margin-bottom: 0.5rem;">Order #FR-20260321-0847</p>
+            <p style="color: var(--slate); margin-bottom: 2rem;">Confirmation sent to murray@fredsrecords.com</p>
+
+            <div style="max-width: 500px; margin: 0 auto; background: #faf8f4; border: 1px solid var(--border); padding: 2rem; text-align: left; margin-bottom: 2rem;">
+                <div style="font-family: var(--font-ui); font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;">What happens next</div>
+                <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem;">
+                    <span class="material-icons" style="color: var(--purple); font-size: 1.2rem; margin-top: 2px;">inventory_2</span>
+                    <div><strong>Packing</strong><br><span style="color: var(--slate); font-size: 0.9rem;">Your records are being pulled from the shelf and packed in triple-ply cruciform mailers. Same-day packing on orders before 2 PM.</span></div>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem;">
+                    <span class="material-icons" style="color: var(--purple); font-size: 1.2rem; margin-top: 2px;">local_shipping</span>
+                    <div><strong>Shipping</strong><br><span style="color: var(--slate); font-size: 0.9rem;">Tracking number emailed within 24 hours. Estimated delivery: 3-5 business days (Canada), 5-10 days (US/International).</span></div>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                    <span class="material-icons" style="color: var(--purple); font-size: 1.2rem; margin-top: 2px;">headphones</span>
+                    <div><strong>Enjoy</strong><br><span style="color: var(--slate); font-size: 0.9rem;">Drop the needle, pour a drink, and remember — every record has a story. Yours starts now.</span></div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="shop.html" class="btn-primary"><span class="material-icons" style="font-size:1rem;">album</span> Keep Digging</a>
+                <a href="source.html" class="btn-ghost"><span class="material-icons" style="font-size:1rem;">manage_search</span> Source a Record</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div><div class="footer-brand">FRED'S RECORDS</div><p class="footer-text">Canada's oldest independent record store.<br><br>Fred Brokenshire (1952-2021).</p></div>
+        <div><div class="footer-heading">Shop</div><ul class="footer-links"><li><a href="shop.html">The Drop</a></li><li><a href="shop.html">Full Catalogue</a></li><li><a href="merch.html">Merch & Apparel</a></li></ul></div>
+        <div><div class="footer-heading">Info</div><ul class="footer-links"><li><a href="about.html">Our Story</a></li><li><a href="about.html">Visit the Shop</a></li><li><a href="sell.html">Sell Your Records</a></li></ul></div>
+        <div><div class="footer-heading">Connect</div><ul class="footer-links"><li><a href="https://www.instagram.com/fredsltd/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/fredsrecords/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>2026 Fred's Records Ltd. All rights reserved.</span><span>Digital Cratedigger — Built from St. John's</span></div>
+</footer>
+
+<script>
+function goToStep(n) {
+    document.querySelectorAll('.checkout-step-content').forEach(el => el.style.display = 'none');
+    const steps = ['crateStep', 'shippingStep', 'paymentStep', 'confirmStep'];
+    document.getElementById(steps[n - 1]).style.display = 'block';
+
+    document.querySelectorAll('.checkout-step').forEach((el, i) => {
+        el.classList.remove('active', 'completed');
+        if (i < n - 1) el.classList.add('completed');
+        if (i === n - 1) el.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function removeItem(btn) {
+    const item = btn.closest('.crate-item');
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(40px)';
+    item.style.transition = 'all 0.3s';
+    setTimeout(() => {
+        item.remove();
+        updateTotals();
+    }, 300);
+}
+
+function updateTotals() {
+    const items = document.querySelectorAll('.crate-item');
+    let subtotal = 0;
+    items.forEach(item => { subtotal += parseFloat(item.dataset.price); });
+    const shipping = subtotal >= 150 ? 0 : 15;
+    const tax = (subtotal + shipping) * 0.15;
+    const total = subtotal + shipping + tax;
+    document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('shippingCost').textContent = shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2);
+    document.getElementById('shippingCost').className = shipping === 0 ? 'green' : '';
+    document.getElementById('taxAmount').textContent = '$' + tax.toFixed(2);
+    document.getElementById('totalAmount').textContent = '$' + total.toFixed(2) + ' CAD';
+    document.getElementById('crateBadge').textContent = items.length;
+
+    if (items.length === 0) {
+        document.getElementById('crateItems').innerHTML = '<div class="crate-empty"><div class="crate-empty-icon"><span class="material-icons" style="font-size:inherit">album</span></div><h3>Your crate is empty</h3><p>Need a recommendation? Tony\'s got you covered.</p><a href="shop.html" class="btn-primary">Start Digging</a></div>';
+        document.querySelector('.order-cta').disabled = true;
+        document.querySelector('.order-cta').style.opacity = '0.5';
+    }
+}
+
+function selectPayment(el) {
+    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+    el.classList.add('active');
+}
+</script>
+<script src="js/interactions.js"></script>
+</body>
+</html>

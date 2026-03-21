@@ -79,9 +79,9 @@ ul { list-style: none; }
 .nav-search input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); width: 280px; }
 .nav-search .material-icons { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); font-size: 1.1rem; }
 .nav-actions { display: flex; align-items: center; gap: 1rem; }
-.nav-cart { position: relative; color: rgba(255,255,255,0.8); }
-.nav-cart .material-icons { font-size: 1.4rem; }
-.nav-cart-badge { position: absolute; top: -6px; right: -8px; background: var(--red); color: white; font-size: 0.55rem; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.nav-crate { position: relative; color: rgba(255,255,255,0.8); }
+.nav-crate .material-icons { font-size: 1.4rem; }
+.nav-crate-badge { position: absolute; top: -6px; right: -8px; background: var(--red); color: white; font-size: 0.55rem; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .nav-cta { background: var(--gold); color: var(--purple); padding: 8px 20px; font-weight: 700; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; border: none; transition: all var(--transition); }
 .nav-cta:hover { background: var(--white); }
 
