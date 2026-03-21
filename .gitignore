@@ -9,18 +9,25 @@ __pycache__/
 
 # Scripts
 *.py
+scripts/
 
 # Internal docs (not for production)
 internal/
 research/
 stitch_screens/
+docs/
 
-# Transcripts and working docs
+# Transcripts
+transcripts/
 *.vtt
 *.transcript.*
+
+# Strategy docs (root-level — will move to docs/ later)
 FRED_RECORDS_DISCOVERY_DEBRIEF.md
 FRED_RECORDS_MASTER_PRD.md
 FRED_RECORDS_PITCH_OUTLINE.md
 MURR_ASSET_REQUEST.md
 MURR_FOLLOW_UP_EMAIL.md
+MURR_PRD.md
+SUMMIT_REFERENCES.md
 UX_AUDIT_REPORT.md
